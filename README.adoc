@@ -1,1 +1,3 @@
 = reverse_asciidoctor
+
+Based on https://github.com/xijo/reverse_markdown
