@@ -1,3 +1,104 @@
 = reverse_asciidoctor
 
 Based on https://github.com/xijo/reverse_markdown
+
+Transforms HTML into asciidoctor.
+
+== Requirements
+
+. http://nokogiri.org/[Nokogiri]
+. Ruby 1.9.3 or higher
+
+== Installation
+
+Install the gem
+
+[source,console]
+----
+[sudo] gem install reverse_asciidoctor
+----
+
+or add it to your Gemfile
+
+[source,ruby]
+----
+gem 'reverse_asciidoctor'
+----
+
+== Features
+
+As a port of reverse_markdown, reverse_asciidoctor shares its features:
+
+* Supports all the established html tags like `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `em`, `strong`, `i`, `b`, `blockquote`, `code`, `img`, `a`, `hr`, `li`, `ol`, `ul`, `table`, `tr`, `th`, `td`, `br`
+* Module based - if you miss a tag, just add it
+* Can deal with nested lists
+* Inline and block code is supported
+* Supports blockquote
+
+
+== Usage
+
+=== Ruby
+
+You can convert html content as string or Nokogiri document:
+
+[source,ruby]
+----
+input  = '<strong>feelings</strong>'
+result = ReverseAsciidoctor.convert input
+result.inspect # " *feelings* "
+----
+
+=== Commandline
+
+It's also possible to convert html files to markdown using the binary:
+
+[source,console]
+----
+$ reverse_asciidoctor file.html > file.adoc
+$ cat file.html | reverse_asciidoctor > file.adoc
+----
+
+=== Configuration
+
+The following options are available:
+
+* `unknown_tags` (default `pass_through`) - how to handle unknown tags. Valid options are:
+** `pass_through` - Include the unknown tag completely into the result
+** `drop` - Drop the unknown tag and its content
+** `bypass` - Ignore the unknown tag but try to convert its content
+** `raise` - Raise an error to let you know
+* `tag_border` (default `' '`) - how to handle tag borders. valid options are:
+** `' '` - Add whitespace if there is none at tag borders.
+** `''` - Do not not add whitespace.
+
+==== As options
+
+Just pass your chosen configuration options in after the input. The given options will last for this operation only.
+
+[source,ruby]
+----
+ReverseAsciidoctor.convert(input, unknown_tags: :raise)
+----
+
+==== Preconfigure
+
+Or configure it block style on a initializer level. These configurations will last for all conversions until they are set to something different.
+
+[source,ruby]
+----
+ReverseAsciidoctor.config do |config|
+  config.unknown_tags     = :bypass
+  config.github_flavored  = true
+  config.tag_border  = ''
+end
+----
+
+
+== Related stuff
+
+* https://github.com/xijo/reverse_markdown[Xijo's original reverse_markdown gem]
+* https://github.com/xijo/reverse_markdown/wiki/Write-your-own-converter[Write custom converters] - Wiki entry about how to write your own converter
+* https://github.com/harlantwood/html_massage[html_massage] - A gem by Harlan T. Wood to convert regular sites into markdown using reverse_markdown
+* https://github.com/benbalter/word-to-markdown[word-to-markdown] - Convert word docs into markdown while using reverse_markdown, by Ben Balter
+* https://asciidoctor.org/docs/user-manual/[The Asciidoctor User Manual]
