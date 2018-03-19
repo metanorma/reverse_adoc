@@ -2,6 +2,7 @@ module ReverseAsciidoctor
   module Converters
     class Li < Base
       def convert(node, state = {})
+        id = node['id']
         content     = treat_children(node, state)
         indentation = indentation_from(state)
         prefix      = prefix_for(node)

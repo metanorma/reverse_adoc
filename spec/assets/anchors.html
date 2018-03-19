@@ -3,15 +3,14 @@
     some text...
     <a href="http://foobar.com">Foobar</a>
     <a href="http://foobar.com" title="f***** up beyond all recognition">Fubar</a>
+    <a href="http://foobar.com" title="f***** up beyond all redemption"/>
     <a href="http://strong.foobar.com"><strong>Strong foobar</strong></a>
-    There should be no extra space before and after the anchor (<a href="http://foobar.com">stripped</a>).
-    Exception: after an !<a href="http://not.an.image.foobar.com">there</a> should be an extra space.
-    Even with stripped elements inbetween: !<span><a href="http://still.not.an.image.foobar.com">there</a></span> should be an extra space.
+    There should be space before but not after the anchor (<a href="http://foobar.com">stripped</a>).
 
-    ignore <a href="foo.html">   </a> anchor tags with no link text
-    not ignore <a href="foo.html"><img src="image.png" alt="An Image" /></a> anchor tags with images
-    pass through the text of <a href="#content">internal jumplinks</a> without treating them as links
-    pass through the text of <a id="content">anchor tags with no href</a> without treating them as links
+    do not ignore <a href="foo.html">   </a> anchor tags with no link text
+    link <a href="#content">internal jumplinks</a> with anchors
+    link <a href="#content2"/>internal jumplinks without anchors
+    treat <a id="content">anchor tags with no href</a> as bookmarks
 
     some text...
 

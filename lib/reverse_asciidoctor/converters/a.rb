@@ -1,3 +1,5 @@
+require "uri"
+
 module ReverseAsciidoctor
   module Converters
     class A < Base
@@ -5,21 +7,30 @@ module ReverseAsciidoctor
         name  = treat_children(node, state)
         href  = node['href']
         title = extract_title(node)
+        id = node['id'] || node['name']
 
-        if href.to_s.start_with?('#') || href.to_s.empty? || name.empty?
+        if !id.nil? && !id.empty?
+          "[[#{id}]]"
+        elsif href.to_s.start_with?('#')
+            href = href.sub(/^#/, "")
+          if name.empty?
+            "<<#{href}>>"
+          else
+            "<<#{href},#{name}>>"
+          end
+        elsif href.to_s.empty?
           name
         else
-          link = "[#{name}](#{href}#{title})"
-          link.prepend(' ') if prepend_space?(node)
+          name = title if name.empty?
+          href = "link:#{href}" unless href.to_s =~ URI::DEFAULT_PARSER.make_regexp
+          link = "#{href}[#{name}]"
+          link.prepend(' ')
           link
         end
       end
 
       private
 
-      def prepend_space?(node)
-        node.at_xpath("preceding::text()[1]").to_s.end_with?('!')
-      end
     end
 
     register :a, A.new

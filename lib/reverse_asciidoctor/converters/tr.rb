@@ -2,6 +2,7 @@ module ReverseAsciidoctor
   module Converters
     class Tr < Base
       def convert(node, state = {})
+        id = node['id']
         content = treat_children(node, state).rstrip
         result  = "|#{content}\n"
         table_header_row?(node) ? result + underline_for(node) : result

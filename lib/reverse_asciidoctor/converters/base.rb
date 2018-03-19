@@ -17,7 +17,7 @@ module ReverseAsciidoctor
 
       def extract_title(node)
         title = escape_keychars(node['title'].to_s)
-        title.empty? ? '' : %[ "#{title}"]
+        title.empty? ? '' : %[ #{title}]
       end
     end
   end

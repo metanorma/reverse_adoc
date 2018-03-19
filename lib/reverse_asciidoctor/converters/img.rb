@@ -4,6 +4,7 @@ module ReverseAsciidoctor
       def convert(node, state = {})
         alt   = node['alt']
         src   = node['src']
+        id = node['id']
         title = extract_title(node)
         " ![#{alt}](#{src}#{title})"
       end

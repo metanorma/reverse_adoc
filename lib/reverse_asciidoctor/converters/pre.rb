@@ -2,6 +2,7 @@ module ReverseAsciidoctor
   module Converters
     class Pre < Base
       def convert(node, state = {})
+        id = node['id']
         content = treat_children(node, state)
           "\n\n    " << content.lines.to_a.join("    ") << "\n\n"
       end
