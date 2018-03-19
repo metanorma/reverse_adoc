@@ -3,7 +3,7 @@ module ReverseAsciidoctor
     class Del < Base
       def convert(node, state = {})
         content = treat_children(node, state.merge(already_crossed_out: true))
-        if disabled? || content.strip.empty? || state[:already_crossed_out]
+        if content.strip.empty? || state[:already_crossed_out]
           content
         else
           "~~#{content}~~"

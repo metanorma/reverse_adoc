@@ -4,7 +4,7 @@ require "reverse_asciidoctor/version"
 
 Gem::Specification.new do |s|
   s.name        = "reverse_asciidoctor"
-  s.version     = ReverseAsciiDoctor::VERSION
+  s.version     = ReverseAsciidoctor::VERSION
   s.authors       = ["Ribose Inc."]
   s.email         = ["open.source@ribose.com"]
 
