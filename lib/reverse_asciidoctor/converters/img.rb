@@ -5,9 +5,16 @@ module ReverseAsciidoctor
         alt   = node['alt']
         src   = node['src']
         id = node['id']
-                anchor = id ? "[[#{id}]]\n" : ""
+        width = node['width']
+        height = node['height']
+        anchor = id ? "[[#{id}]]\n" : ""
         title = extract_title(node)
-        " ![#{alt}](#{src}#{title})"
+        title = ".#{title}\n" unless title.empty?
+        attrs = alt
+        attrs = "\"\"" if (width || height) && alt.nil?
+        attrs += ",#{width}" if width
+        attrs += ",#{height}" if width && height
+        [anchor, title, "image::", src, "[", attrs, "]"].join("")
       end
     end
 
