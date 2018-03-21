@@ -19,5 +19,8 @@ module ReverseAsciidoctor
     register :applet,    Bypass.new
     register :map,    Bypass.new
     register :area,    Bypass.new
+    register :bdi,    Bypass.new
+    register :bdo,    Bypass.new
+    register :big,    Bypass.new
   end
 end

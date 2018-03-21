@@ -42,6 +42,7 @@ In addition, it supports:
 * `aside`
 * `audio`
 * `@id` anchors
+* `blockquote@cite`
 * `img/@width`, `img/@height`
 * `ol/@style`
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
@@ -52,6 +53,9 @@ The gem does not support
 
 * `col`, `colgroup`
 * `source`
+* `bdi`, `bdo`
+* `map`
+* `big`
 
 
 == Usage
