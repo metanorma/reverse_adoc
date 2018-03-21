@@ -7,12 +7,13 @@ describe ReverseAsciidoctor do
   subject { ReverseAsciidoctor.convert(input) }
 
   it { is_expected.to match /plain text ?\n/ }
-  it { is_expected.to match /# h1\n/ }
-  it { is_expected.to match /## h2\n/ }
-  it { is_expected.to match /### h3\n/ }
-  it { is_expected.to match /#### h4\n/ }
-  it { is_expected.to match /##### h5\n/ }
-  it { is_expected.to match /###### h6\n/ }
+  it { is_expected.to match /\n= h1\n/ }
+  it { is_expected.to match /\n\[\[A]\]\n= h1 with anchor\n/ }
+  it { is_expected.to match /\n== h2\n/ }
+  it { is_expected.to match /\n=== h3\n/ }
+  it { is_expected.to match /\n==== h4\n/ }
+  it { is_expected.to match /\n===== h5\n/ }
+  it { is_expected.to match /\n====== h6\n/ }
 
   it { is_expected.to match /_em tag content_/ }
   it { is_expected.to match /before and after empty em tags/ }

@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe ReverseAsciidoctor::Converters::Code do
 
-  let(:converter) { ReverseAsciidoctor::Converters::Code.new }
+  let(:converter) { ReverseAsciidoctor::Converters::Div.new }
 
-  it 'converts as backtick' do
-    node = node_for("<code>puts foo</code>")
-    expect(converter.convert(node)).to include "`puts foo1"
+  it 'converts div' do
+    node = node_for("<div>puts foo</div>")
+    expect(converter.convert(node)).to include "\nputs foo"
   end
 
-  it 'converts as backtick' do
-    node = node_for("<tt>puts foo</tt>")
-    expect(converter.convert(node)).to include "`puts foo1"
+  it 'converts div with anchor' do
+    node = node_for("<div id='A'>puts foo</div>")
+    expect(converter.convert(node)).to include "\n[[A]]\nputs foo"
   end
 
 end

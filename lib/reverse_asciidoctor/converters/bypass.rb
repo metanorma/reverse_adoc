@@ -12,5 +12,6 @@ module ReverseAsciidoctor
     register :span,     Bypass.new
     register :thead,    Bypass.new
     register :tbody,    Bypass.new
+    register :tfoot,    Bypass.new
   end
 end

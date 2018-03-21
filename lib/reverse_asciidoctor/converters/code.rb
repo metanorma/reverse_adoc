@@ -7,5 +7,6 @@ module ReverseAsciidoctor
     end
 
     register :code, Code.new
+    register :tt, Code.new
   end
 end
