@@ -3,9 +3,9 @@ module ReverseAsciidoctor
     class Td < Base
       def convert(node, state = {})
         id = node['id']
-                anchor = id ? "[[#{id}]]\n" : ""
+        anchor = id ? "[[#{id}]]" : ""
         content = treat_children(node, state)
-        " #{content} |"
+        "| #{anchor}#{content} "
       end
     end
 

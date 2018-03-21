@@ -2,10 +2,8 @@ module ReverseAsciidoctor
   module Converters
     class Tr < Base
       def convert(node, state = {})
-        id = node['id']
-                anchor = id ? "[[#{id}]]\n" : ""
         content = treat_children(node, state).rstrip
-        result  = "|#{content}\n"
+        result  = "#{content}\n"
         table_header_row?(node) ? result + underline_for(node) : result
       end
 
@@ -14,7 +12,7 @@ module ReverseAsciidoctor
       end
 
       def underline_for(node)
-        "| " + (['---'] * node.element_children.size).join(' | ') + " |\n"
+        "\n"
       end
     end
 
