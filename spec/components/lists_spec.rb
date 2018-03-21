@@ -29,9 +29,9 @@ describe ReverseAsciidoctor do
   end
 
   context "lists containing links" do
-    it { is_expected.to match /\n- \[1 Basic concepts\]\(Basic_concepts\)\n/ }
-    it { is_expected.to match /\n- \[2 History of the idea\]\(History_of_the_idea\)\n/ }
-    it { is_expected.to match /\n- \[3 Intelligence explosion\]\(Intelligence_explosion\)\n/ }
+    it { is_expected.to match /\n- link:Basic_concepts\[1 Basic concepts\]\n/ }
+    it { is_expected.to match /\n- link:History_of_the_idea\[2 History of the idea\]\n/ }
+    it { is_expected.to match /\n- link:Intelligence_explosion\[3 Intelligence explosion\]\n/ }
   end
 
   context "lists containing embedded <p> tags" do

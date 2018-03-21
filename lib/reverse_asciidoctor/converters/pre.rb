@@ -3,22 +3,20 @@ module ReverseAsciidoctor
     class Pre < Base
       def convert(node, state = {})
         id = node['id']
+        anchor = id ? "[[#{id}]]\n" : ""
+        lang = language(node)
         content = treat_children(node, state)
-          "\n\n    " << content.lines.to_a.join("    ") << "\n\n"
+        if lang
+          "\n\n#{anchor}[source,#{lang}]\n----\n" << content.lines.to_a.join("") << "\n----\n\n"
+        else
+          "\n\n#{anchor}....\n" << content.lines.to_a.join("") << "\n....\n\n"
+        end
       end
 
       private
 
-      # Override #treat as proposed in https://github.com/xijo/reverse_markdown/pull/69
       def treat(node, state)
-        case node.name
-        when 'code'
-          node.text
-        when 'br'
-          "\n"
-        else
-          super
-        end
+        node.to_s
       end
 
       def language(node)

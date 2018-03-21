@@ -11,7 +11,7 @@ describe ReverseAsciidoctor do
   end
 
   it "should not over escape * or _" do
-    expect(subject).to include '[![](example.com/foo_bar.png) I\_AM\_HELPFUL](example.com/foo_bar)'
+    expect(subject).to include 'link:example.com/foo_bar[![](example.com/foo_bar.png) I\_AM\_HELPFUL]'
   end
 
 end

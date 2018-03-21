@@ -30,6 +30,7 @@ gem 'reverse_asciidoctor'
 As a port of reverse_markdown, reverse_asciidoctor shares its features:
 
 * Supports all the established html tags like `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `em`, `strong`, `i`, `b`, `blockquote`, `code`, `img`, `a`, `hr`, `li`, `ol`, `ul`, `table`, `tr`, `th`, `td`, `br`
+** reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
 * Module based - if you miss a tag, just add it
 * Can deal with nested lists
 * Inline and block code is supported
