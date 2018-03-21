@@ -12,7 +12,6 @@ module ReverseAsciidoctor
       def prefix_for(node, state)
         length = state.fetch(:ol_count, 0)
         if node.parent.name == 'ol'
-          index = node.parent.xpath('li').index(node)
           "." * [length, 0].max
         else
           "*" * [length, 0].max

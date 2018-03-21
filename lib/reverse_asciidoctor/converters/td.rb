@@ -3,14 +3,17 @@ module ReverseAsciidoctor
     class Td < Base
       def convert(node, state = {})
         id = node['id']
-        colspan = node['colspan']
-        rowspan = node['rowspan']
-        colrowattr = colrow(colspan, rowspan)
-        alignattr = alignstyle(node)
         anchor = id ? "[[#{id}]]" : ""
+        colrowattr = colrow(node['colspan'], node['rowspan'])
+        alignattr = alignstyle(node)
         style = cellstyle(node)
+        singlepara = node.elements.size == 1 && node.elements.first.name == "p"
+        state[:tdsinglepara] = singlepara if singlepara
+        adoccell = node.at(".//ul | .//ol | .//pre") || node.at(".//p") && !singlepara
+        style = "a" if adoccell
+        delim = adoccell ? "\n" : " "
         content = treat_children(node, state)
-        "#{colrowattr}#{alignattr}#{style}| #{anchor}#{content} "
+        "#{colrowattr}#{alignattr}#{style}| #{anchor}#{content}#{delim}"
       end
 
       def cellstyle(node)

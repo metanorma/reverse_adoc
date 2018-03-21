@@ -1,9 +1,9 @@
 module ReverseAsciidoctor
   module Converters
     class Text < Base
-      def convert(node, options = {})
+      def convert(node, state = {})
         if node.text.strip.empty?
-          treat_empty(node)
+          treat_empty(node, state)
         else
           treat_text(node)
         end
@@ -11,9 +11,11 @@ module ReverseAsciidoctor
 
       private
 
-      def treat_empty(node)
+      def treat_empty(node, state)
         parent = node.parent.name.to_sym
         if [:ol, :ul].include?(parent)  # Otherwise the identation is broken
+          ''
+        elsif state[:tdsinglepara]
           ''
         elsif node.text == ' '          # Regular whitespace text node
           ' '
