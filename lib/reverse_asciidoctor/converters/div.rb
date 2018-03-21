@@ -3,6 +3,7 @@ module ReverseAsciidoctor
     class Div < Base
       def convert(node, state = {})
         id = node['id']
+                anchor = id ? "[[#{id}]]\n" : ""
         "\n" << treat_children(node, state) << "\n"
       end
     end

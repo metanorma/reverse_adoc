@@ -3,6 +3,7 @@ module ReverseAsciidoctor
     class Blockquote < Base
       def convert(node, state = {})
         id = node['id']
+                anchor = id ? "[[#{id}]]\n" : ""
         content = treat_children(node, state).strip
         content = ReverseAsciidoctor.cleaner.remove_newlines(content)
         "\n\n> " << content.lines.to_a.join('> ') << "\n\n"

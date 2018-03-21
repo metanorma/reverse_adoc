@@ -3,6 +3,7 @@ module ReverseAsciidoctor
     class H < Base
       def convert(node, state = {})
         id = node['id']
+                anchor = id ? "[[#{id}]]\n" : ""
         prefix = '#' * node.name[/\d/].to_i
         ["\n", prefix, ' ', treat_children(node, state), "\n"].join
       end
