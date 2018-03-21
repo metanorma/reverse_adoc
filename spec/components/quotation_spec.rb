@@ -7,6 +7,6 @@ describe ReverseAsciidoctor do
   subject { ReverseAsciidoctor.convert(input) }
 
   it { is_expected.to match /\n      <code>Block of code<\/code>$/ }
-  it { is_expected.to include "\n> First quoted paragraph\n> \n> Second quoted paragraph" }
+  it { is_expected.to include "\n____\nFirst quoted paragraph\n\nSecond quoted paragraph\n____\n" }
 
 end
