@@ -42,7 +42,11 @@ In addition, it supports:
 * @id anchors
 * img/@width, img/@height
 * ol/@style
-* td/@colspan, td/@rowspan
+* td/@colspan, td/@rowspan, td@/align, td@/valign
+
+The gem does not support
+
+* `col`, `colgroup`
 
 
 == Usage

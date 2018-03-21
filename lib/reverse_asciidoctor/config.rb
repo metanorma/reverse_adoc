@@ -5,7 +5,7 @@ module ReverseAsciidoctor
     def initialize
       @unknown_tags     = :pass_through
       @em_delimiter     = '_'.freeze
-      @strong_delimiter = '**'.freeze
+      @strong_delimiter = '*'.freeze
       @inline_options   = {}
       @tag_border       = ' '.freeze
     end

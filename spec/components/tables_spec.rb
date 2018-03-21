@@ -15,5 +15,10 @@ describe ReverseAsciidoctor do
 
   it { is_expected.to match /\n\.2\+\| rowspan 2\n/ }
   it { is_expected.to match /\n2\+| colspan 2\n/ }
+  it { is_expected.to match /\n2\.2\+| colrowspan 2\n/ }
 
+  it { is_expected.to match /<\| horizontal left / }
+  it { is_expected.to match /\^\| horizontal center / }
+  it { is_expected.to match />\| horizontal right\n/ }
+  it { is_expected.to match /\^\.\^\| center middle\n/ }
 end
