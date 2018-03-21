@@ -2,7 +2,7 @@ module ReverseAsciidoctor
   module Converters
     class Br < Base
       def convert(node, state = {})
-        "  \n"
+        " +\n"
       end
     end
 

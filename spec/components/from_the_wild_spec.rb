@@ -7,7 +7,7 @@ describe ReverseAsciidoctor do
   subject { ReverseAsciidoctor.convert(input) }
 
   it "should make sense of strong-crazy markup (as seen in the wild)" do
-    expect(subject).to include "**.  \n \\*\\*\\* intentcast** : logo design   \n **.**\n\n"
+    expect(subject).to include "**. +\n \\*\\*\\* intentcast **: logo design** +**\n"
   end
 
   it "should not over escape * or _" do

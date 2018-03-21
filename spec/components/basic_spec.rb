@@ -34,7 +34,7 @@ describe ReverseAsciidoctor do
   it { is_expected.to match /_i tag content_/ }
   it { is_expected.to match /\*\*b tag content\*\*/ }
 
-  it { is_expected.to match /br tags become double space followed by newline  \n/ }
+  it { is_expected.to match /br tags become double space followed by newline \+\n/ }
   #it { should match /br tags XXX  \n/ }
 
   it { is_expected.to match /before hr \n\* \* \*\n after hr/ }
