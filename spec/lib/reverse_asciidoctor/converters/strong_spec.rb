@@ -15,6 +15,6 @@ describe ReverseAsciidoctor::Converters::Strong do
 
   it 'moves border whitespaces outside of the delimiters tag' do
     input = node_for("<strong> \n foo </strong>")
-    expect(converter.convert(input)).to eq " **foo** "
+    expect(converter.convert(input)).to eq " *foo* "
   end
 end

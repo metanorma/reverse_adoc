@@ -10,7 +10,7 @@ describe ReverseAsciidoctor do
   it { is_expected.to include 'http://foobar.com[Foobar]' }
   it { is_expected.to include 'http://foobar.com[Fubar]' }
   it { is_expected.to include 'http://foobar.com[f\*\*\*\*\* up beyond all redemption]' }
-  it { is_expected.to include 'http://strong.foobar.com[**Strong foobar**]' }
+  it { is_expected.to include 'http://strong.foobar.com[*Strong foobar*]' }
 
   it { is_expected.to include 'There should be space before but not after the anchor ( http://foobar.com[stripped]).' }
 
