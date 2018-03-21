@@ -26,6 +26,7 @@ require 'reverse_asciidoctor/converters/pre'
 require 'reverse_asciidoctor/converters/strong'
 require 'reverse_asciidoctor/converters/table'
 require 'reverse_asciidoctor/converters/td'
+require 'reverse_asciidoctor/converters/th'
 require 'reverse_asciidoctor/converters/text'
 require 'reverse_asciidoctor/converters/tr'
 

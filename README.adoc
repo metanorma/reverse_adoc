@@ -42,6 +42,7 @@ In addition, it supports:
 * @id anchors
 * img/@width, img/@height
 * ol/@style
+* td/@colspan, td/@rowspan
 
 
 == Usage

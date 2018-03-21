@@ -7,10 +7,13 @@ describe ReverseAsciidoctor do
   subject { ReverseAsciidoctor.convert(input) }
 
   it { is_expected.to match /\[\[A\]\]\n\|===\n\| \[\[C\]\]header 1 \| header 2 \| header 3\n\n/ }
-  it { is_expected.to match /\n\| \[\[D\]\]data 1-1 \| data 2-1 \| data 3-1\n/ }
-  it { is_expected.to match /\n\| data 1-2 \| data 2-2 \| data 3-2\n/ }
+  it { is_expected.to match /\nh\| \[\[D\]\]data 1-1 \| data 2-1 \| data 3-1\n/ }
+  it { is_expected.to match /\nh\| data 1-2 \| data 2-2 \| data 3-2\n/ }
 
   it { is_expected.to match /\n\| _header oblique_ \| \*header bold\* \| `header code`\n\n/ }
   it { is_expected.to match /\n\| _data oblique_ \| \*data bold\* \| `data code`\n/ }
+
+  it { is_expected.to match /\n\.2\+\| rowspan 2\n/ }
+  it { is_expected.to match /\n2\+| colspan 2\n/ }
 
 end

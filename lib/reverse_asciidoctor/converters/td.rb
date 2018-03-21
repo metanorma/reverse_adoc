@@ -3,13 +3,21 @@ module ReverseAsciidoctor
     class Td < Base
       def convert(node, state = {})
         id = node['id']
+        colspan = node['colspan']
+        rowspan = node['rowspan']
+        colattr = colspan ? "#{colspan}+" : ""
+        rowattr = rowspan ? ".#{rowspan}+" : ""
         anchor = id ? "[[#{id}]]" : ""
+        style = cellstyle(node)
         content = treat_children(node, state)
-        "| #{anchor}#{content} "
+        "#{colattr}#{rowattr}#{style}| #{anchor}#{content} "
+      end
+
+      def cellstyle(node)
+        ""
       end
     end
 
     register :td, Td.new
-    register :th, Td.new
   end
 end
