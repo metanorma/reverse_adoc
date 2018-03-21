@@ -13,5 +13,11 @@ module ReverseAsciidoctor
     register :thead,    Bypass.new
     register :tbody,    Bypass.new
     register :tfoot,    Bypass.new
+    register :abbr,    Bypass.new
+    register :acronym,    Bypass.new
+    register :address,    Bypass.new
+    register :applet,    Bypass.new
+    register :map,    Bypass.new
+    register :area,    Bypass.new
   end
 end

@@ -41,4 +41,6 @@ describe ReverseAsciidoctor do
   it { is_expected.to match /before hr \n\* \* \*\n after hr/ }
 
   it { is_expected.to match /section 1\n ?\nsection 2/ }
+
+  it { is_expected.to match /ignore abbr/ }
 end

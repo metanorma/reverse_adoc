@@ -39,10 +39,13 @@ As a port of reverse_markdown, reverse_asciidoctor shares its features:
 
 In addition, it supports:
 
-* @id anchors
-* img/@width, img/@height
-* ol/@style
-* td/@colspan, td/@rowspan, td@/align, td@/valign
+* `aside`
+* `@id` anchors
+* `img/@width`, `img/@height`
+* `ol/@style`
+* `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
+* Lists and paragraphs within cells
+** Not tables within cells: Asciidoctor cannot deal with nested tabls
 
 The gem does not support
 

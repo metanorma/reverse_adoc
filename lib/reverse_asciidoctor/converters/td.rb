@@ -9,7 +9,8 @@ module ReverseAsciidoctor
         style = cellstyle(node)
         singlepara = node.elements.size == 1 && node.elements.first.name == "p"
         state[:tdsinglepara] = singlepara if singlepara
-        adoccell = node.at(".//ul | .//ol | .//pre") || node.at(".//p") && !singlepara
+        adoccell = node.at(".//ul | .//ol | .//pre | .//blockquote | .//br | .//hr") ||
+          node.at(".//p") && !singlepara
         style = "a" if adoccell
         delim = adoccell ? "\n" : " "
         content = treat_children(node, state)
