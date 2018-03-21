@@ -1,18 +1,12 @@
 require 'spec_helper'
 
-describe ReverseAsciidoctor::Converters::Code do
+describe ReverseAsciidoctor::Converters::P do
 
-  let(:converter) { ReverseAsciidoctor::Converters::Div.new }
+  let(:converter) { ReverseAsciidoctor::Converters::P.new }
 
-  it 'converts div' do
-    node = node_for("<div>puts foo</div>")
-    expect(converter.convert(node)).to include "\nputs foo"
-  end
-
-  it 'converts div with anchor' do
-    node = node_for("<div id='A'>puts foo</div>")
+  it 'converts p with anchor' do
+    node = node_for("<p id='A'>puts foo</p>")
     expect(converter.convert(node)).to include "\n[[A]]\nputs foo"
   end
-
 end
 

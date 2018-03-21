@@ -14,6 +14,11 @@ describe ReverseAsciidoctor do
   it { is_expected.to match /\n\*\* nested unsorted list entry\n/ }
   it { is_expected.to match /\n\.\.\. deep nested list entry\n/ }
 
+  context "list anchors" do
+    it { is_expected.to match /\n\[\[1\]\]\n\. arabic1\n/ }
+    it { is_expected.to match /\n\[\[A\]\]\n\* upperalpha1\n/ }
+  end
+
   context "list styles" do
     it { is_expected.to match /\n\[arabic\]\n\. arabic\n/ }
     it { is_expected.to match /\n\[loweralpha\]\n\. loweralpha\n/ }
