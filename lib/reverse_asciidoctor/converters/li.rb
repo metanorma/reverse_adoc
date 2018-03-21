@@ -3,25 +3,20 @@ module ReverseAsciidoctor
     class Li < Base
       def convert(node, state = {})
         id = node['id']
-                anchor = id ? "[[#{id}]]\n" : ""
+        anchor = id ? "[[#{id}]]" : ""
         content     = treat_children(node, state)
-        indentation = indentation_from(state)
-        prefix      = prefix_for(node)
-        "#{indentation}#{prefix}#{content.chomp}\n"
+        prefix      = prefix_for(node, state)
+        "#{prefix} #{anchor}#{content.chomp}\n"
       end
 
-      def prefix_for(node)
+      def prefix_for(node, state)
+        length = state.fetch(:ol_count, 0)
         if node.parent.name == 'ol'
           index = node.parent.xpath('li').index(node)
-          "#{index.to_i + 1}. "
+          "." * [length, 0].max
         else
-          '- '
+          "*" * [length, 0].max
         end
-      end
-
-      def indentation_from(state)
-        length = state.fetch(:ol_count, 0)
-        '  ' * [length - 1, 0].max
       end
     end
 

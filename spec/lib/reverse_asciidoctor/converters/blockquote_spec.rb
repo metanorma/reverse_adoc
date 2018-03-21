@@ -7,7 +7,7 @@ describe ReverseAsciidoctor::Converters::Blockquote do
   it 'converts nested elements as well' do
     input = node_for("<blockquote><ul><li>foo</li></ul></blockquote>")
     result = converter.convert(input)
-    expect(result).to eq "\n\n____\n- foo\n____\n\n"
+    expect(result).to eq "\n\n____\n* foo\n____\n\n"
   end
 
   it 'can deal with paragraphs inside' do

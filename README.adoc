@@ -39,7 +39,8 @@ As a port of reverse_markdown, reverse_asciidoctor shares its features:
 In addition, it supports:
 
 * @id anchors
-
+* img/@width, img/@height
+* ol/@style
 
 == Usage
 
