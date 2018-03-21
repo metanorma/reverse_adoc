@@ -40,6 +40,7 @@ As a port of reverse_markdown, reverse_asciidoctor shares its features:
 In addition, it supports:
 
 * `aside`
+* `audio`
 * `@id` anchors
 * `img/@width`, `img/@height`
 * `ol/@style`
@@ -50,6 +51,7 @@ In addition, it supports:
 The gem does not support
 
 * `col`, `colgroup`
+* `source`
 
 
 == Usage
