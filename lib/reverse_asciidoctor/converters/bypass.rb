@@ -22,5 +22,7 @@ module ReverseAsciidoctor
     register :bdi,    Bypass.new
     register :bdo,    Bypass.new
     register :big,    Bypass.new
+    register :button,    Bypass.new
+    register :canvas,    Bypass.new
   end
 end

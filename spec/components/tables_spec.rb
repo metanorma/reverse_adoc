@@ -22,6 +22,8 @@ describe ReverseAsciidoctor do
   it { is_expected.to match />\| horizontal right\n/ }
   it { is_expected.to match /\^\.\^\| center middle\n/ }
 
+  it { is_expected.to match /\n\.Table _caption_\n\|===\n/ }
+
   it { is_expected.to match /\na|\nHello\n\nThis cell has multiple paragraphs\n\n/ }
   it { is_expected.to match /\n\| This cell has a single paragraph\n/ }
 end

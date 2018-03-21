@@ -5,5 +5,7 @@ module ReverseAsciidoctor
         ''
       end
     end
+
+    register :caption, Drop.new
   end
 end

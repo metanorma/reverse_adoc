@@ -46,6 +46,7 @@ In addition, it supports:
 * `img/@width`, `img/@height`
 * `ol/@style`
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
+* `table/caption`
 * Lists and paragraphs within cells
 ** Not tables within cells: Asciidoctor cannot deal with nested tabls
 
@@ -54,8 +55,9 @@ The gem does not support
 * `col`, `colgroup`
 * `source`
 * `bdi`, `bdo`
-* `map`
+* `map`, `canvas`
 * `big`
+* `button`
 
 
 == Usage
