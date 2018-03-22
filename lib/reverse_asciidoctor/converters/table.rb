@@ -31,12 +31,29 @@ module ReverseAsciidoctor
         end
       end
 
+      def rules(node)
+        case node["rules"]
+        when "all"
+          "rules=all"
+        when "rows"
+          "rules=rows"
+        when "cols"
+          "rules=cols"
+        when "none"
+          "rules=none"
+          else
+          nil
+        end
+      end
+
       def style(node)
         width = "width=#{node['width']}" if node['width']
         attrs = []
         frame_attr = frame(node)
+        rules_attr = rules(node)
         attrs << width if width
         attrs << frame_attr if frame_attr
+        attrs << rules_attr if rules_attr
         return "" if attrs.empty?
         "[#{attrs.join(',')}]\n"
       end

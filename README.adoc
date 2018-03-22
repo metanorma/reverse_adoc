@@ -67,7 +67,7 @@ In addition, it supports:
 * `img/@width`, `img/@height`
 * `ol/@style`, `ol/@start`, `ol/@reversed`
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
-* `table/caption`, `table/@width`, `table/@frame` (partial)
+* `table/caption`, `table/@width`, `table/@frame` (partial), `table/@rules` (partial)
 * Lists and paragraphs within cells
 ** Not tables within cells: Asciidoctor cannot deal with nested tabls
 
