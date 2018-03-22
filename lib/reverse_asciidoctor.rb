@@ -38,6 +38,7 @@ require 'reverse_asciidoctor/converters/th'
 require 'reverse_asciidoctor/converters/text'
 require 'reverse_asciidoctor/converters/tr'
 require 'reverse_asciidoctor/converters/video'
+require 'reverse_asciidoctor/converters/math'
 
 module ReverseAsciidoctor
 
