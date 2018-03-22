@@ -8,5 +8,7 @@ module ReverseAsciidoctor
 
     register :code, Code.new
     register :tt, Code.new
+    register :kbd, Code.new
+    register :samp, Code.new
   end
 end

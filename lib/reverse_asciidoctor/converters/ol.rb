@@ -21,5 +21,6 @@ module ReverseAsciidoctor
 
     register :ol, Ol.new
     register :ul, Ol.new
+    register :dir, Ol.new
   end
 end

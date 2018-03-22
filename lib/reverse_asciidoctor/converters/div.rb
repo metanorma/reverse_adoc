@@ -10,5 +10,6 @@ module ReverseAsciidoctor
 
     register :div,     Div.new
     register :article, Div.new
+    register :details, Div.new
   end
 end

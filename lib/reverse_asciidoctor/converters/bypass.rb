@@ -24,5 +24,24 @@ module ReverseAsciidoctor
     register :big,    Bypass.new
     register :button,    Bypass.new
     register :canvas,    Bypass.new
+    register :data,    Bypass.new
+    register :datalist,    Bypass.new
+    register :del,    Bypass.new
+    register :ins,    Bypass.new
+    register :dfn,    Bypass.new
+    register :dialog,    Bypass.new
+    register :embed,    Bypass.new
+    register :fieldset,    Bypass.new
+    register :font,    Bypass.new
+    register :footer,    Bypass.new
+    register :form,    Bypass.new
+    register :frame,    Bypass.new
+    register :frameset,    Bypass.new
+    register :header,    Bypass.new
+    register :iframe,    Bypass.new
+    register :input,    Bypass.new
+    register :label,    Bypass.new
+    register :legend,    Bypass.new
+    register :main,    Bypass.new
   end
 end
