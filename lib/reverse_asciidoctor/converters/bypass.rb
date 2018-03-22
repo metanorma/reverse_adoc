@@ -69,5 +69,9 @@ module ReverseAsciidoctor
     register :section,    Bypass.new
     register :summary,    Bypass.new
     register :svg,    Bypass.new
+    register :template,    Bypass.new
+    register :textarea,    Bypass.new
+    register :track,    Bypass.new
+    register :u,    Bypass.new
   end
 end

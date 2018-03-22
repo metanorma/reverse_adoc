@@ -41,7 +41,7 @@ module ReverseAsciidoctor
           "rules=cols"
         when "none"
           "rules=none"
-          else
+        else
           nil
         end
       end

@@ -25,10 +25,12 @@ module ReverseAsciidoctor
         style = number_style(node)
         reversed = "%reversed" if node["reversed"]
         start = "start=#{node['start']}" if node["start"]
+        type = "type=#{node['type']}" if node["type"]
         attrs = []
         attrs << style if style
         attrs << reversed if reversed
         attrs << start if start
+        attrs << type if type
         if attrs.empty?
           ""
         else

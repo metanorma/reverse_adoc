@@ -65,7 +65,7 @@ In addition, it supports:
 * `@id` anchors
 * `blockquote@cite`
 * `img/@width`, `img/@height`
-* `ol/@style`, `ol/@start`, `ol/@reversed`
+* `ol/@style`, `ol/@start`, `ol/@reversed`, `ul/@type`
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
 * `table/caption`, `table/@width`, `table/@frame` (partial), `table/@rules` (partial)
 * Lists and paragraphs within cells
@@ -77,13 +77,13 @@ The gem does not support
 * `source`, `picture`
 * `bdi`, `bdo`, `ruby`, `rt`, `rp`
 * `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
-* `map`, `canvas`, `dialog`, `embed`, `object`, `param`, `svg`
-* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`
-* `big`, `dfn`, `font`, `s`, `small`, `span`, `strike`
+* `map`, `canvas`, `dialog`, `embed`, `object`, `param`, `svg`, `track`
+* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`, `textarea`
+* `big`, `dfn`, `font`, `s`, `small`, `span`, `strike`, `u`
 * `center`
 * `data`, `meter`
 * `del`, `ins`
-* `footer`, `header`, `main`, `nav`, `details`, `section`, `summary`
+* `footer`, `header`, `main`, `nav`, `details`, `section`, `summary`, `template`
 
 == Usage
 

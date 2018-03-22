@@ -25,6 +25,7 @@ describe ReverseAsciidoctor do
     it { is_expected.to match /\n\[upperalpha\]\n\. upperalpha\n/ }
     it { is_expected.to match /\n\[lowerroman\]\n\. lowerroman\n/ }
     it { is_expected.to match /\n\[upperroman\]\n\. upperroman\n/ }
+    it { is_expected.to match /\n\[type=disc\]\n\* disc\n/ }
   end
 
   context "list start, reversed" do
