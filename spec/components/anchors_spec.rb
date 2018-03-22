@@ -4,7 +4,6 @@ describe ReverseAsciidoctor do
 
   let(:input)    { File.read('spec/assets/anchors.html') }
   let(:document) { Nokogiri::HTML(input) }
-  puts ReverseAsciidoctor.convert(File.read('spec/assets/anchors.html'))
   subject { ReverseAsciidoctor.convert(input) }
 
   it { is_expected.to include 'http://foobar.com[Foobar]' }
