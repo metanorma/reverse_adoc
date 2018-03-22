@@ -63,7 +63,7 @@ In addition, it supports:
 * `@id` anchors
 * `blockquote@cite`
 * `img/@width`, `img/@height`
-* `ol/@style`, `ol/@start`
+* `ol/@style`, `ol/@start`, `ol/@reversed`
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
 * `table/caption`
 * Lists and paragraphs within cells

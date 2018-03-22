@@ -23,15 +23,16 @@ module ReverseAsciidoctor
 
       def ol_attrs(node)
         style = number_style(node)
+        reversed = "%reversed" if node["reversed"]
         start = "start=#{node['start']}" if node["start"]
-        if style && start
-          "[#{style},#{start}]\n"
-        elsif style
-          "[#{style}]\n"
-        elsif start
-          "[#{start}]\n"
-        else
+        attrs = []
+        attrs << style if style
+        attrs << reversed if reversed
+        attrs << start if start
+        if attrs.empty?
           ""
+        else
+          "[#{attrs.join(',')}]\n"
         end
       end
     end

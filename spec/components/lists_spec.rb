@@ -27,8 +27,9 @@ describe ReverseAsciidoctor do
     it { is_expected.to match /\n\[upperroman\]\n\. upperroman\n/ }
   end
 
-  context "list start" do
+  context "list start, reversed" do
     it { is_expected.to match /\n\[start=3\]\n\. another ordered list entry\n/ }
+    it { is_expected.to match /\n\[%reversed\]\n\. a reversed ordered list entry\n/ }
   end
 
   context "nested list with no whitespace" do
