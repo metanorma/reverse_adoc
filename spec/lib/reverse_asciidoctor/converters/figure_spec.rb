@@ -1,28 +1,13 @@
 require 'spec_helper'
 
-describe ReverseAsciidoctor::Converters::Img do
+describe ReverseAsciidoctor::Converters::Figure do
 
-  let(:converter) { ReverseAsciidoctor::Converters::Img.new }
+  let(:converter) { ReverseAsciidoctor::Converters::Figure.new }
 
-  it 'converts image with no attributes' do
-    node = node_for("<img src='example.jpg'/>")
-    expect(converter.convert(node)).to include "image::example.jpg[]"
+  it 'converts figure' do
+    node = node_for("<figure id='A'><img src='example.jpg'/><figcaption>Figure <i>caption</i></figcaption></figure>")
+    expect(converter.convert(node)).to include "[[A]]\n.Figure _caption_\n====\nimage::example.jpg[]\n====\n"
+
   end
-
-  it 'converts image with full set of attributes' do
-    node = node_for("<img id='A' alt='Alt Text' src='example.jpg' width='30' height='40'/>")
-    expect(converter.convert(node)).to include "[[A]]\nimage::example.jpg[Alt Text,30,40]"
-  end
-
-  it 'converts image with alt text, no width and height' do
-    node = node_for("<img id='A' alt='Alt Text' src='example.jpg'/>")
-    expect(converter.convert(node)).to include "[[A]]\nimage::example.jpg[Alt Text]"
-  end
-
-  it 'converts image with width and height, no alt text' do
-    node = node_for("<img id='A' src='example.jpg' width='30' height='40'/>")
-    expect(converter.convert(node)).to include "[[A]]\nimage::example.jpg[\"\",30,40]"
-  end
-
 end
 

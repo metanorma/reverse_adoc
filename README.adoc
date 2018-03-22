@@ -29,18 +29,37 @@ gem 'reverse_asciidoctor'
 
 As a port of reverse_markdown, reverse_asciidoctor shares its features:
 
-* Supports all the established html tags: `a`, `blockquote`, `br`, `code`, `tt`, `div`, `article`, `em`, `i`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `img`, `li`, `ol`, `ul`, `p`, `pre`, `strong`, `b`, `table`, `td`, `th`, `tr`
-** reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
-** As with reverse_markdown, `pre` is only treated as sourcecode if it is contained in a `div@class = highlight-` element, or has a `@brush` attribute naming the language (Confluence).
 * Module based - if you miss a tag, just add it
 * Can deal with nested lists
 * Inline and block code is supported
 * Supports blockquote
 
+It supports the following html tags supported by reverse_markdown:
+
+* `a`
+* `blockquote`
+* `br`
+* `code`, `tt` (added: `kbd`, `samp`)
+* `div`, `article` (added: `details`)
+* `em`, `i` (added: `cite`)
+* `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
+* `img`
+* `li`, `ol`, `ul` (added: `dir`)
+* `p`, `pre`
+* `strong`, `b`
+* `table`, `td`, `th`, `tr`
+
+NOTE:
+* reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
+* As with reverse_markdown, `pre` is only treated as sourcecode if it is contained in a `div@class = highlight-` element, or has a `@brush` attribute naming the language (Confluence).
+* The gem does not support `p@align`, because Asciidoctor doesn't
+
 In addition, it supports:
 
 * `aside`
 * `audio`
+* `figure`, `figcaption`
+* `mark`
 * `@id` anchors
 * `blockquote@cite`
 * `img/@width`, `img/@height`
@@ -55,10 +74,13 @@ The gem does not support
 * `col`, `colgroup`
 * `source`
 * `bdi`, `bdo`
-* `map`, `canvas`
-* `big`
-* `button`
-
+* `frame`, `frameset`, `iframe`
+* `map`, `canvas`, `dialog`, `embed`, `fieldset`, `button`, `datalist`, `form`, `input`, `label`, `legend`
+* `big`, `dfn`, `font`
+* `center`
+* `data`
+* `del`, `ins`
+* `footer`, `header`, `main`
 
 == Usage
 
