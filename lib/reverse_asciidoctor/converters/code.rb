@@ -10,5 +10,6 @@ module ReverseAsciidoctor
     register :tt, Code.new
     register :kbd, Code.new
     register :samp, Code.new
+    register :var, Code.new
   end
 end

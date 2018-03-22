@@ -39,7 +39,7 @@ It supports the following html tags supported by reverse_markdown:
 * `a`
 * `blockquote`
 * `br`
-* `code`, `tt` (added: `kbd`, `samp`)
+* `code`, `tt` (added: `kbd`, `samp`, `var`)
 * `div`, `article`
 * `em`, `i` (added: `cite`)
 * `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
@@ -57,7 +57,7 @@ NOTE:
 In addition, it supports:
 
 * `aside`
-* `audio`
+* `audio`, `video` (with `@src` attributes)
 * `figure`, `figcaption`
 * `mark`
 * `q`
