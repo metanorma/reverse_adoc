@@ -73,5 +73,6 @@ module ReverseAsciidoctor
     register :textarea,    Bypass.new
     register :track,    Bypass.new
     register :u,    Bypass.new
+    register :wbr,    Bypass.new
   end
 end

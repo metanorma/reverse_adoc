@@ -75,7 +75,7 @@ The gem does not support
 
 * `col`, `colgroup`
 * `source`, `picture`
-* `bdi`, `bdo`, `ruby`, `rt`, `rp`
+* `bdi`, `bdo`, `ruby`, `rt`, `rp`, `wbr`
 * `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
 * `map`, `canvas`, `dialog`, `embed`, `object`, `param`, `svg`, `track`
 * `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`, `textarea`
