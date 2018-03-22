@@ -48,7 +48,6 @@ module ReverseAsciidoctor
     register :meter,    Bypass.new
     register :nav,    Bypass.new
     register :noframes,    Bypass.new
-    register :script,    Bypass.new
     register :noscript,    Bypass.new
     register :object,    Bypass.new
     register :optgroup,    Bypass.new

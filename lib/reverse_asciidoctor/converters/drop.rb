@@ -12,5 +12,7 @@ module ReverseAsciidoctor
     register :link, Drop.new
     register :style, Drop.new
     register :meta, Drop.new
+    register :script, Drop.new
+    register :comment, Drop.new
   end
 end
