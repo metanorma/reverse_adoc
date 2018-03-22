@@ -40,7 +40,7 @@ It supports the following html tags supported by reverse_markdown:
 * `blockquote`
 * `br`
 * `code`, `tt` (added: `kbd`, `samp`)
-* `div`, `article` (added: `details`, `section`)
+* `div`, `article`
 * `em`, `i` (added: `cite`)
 * `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
 * `img`
@@ -67,7 +67,7 @@ In addition, it supports:
 * `img/@width`, `img/@height`
 * `ol/@style`, `ol/@start`, `ol/@reversed`
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
-* `table/caption`
+* `table/caption`, `table/@width`
 * Lists and paragraphs within cells
 ** Not tables within cells: Asciidoctor cannot deal with nested tabls
 
@@ -77,13 +77,13 @@ The gem does not support
 * `source`, `picture`
 * `bdi`, `bdo`, `ruby`, `rt`, `rp`
 * `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
-* `map`, `canvas`, `dialog`, `embed`, `object`, `param`
+* `map`, `canvas`, `dialog`, `embed`, `object`, `param`, `svg`
 * `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`
 * `big`, `dfn`, `font`, `s`, `small`, `span`, `strike`
 * `center`
 * `data`, `meter`
 * `del`, `ins`
-* `footer`, `header`, `main`, `nav`
+* `footer`, `header`, `main`, `nav`, `details`, `section`, `summary`
 
 == Usage
 
