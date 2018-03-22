@@ -3,7 +3,7 @@ module ReverseAsciidoctor
     class Head < Base
       def convert(node, state = {})
         title = extract_title(node)
-        "= #{title}\n\n"
+        "= #{title}\n:stem:\n\n"
       end
 
       def extract_title(node)

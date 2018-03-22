@@ -71,7 +71,25 @@ In addition, it supports:
 * Lists and paragraphs within cells
 ** Not tables within cells: Asciidoctor cannot deal with nested tabls
 
-The gem does not support
+It also supports MathML... sort of.
+
+* Asciidoctor supports AsciiMath and LaTeX for stem expressions. HTML uses MathML.
+The gem will recognise MathML expressions in HTML, and will wrap them in Asciidoctor
+`stem:[ ]` macros. The result of this gem is not actually legal Asciidoctor for stem: 
+Asciidoctor will presumably
+think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
+AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
+on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
+uses the output) as such; so this is still much better than nothing for stem processing.
+* An alternative would be to attempt to map MathML to either LaTeX or AsciiMath.
+** The self-description of https://github.com/learningobjectsinc/mathml-to-asciimath
+("subset"... "this module is not: comprehensive, performant") does not recommend it,
+when MathJax is entirely happy with MathML anyway.
+** https://github.com/transpect/mml2tex looks rather more robust, and is also used
+to export Word documents and their OOMML to LaTeX via MathML. But we'd still rather
+keep the MathML in place.
+
+The gem does not support:
 
 * `col`, `colgroup`
 * `source`, `picture`
@@ -150,4 +168,5 @@ end
 * https://github.com/xijo/reverse_markdown/wiki/Write-your-own-converter[Write custom converters] - Wiki entry about how to write your own converter
 * https://github.com/harlantwood/html_massage[html_massage] - A gem by Harlan T. Wood to convert regular sites into markdown using reverse_markdown
 * https://github.com/benbalter/word-to-markdown[word-to-markdown] - Convert word docs into markdown while using reverse_markdown, by Ben Balter
+* https://github.com/asciidocfx/HtmlToAsciidoc[HtmlToAsciidoc] - Javascript regexp-based converter of HTML to Asciidoctor
 * https://asciidoctor.org/docs/user-manual/[The Asciidoctor User Manual]
