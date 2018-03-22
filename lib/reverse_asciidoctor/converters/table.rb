@@ -16,10 +16,27 @@ module ReverseAsciidoctor
         treat_children(title, {})
       end
 
+      def frame(node)
+        case node["frame"]
+        when "void"
+          "frame=none"
+        when "hsides"
+          "frame=topbot"
+        when "vsides"
+          "frame=sides"
+        when "box", "border"
+          "frame=all"
+        else
+          nil
+        end
+      end
+
       def style(node)
         width = "width=#{node['width']}" if node['width']
         attrs = []
+        frame_attr = frame(node)
         attrs << width if width
+        attrs << frame_attr if frame_attr
         return "" if attrs.empty?
         "[#{attrs.join(',')}]\n"
       end
