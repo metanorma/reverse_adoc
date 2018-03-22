@@ -51,5 +51,11 @@ module ReverseAsciidoctor
     register :script,    Bypass.new
     register :noscript,    Bypass.new
     register :object,    Bypass.new
+    register :optgroup,    Bypass.new
+    register :option,    Bypass.new
+    register :output,    Bypass.new
+    register :param,    Bypass.new
+    register :picture,    Bypass.new
+    register :progress,    Bypass.new
   end
 end

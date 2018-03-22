@@ -60,6 +60,7 @@ In addition, it supports:
 * `audio`
 * `figure`, `figcaption`
 * `mark`
+* `q`
 * `@id` anchors
 * `blockquote@cite`
 * `img/@width`, `img/@height`
@@ -72,10 +73,11 @@ In addition, it supports:
 The gem does not support
 
 * `col`, `colgroup`
-* `source`
+* `source`, `picture`
 * `bdi`, `bdo`
-* `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`
-* `map`, `canvas`, `dialog`, `embed`, `fieldset`, `button`, `datalist`, `form`, `input`, `label`, `legend`, `menu`, `menulist`, `object`
+* `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
+* `map`, `canvas`, `dialog`, `embed`, `object`, `param`
+* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`
 * `big`, `dfn`, `font`
 * `center`
 * `data`, `meter`
