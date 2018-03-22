@@ -43,5 +43,13 @@ module ReverseAsciidoctor
     register :label,    Bypass.new
     register :legend,    Bypass.new
     register :main,    Bypass.new
+    register :menu,    Bypass.new
+    register :menulist,    Bypass.new
+    register :meter,    Bypass.new
+    register :nav,    Bypass.new
+    register :noframes,    Bypass.new
+    register :script,    Bypass.new
+    register :noscript,    Bypass.new
+    register :object,    Bypass.new
   end
 end
