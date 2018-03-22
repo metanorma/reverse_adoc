@@ -40,7 +40,7 @@ It supports the following html tags supported by reverse_markdown:
 * `blockquote`
 * `br`
 * `code`, `tt` (added: `kbd`, `samp`)
-* `div`, `article` (added: `details`)
+* `div`, `article` (added: `details`, `section`)
 * `em`, `i` (added: `cite`)
 * `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
 * `img`
@@ -61,6 +61,7 @@ In addition, it supports:
 * `figure`, `figcaption`
 * `mark`
 * `q`
+* `sub`, `sup`
 * `@id` anchors
 * `blockquote@cite`
 * `img/@width`, `img/@height`
@@ -74,11 +75,11 @@ The gem does not support
 
 * `col`, `colgroup`
 * `source`, `picture`
-* `bdi`, `bdo`
+* `bdi`, `bdo`, `ruby`, `rt`, `rp`
 * `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
 * `map`, `canvas`, `dialog`, `embed`, `object`, `param`
-* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`
-* `big`, `dfn`, `font`
+* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`
+* `big`, `dfn`, `font`, `s`, `small`, `span`, `strike`
 * `center`
 * `data`, `meter`
 * `del`, `ins`

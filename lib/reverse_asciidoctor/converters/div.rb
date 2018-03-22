@@ -11,5 +11,6 @@ module ReverseAsciidoctor
     register :div,     Div.new
     register :article, Div.new
     register :details, Div.new
+    register :section, Div.new
   end
 end

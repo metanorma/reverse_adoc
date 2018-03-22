@@ -57,5 +57,13 @@ module ReverseAsciidoctor
     register :param,    Bypass.new
     register :picture,    Bypass.new
     register :progress,    Bypass.new
+    register :ruby,    Bypass.new
+    register :rt,    Bypass.new
+    register :rp,    Bypass.new
+    register :s,    Bypass.new
+    register :select,    Bypass.new
+    register :small,    Bypass.new
+    register :span,    Bypass.new
+    register :strike,    Bypass.new
   end
 end
