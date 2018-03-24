@@ -24,4 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake'
   s.add_development_dependency 'redcarpet'
   s.add_development_dependency 'codeclimate-test-reporter'
+
+  # All the following are for bin/w2m
+  s.add_dependency 'word-to-markdown'
 end

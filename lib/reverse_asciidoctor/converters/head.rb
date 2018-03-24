@@ -9,7 +9,7 @@ module ReverseAsciidoctor
       def extract_title(node)
         title = node.at("./title")
         return "(???)" if title.nil?
-        treat_children(title, {})
+        title.text
       end
     end
 

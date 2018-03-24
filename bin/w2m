@@ -4,6 +4,17 @@
 require 'word-to-markdown'
 require 'reverse_asciidoctor'
 
+def scrub_whitespace(string)
+  string = string.dup
+  string.gsub!('&nbsp;', ' ')       # HTML encoded spaces
+  string.sub!(/\A[[:space:]]+/, '') # document leading whitespace
+  string.sub!(/[[:space:]]+\z/, '') # document trailing whitespace
+  string.gsub!(/([ ]+)$/, '')       # line trailing whitespace
+  string.gsub!(/\n\n\n\n/, "\n\n")  # Quadruple line breaks
+  string.delete!(' ')               # Unicode non-breaking spaces, injected as tabs
+  string
+end
+
 if ARGV.size != 1 || ARGV[0] == '--help'
   puts 'Usage: bundle exec w2m path/to/document.docx'
   exit 1
@@ -15,6 +26,6 @@ if ARGV[0] == '--version'
 else
   doc = WordToMarkdown.new ARGV[0]
   # puts doc.to_s
-  puts ReverseAsciidoctor.convert(doc.document.html, WordToMarkdown::REVERSE_MARKDOWN_OPTIONS)
+  puts ReverseAsciidoctor.convert(scrub_whitespace(doc.document.html), WordToMarkdown::REVERSE_MARKDOWN_OPTIONS)
 end
 

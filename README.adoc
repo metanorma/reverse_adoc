@@ -122,9 +122,23 @@ It's also possible to convert html files to markdown using the binary:
 
 [source,console]
 ----
-$ reverse_asciidoctor file.html > file.adoc
-$ cat file.html | reverse_asciidoctor > file.adoc
+$ bin/reverse_asciidoctor file.html > file.adoc
+$ cat file.html | bin/reverse_asciidoctor > file.adoc
 ----
+
+In addition, the `bin/w2m` script (
+adapted from https://github.com/benbalter/word-to-markdown[Ben Balter's word-to-markdown])
+script extracts HTML from Word docx documents, and converts it to Asciidoc.
+
+[source,console]
+----
+$ bundle exec bin/w2m document.docx > document.adoc
+----
+
+The script presumes that LibreOffice has already been installed: it uses LibreOffice's
+export to XHTML. LibreOffice's export of XHTML is superior to the native Microsoft Word export
+to HTML: it exports lists (which Word keeps as paragraphs), and it exports OOMML into MathML.
+On the other hand, the LibreOffice export relies on 
 
 === Configuration
 

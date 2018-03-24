@@ -4,7 +4,7 @@ module ReverseAsciidoctor
       def convert(node, state = {})
         id = node['id']
         anchor = id ? "[[#{id}]]\n" : ""
-        prefix = '=' * node.name[/\d/].to_i
+        prefix = '=' * (node.name[/\d/].to_i + 1)
         ["\n", anchor, prefix, ' ', treat_children(node, state), "\n"].join
       end
     end
