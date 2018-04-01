@@ -140,7 +140,10 @@ $ bundle exec bin/w2a document.docx > document.adoc
 The script presumes that LibreOffice has already been installed: it uses LibreOffice's
 export to XHTML. LibreOffice's export of XHTML is superior to the native Microsoft Word export
 to HTML: it exports lists (which Word keeps as paragraphs), and it exports OOMML into MathML.
-On the other hand, the LibreOffice export relies on 
+On the other hand, the LibreOffice export relies on default styling being used in the
+document, and it may not cope with ordered lists or headings with customised appearance.
+For best results, reset the styles in the document you're converting to those in
+the default Normal.dot template.
 
 === Configuration
 
