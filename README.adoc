@@ -49,10 +49,12 @@ It supports the following html tags supported by reverse_markdown:
 * `strong`, `b`
 * `table`, `td`, `th`, `tr`
 
-NOTE:
+[NOTE]
+====
 * reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
 * As with reverse_markdown, `pre` is only treated as sourcecode if it is contained in a `div@class = highlight-` element, or has a `@brush` attribute naming the language (Confluence).
 * The gem does not support `p@align`, because Asciidoctor doesn't
+====
 
 In addition, it supports:
 
@@ -184,3 +186,4 @@ end
 * https://github.com/benbalter/word-to-markdown[word-to-markdown] - Convert word docs into markdown while using reverse_markdown, by Ben Balter
 * https://github.com/asciidocfx/HtmlToAsciidoc[HtmlToAsciidoc] - Javascript regexp-based converter of HTML to Asciidoctor
 * https://asciidoctor.org/docs/user-manual/[The Asciidoctor User Manual]
+
