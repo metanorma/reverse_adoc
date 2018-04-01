@@ -126,13 +126,13 @@ $ bin/reverse_asciidoctor file.html > file.adoc
 $ cat file.html | bin/reverse_asciidoctor > file.adoc
 ----
 
-In addition, the `bin/w2m` script (
-adapted from https://github.com/benbalter/word-to-markdown[Ben Balter's word-to-markdown])
-script extracts HTML from Word docx documents, and converts it to Asciidoc.
+In addition, the `bin/w2a` script (adapted from the `bin/w2m` script in 
+https://github.com/benbalter/word-to-markdown[Ben Balter's word-to-markdown])
+extracts HTML from Word docx documents, and converts it to Asciidoc.
 
 [source,console]
 ----
-$ bundle exec bin/w2m document.docx > document.adoc
+$ bundle exec bin/w2a document.docx > document.adoc
 ----
 
 The script presumes that LibreOffice has already been installed: it uses LibreOffice's
