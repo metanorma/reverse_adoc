@@ -1,9 +1,10 @@
 module ReverseAsciidoctor
   class Config
-    attr_accessor :unknown_tags, :tag_border
+    attr_accessor :unknown_tags, :tag_border, :mathml2asciimath
 
     def initialize
       @unknown_tags     = :pass_through
+      @mathml2asciimath     = false
       @em_delimiter     = '_'.freeze
       @strong_delimiter = '*'.freeze
       @inline_options   = {}
@@ -19,6 +20,10 @@ module ReverseAsciidoctor
 
     def unknown_tags
       @inline_options[:unknown_tags] || @unknown_tags
+    end
+
+    def mathml2asciimath
+      @inline_options[:mathml2asciimath] || @mathml2asciimath
     end
 
     def tag_border

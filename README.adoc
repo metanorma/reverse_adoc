@@ -83,13 +83,9 @@ think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
 AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
 on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
 uses the output) as such; so this is still much better than nothing for stem processing.
-* An alternative would be to attempt to map MathML to either LaTeX or AsciiMath.
-** The self-description of https://github.com/learningobjectsinc/mathml-to-asciimath
-("subset"... "this module is not: comprehensive, performant") does not recommend it,
-when MathJax is entirely happy with MathML anyway.
-** https://github.com/transpect/mml2tex looks rather more robust, and is also used
-to export Word documents and their OOMML to LaTeX via MathML. But we'd still rather
-keep the MathML in place.
+** The gem will optionally invoke the https://github.com/riboseinc/mathml2asciimath
+gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
+post-edited; but it's a lot better than nothing.
 
 The gem does not support:
 
@@ -157,6 +153,8 @@ The following options are available:
 * `tag_border` (default `' '`) - how to handle tag borders. valid options are:
 ** `' '` - Add whitespace if there is none at tag borders.
 ** `''` - Do not not add whitespace.
+* `mathml2asciimath` - if `true`, will use the https://github.com/riboseinc/mathml2asciimath gem
+to convert MathML to AsciiMath
 
 ==== As options
 
@@ -164,7 +162,7 @@ Just pass your chosen configuration options in after the input. The given option
 
 [source,ruby]
 ----
-ReverseAsciidoctor.convert(input, unknown_tags: :raise)
+ReverseAsciidoctor.convert(input, unknown_tags: :raise, mathml2asciimath: true)
 ----
 
 ==== Preconfigure
@@ -175,7 +173,7 @@ Or configure it block style on a initializer level. These configurations will la
 ----
 ReverseAsciidoctor.config do |config|
   config.unknown_tags     = :bypass
-  config.github_flavored  = true
+  config.mathml2asciimath  = true
   config.tag_border  = ''
 end
 ----
