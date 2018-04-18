@@ -141,6 +141,14 @@ document, and it may not cope with ordered lists or headings with customised app
 For best results, reset the styles in the document you're converting to those in
 the default Normal.dot template.
 
+If you wish to convert the MathML in the document to AsciiMath, run the script with the
+`--mathml2asciimath` option:
+
+[source,console]
+----
+$ bundle exec bin/w2a --mathml2asciimath document.docx > document.adoc
+----
+
 === Configuration
 
 The following options are available:

@@ -23,6 +23,7 @@ module ReverseAsciidoctor
           line.strip.gsub(/[ \t]{2,}/, ' ')
         end
       end
+      string.gsub!(/\n stem:\[/, "\nstem:[")
     end
 
     # Find non-asterisk content that is enclosed by two or
