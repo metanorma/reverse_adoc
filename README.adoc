@@ -149,6 +149,12 @@ If you wish to convert the MathML in the document to AsciiMath, run the script w
 $ bundle exec bin/w2a --mathml2asciimath document.docx > document.adoc
 ----
 
+Note that some information in OOMML is not preserved in the export to MathML from LibreOffice;
+in particular, font shifts such as double-struck fonts.
+
+Note that the LibreOffice exporter does seem to drop some text (possibly associated with
+MathML); use with caution.
+
 === Configuration
 
 The following options are available:

@@ -18,12 +18,15 @@ module ReverseAsciidoctor
     end
 
     def remove_inner_whitespaces(string)
+      unless string.nil?
+        string.gsub!(/\n stem:\[/, "\nstem:[")
+        string.gsub!(/(stem:\[([^\]]|\\\])*\])\n(?=\S)/, "\\1 ")
+      end
       string.each_line.inject("") do |memo, line|
         memo + preserve_border_whitespaces(line) do
           line.strip.gsub(/[ \t]{2,}/, ' ')
         end
       end
-      string.gsub!(/\n stem:\[/, "\nstem:[")
     end
 
     # Find non-asterisk content that is enclosed by two or

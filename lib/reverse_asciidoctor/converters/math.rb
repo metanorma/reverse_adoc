@@ -9,7 +9,8 @@ module ReverseAsciidoctor
       def convert(node, state = {})
         stem = node.to_s.gsub(/\n/, " ")
         stem = MathML2AsciiMath.m2a(stem) if ReverseAsciidoctor.config.mathml2asciimath
-        " stem:[" << stem.gsub(/\[/, "\\[").gsub(/\]/, "\\]") << "]"
+        stem = stem.gsub(/\[/, "\\[").gsub(/\]/, "\\]").gsub(/\(\(([^\)]+)\)\)/, "(\\1)") unless stem.nil?
+        " stem:[" << stem << "]"
       end
     end
 
