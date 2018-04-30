@@ -25,82 +25,6 @@ or add it to your Gemfile
 gem 'reverse_asciidoctor'
 ----
 
-== Features
-
-As a port of reverse_markdown, reverse_asciidoctor shares its features:
-
-* Module based - if you miss a tag, just add it
-* Can deal with nested lists
-* Inline and block code is supported
-* Supports blockquote
-
-It supports the following html tags supported by reverse_markdown:
-
-* `a`
-* `blockquote`
-* `br`
-* `code`, `tt` (added: `kbd`, `samp`, `var`)
-* `div`, `article`
-* `em`, `i` (added: `cite`)
-* `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
-* `img`
-* `li`, `ol`, `ul` (added: `dir`)
-* `p`, `pre`
-* `strong`, `b`
-* `table`, `td`, `th`, `tr`
-
-[NOTE]
-====
-* reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
-* As with reverse_markdown, `pre` is only treated as sourcecode if it is contained in a `div@class = highlight-` element, or has a `@brush` attribute naming the language (Confluence).
-* The gem does not support `p@align`, because Asciidoctor doesn't
-====
-
-In addition, it supports:
-
-* `aside`
-* `audio`, `video` (with `@src` attributes)
-* `figure`, `figcaption`
-* `mark`
-* `q`
-* `sub`, `sup`
-* `@id` anchors
-* `blockquote@cite`
-* `img/@width`, `img/@height`
-* `ol/@style`, `ol/@start`, `ol/@reversed`, `ul/@type`
-* `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
-* `table/caption`, `table/@width`, `table/@frame` (partial), `table/@rules` (partial)
-* Lists and paragraphs within cells
-** Not tables within cells: Asciidoctor cannot deal with nested tabls
-
-It also supports MathML... sort of.
-
-* Asciidoctor supports AsciiMath and LaTeX for stem expressions. HTML uses MathML.
-The gem will recognise MathML expressions in HTML, and will wrap them in Asciidoctor
-`stem:[ ]` macros. The result of this gem is not actually legal Asciidoctor for stem: 
-Asciidoctor will presumably
-think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
-AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
-on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
-uses the output) as such; so this is still much better than nothing for stem processing.
-** The gem will optionally invoke the https://github.com/riboseinc/mathml2asciimath
-gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
-post-edited; but it's a lot better than nothing.
-
-The gem does not support:
-
-* `col`, `colgroup`
-* `source`, `picture`
-* `bdi`, `bdo`, `ruby`, `rt`, `rp`, `wbr`
-* `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
-* `map`, `canvas`, `dialog`, `embed`, `object`, `param`, `svg`, `track`
-* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`, `textarea`
-* `big`, `dfn`, `font`, `s`, `small`, `span`, `strike`, `u`
-* `center`
-* `data`, `meter`
-* `del`, `ins`
-* `footer`, `header`, `main`, `nav`, `details`, `section`, `summary`, `template`
-
 == Usage
 
 === Ruby
@@ -155,7 +79,84 @@ in particular, font shifts such as double-struck fonts.
 Note that the LibreOffice exporter does seem to drop some text (possibly associated with
 MathML); use with caution.
 
-=== Configuration
+== Features
+
+As a port of reverse_markdown, reverse_asciidoctor shares its features:
+
+* Module based - if you miss a tag, just add it
+* Can deal with nested lists 
+* Inline and block code is supported
+* Supports blockquote
+
+It supports the following html tags supported by reverse_markdown:
+
+* `a`
+* `blockquote`
+* `br`
+* `code`, `tt` (added: `kbd`, `samp`, `var`)
+* `div`, `article`
+* `em`, `i` (added: `cite`)
+* `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
+* `img` 
+* `li`, `ol`, `ul` (added: `dir`)
+* `p`, `pre`
+* `strong`, `b`
+* `table`, `td`, `th`, `tr`
+
+[NOTE]
+====
+* reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
+* As with reverse_markdown, `pre` is only treated as sourcecode if it is contained in a `div@class = highlight-` element, or has a `@brush` attribute naming the language (Confluence).
+* The gem does not support `p@align`, because Asciidoctor doesn't
+====
+
+In addition, it supports:
+
+* `aside`
+* `audio`, `video` (with `@src` attributes)
+* `figure`, `figcaption` 
+* `mark`
+* `q`
+* `sub`, `sup`
+* `@id` anchors
+* `blockquote@cite`
+* `img/@width`, `img/@height`
+* `ol/@style`, `ol/@start`, `ol/@reversed`, `ul/@type`
+* `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
+* `table/caption`, `table/@width`, `table/@frame` (partial), `table/@rules` (partial)
+* Lists and paragraphs within cells
+** Not tables within cells: Asciidoctor cannot deal with nested tabls
+
+It also supports MathML... sort of.
+
+* Asciidoctor supports AsciiMath and LaTeX for stem expressions. HTML uses MathML.
+The gem will recognise MathML expressions in HTML, and will wrap them in Asciidoctor
+`stem:[ ]` macros. The result of this gem is not actually legal Asciidoctor for stem:
+Asciidoctor will presumably
+think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
+AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
+on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
+uses the output) as such; so this is still much better than nothing for stem processing.
+** The gem will optionally invoke the https://github.com/riboseinc/mathml2asciimath
+gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
+post-edited; but it's a lot better than nothing.
+
+The gem does not support:
+
+* `col`, `colgroup`
+* `source`, `picture`
+* `bdi`, `bdo`, `ruby`, `rt`, `rp`, `wbr`
+* `frame`, `frameset`, `iframe`, `noframes`, `noscript`, `script`, `input`, `output`, `progress`
+* `map`, `canvas`, `dialog`, `embed`, `object`, `param`, `svg`, `track`
+* `fieldset`, `button`, `datalist`, `form`, `label`, `legend`, `menu`, `menulist`, `optgroup`, `option`, `select`, `textarea`
+* `big`, `dfn`, `font`, `s`, `small`, `span`, `strike`, `u`
+* `center`
+* `data`, `meter`
+* `del`, `ins`
+* `footer`, `header`, `main`, `nav`, `details`, `section`, `summary`, `template`
+
+
+== Configuration
 
 The following options are available:
 
@@ -170,7 +171,7 @@ The following options are available:
 * `mathml2asciimath` - if `true`, will use the https://github.com/riboseinc/mathml2asciimath gem
 to convert MathML to AsciiMath
 
-==== As options
+=== As options
 
 Just pass your chosen configuration options in after the input. The given options will last for this operation only.
 
@@ -179,7 +180,7 @@ Just pass your chosen configuration options in after the input. The given option
 ReverseAsciidoctor.convert(input, unknown_tags: :raise, mathml2asciimath: true)
 ----
 
-==== Preconfigure
+=== Preconfigure
 
 Or configure it block style on a initializer level. These configurations will last for all conversions until they are set to something different.
 
