@@ -12,6 +12,10 @@ def scrub_whitespace(string)
   string.gsub!(/([ ]+)$/, '')       # line trailing whitespace
   string.gsub!(/\n\n\n\n/, "\n\n")  # Quadruple line breaks
   string.delete!(' ')               # Unicode non-breaking spaces, injected as tabs
+  # following added by me
+  string.gsub!(%r{<h[1-9][^>]*></h1>}, " ") # I don't know why Libre Office is inserting them, but they need to go
+  string.gsub!(%r{<h1[^>]* style="vertical-align: super;[^>]*>([^<]+)</h1>},
+              "<sup>\\1</sup>")         # I absolutely don't know why Libre Office is rendering superscripts as h1
   string
 end
 
@@ -30,7 +34,7 @@ if ARGV[0] == '--version'
   puts "LibreOffice v#{WordToMarkdown.soffice.version}" unless Gem.win_platform?
 else
   doc = WordToMarkdown.new ARGV[0]
-  # puts doc.to_s
+  # puts scrub_whitespace(doc.document.html)
   puts ReverseAsciidoctor.convert(scrub_whitespace(doc.document.html), WordToMarkdown::REVERSE_MARKDOWN_OPTIONS)
 end
 

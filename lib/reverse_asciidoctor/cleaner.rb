@@ -21,6 +21,7 @@ module ReverseAsciidoctor
       unless string.nil?
         string.gsub!(/\n stem:\[/, "\nstem:[")
         string.gsub!(/(stem:\[([^\]]|\\\])*\])\n(?=\S)/, "\\1 ")
+        string.gsub!(/(stem:\[([^\]]|\\\])*\])\s+(?=[\^-])/, "\\1")
       end
       string.each_line.inject("") do |memo, line|
         memo + preserve_border_whitespaces(line) do
