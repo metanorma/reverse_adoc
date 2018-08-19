@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/ribose/reverse_asciidoctor"
   s.summary     = %q{Convert html code into asciidoctor.}
   s.description = %q{Map simple html back into asciidoctor, e.g. if you want to import existing html data in your application.}
+  s.license       = "BSD-2-Clause"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
