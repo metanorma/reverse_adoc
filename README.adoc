@@ -1,5 +1,9 @@
 = reverse_asciidoctor
 
+image:https://img.shields.io/gem/v/reverse_asciidoctor.svg["Gem Version", link="https://rubygems.org/gems/reverse_asciidoctor"]
+image:https://img.shields.io/travis/riboseinc/reverse_asciidoctor/master.svg["Build Status", link="https://travis-ci.org/riboseinc/reverse_asciidoctor"]
+image:https://codeclimate.com/github/riboseinc/reverse_asciidoctor/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/riboseinc/reverse_asciidoctor"]
+
 Based on https://github.com/xijo/reverse_markdown
 
 Transforms HTML into asciidoctor.

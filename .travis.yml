@@ -3,7 +3,7 @@ language: ruby
 sudo: false
 
 before_install:
-  - gem install bundler -v 1.16.1
+  - gem install bundler -v 2.0.1
 
 rvm:
   - 2.5
