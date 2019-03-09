@@ -1,8 +1,8 @@
 = reverse_asciidoctor
 
 image:https://img.shields.io/gem/v/reverse_asciidoctor.svg["Gem Version", link="https://rubygems.org/gems/reverse_asciidoctor"]
-image:https://img.shields.io/travis/riboseinc/reverse_asciidoctor/master.svg["Build Status", link="https://travis-ci.org/riboseinc/reverse_asciidoctor"]
-image:https://codeclimate.com/github/riboseinc/reverse_asciidoctor/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/riboseinc/reverse_asciidoctor"]
+image:https://img.shields.io/travis/metanorma/reverse_asciidoctor/master.svg["Build Status", link="https://travis-ci.org/metanorma/reverse_asciidoctor"]
+image:https://codeclimate.com/github/metanorma/reverse_asciidoctor/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/reverse_asciidoctor"]
 
 Based on https://github.com/xijo/reverse_markdown
 
@@ -141,7 +141,7 @@ think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
 AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
 on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
 uses the output) as such; so this is still much better than nothing for stem processing.
-** The gem will optionally invoke the https://github.com/riboseinc/mathml2asciimath
+** The gem will optionally invoke the https://github.com/metanorma/mathml2asciimath
 gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
 post-edited; but it's a lot better than nothing.
 
@@ -172,7 +172,7 @@ The following options are available:
 * `tag_border` (default `' '`) - how to handle tag borders. valid options are:
 ** `' '` - Add whitespace if there is none at tag borders.
 ** `''` - Do not not add whitespace.
-* `mathml2asciimath` - if `true`, will use the https://github.com/riboseinc/mathml2asciimath gem
+* `mathml2asciimath` - if `true`, will use the https://github.com/metanorma/mathml2asciimath gem
 to convert MathML to AsciiMath
 
 === As options

@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors       = ["Ribose Inc."]
   s.email         = ["open.source@ribose.com"]
 
-  s.homepage    = "http://github.com/ribose/reverse_asciidoctor"
+  s.homepage    = "http://github.com/metanorma/reverse_asciidoctor"
   s.summary     = %q{Convert html code into asciidoctor.}
   s.description = %q{Map simple html back into asciidoctor, e.g. if you want to import existing html data in your application.}
   s.license       = "BSD-2-Clause"
