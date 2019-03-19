@@ -141,6 +141,9 @@ think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
 AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
 on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
 uses the output) as such; so this is still much better than nothing for stem processing.
+** On the other hand, if you are using this gem in the context of https://www.metanorma.com[Metanorma],
+Metanorma Asciidoctor accepts MathML as a native mathematical format. So you do not need
+to convert the MathML to AsciiMath.
 ** The gem will optionally invoke the https://github.com/metanorma/mathml2asciimath
 gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
 post-edited; but it's a lot better than nothing.
