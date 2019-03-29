@@ -3,6 +3,8 @@
 image:https://img.shields.io/gem/v/reverse_asciidoctor.svg["Gem Version", link="https://rubygems.org/gems/reverse_asciidoctor"]
 image:https://img.shields.io/travis/metanorma/reverse_asciidoctor/master.svg["Build Status", link="https://travis-ci.org/metanorma/reverse_asciidoctor"]
 image:https://codeclimate.com/github/metanorma/reverse_asciidoctor/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/reverse_asciidoctor"]
+image:https://ci.appveyor.com/api/projects/status/s4st0ft8moay90m6?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/reverse-asciidoctor"]
+
 
 Based on https://github.com/xijo/reverse_markdown
 
