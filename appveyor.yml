@@ -1,0 +1,30 @@
+version: '{build}'
+
+environment:
+  matrix:
+    - RUBY_VERSION: 25
+    - RUBY_VERSION: 24
+    - RUBY_VERSION: 23
+    - RUBY_VERSION: _trunk
+
+matrix:
+  allow_failures:
+    - RUBY_VERSION: _trunk
+
+install:
+  - ps: . { iwr -useb https://raw.githubusercontent.com/metanorma/metanorma-build-scripts/master/appveyor.ps1 } | iex
+  - refreshenv
+
+build_script:
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
+  - bundle update
+  - bundle install
+
+before_test:
+  - ruby -v
+  - gem -v
+  - bundle -v
+
+test_script:
+  - bundle exec rake
+
