@@ -35,7 +35,7 @@ gem 'reverse_asciidoctor'
 
 === Ruby
 
-You can convert html content as string or Nokogiri document:
+You can convert HTML content as string or Nokogiri document:
 
 [source,ruby]
 ----
@@ -46,7 +46,7 @@ result.inspect # " *feelings* "
 
 === Commandline
 
-It's also possible to convert html files to markdown using the binary:
+It's also possible to convert HTML files to AsciiDoc markup using the binary:
 
 [source,console]
 ----
