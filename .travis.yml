@@ -10,7 +10,7 @@ rvm:
 - 2.4
 - ruby-head
 before_install: 
-- gem install bundler -v 2.0.1
+- gem install bundler -v "~> 2"
 - bundle update
 matrix:
   allow_failures:
