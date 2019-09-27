@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   # specify any dependencies here; for example:
-  s.add_dependency 'nokogiri'
+  s.add_dependency 'nokogiri', ">= 1.10.4"
   s.add_dependency 'mathml2asciimath'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'simplecov'
