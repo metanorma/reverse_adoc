@@ -1,100 +1,175 @@
-= reverse_asciidoctor
+= AsciiDoc from HTML and Microsoft Word: reverse_adoc
 
-image:https://img.shields.io/gem/v/reverse_asciidoctor.svg["Gem Version", link="https://rubygems.org/gems/reverse_asciidoctor"]
-image:https://img.shields.io/travis/metanorma/reverse_asciidoctor/master.svg["Build Status", link="https://travis-ci.org/metanorma/reverse_asciidoctor"]
-image:https://codeclimate.com/github/metanorma/reverse_asciidoctor/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/reverse_asciidoctor"]
+image:https://img.shields.io/gem/v/reverse_adoc.svg["Gem Version", link="https://rubygems.org/gems/reverse_adoc"]
+image:https://img.shields.io/travis/metanorma/reverse_adoc/master.svg["Build Status", link="https://travis-ci.org/metanorma/reverse_adoc"]
+image:https://codeclimate.com/github/metanorma/reverse_adoc/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/reverse_adoc"]
 image:https://ci.appveyor.com/api/projects/status/s4st0ft8moay90m6?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/reverse-asciidoctor"]
 
+== Purpose
+
+Transforms HTML and Microsoft Word into AsciiDoc.
 
 Based on https://github.com/xijo/reverse_markdown
 
-Transforms HTML into asciidoctor.
-
-== Requirements
-
-. http://nokogiri.org/[Nokogiri]
-. Ruby 1.9.3 or higher
 
 == Installation
 
-Install the gem
+Install the gem:
 
 [source,console]
 ----
-[sudo] gem install reverse_asciidoctor
+[sudo] gem install reverse_adoc
 ----
 
-or add it to your Gemfile
+or add it to your `Gemfile`:
 
 [source,ruby]
 ----
-gem 'reverse_asciidoctor'
+gem 'reverse_adoc'
 ----
 
-== Usage
 
-=== Ruby
+== Command-line usage
 
-You can convert HTML content as string or Nokogiri document:
+=== HTML to AsciiDoc: `reverse_adoc`
 
-[source,ruby]
-----
-input  = '<strong>feelings</strong>'
-result = ReverseAsciidoctor.convert input
-result.inspect # " *feelings* "
-----
-
-=== Commandline
-
-It's also possible to convert HTML files to AsciiDoc markup using the binary:
+Convert HTML files to AsciiDoc:
 
 [source,console]
 ----
-$ bin/reverse_asciidoctor file.html > file.adoc
-$ cat file.html | bin/reverse_asciidoctor > file.adoc
+$ reverse_adoc file.html > file.adoc
+$ cat file.html | reverse_adoc > file.adoc
 ----
-
-In addition, the `bin/w2a` script (adapted from the `bin/w2m` script in 
-https://github.com/benbalter/word-to-markdown[Ben Balter's word-to-markdown])
-extracts HTML from Word docx documents, and converts it to Asciidoc.
 
 [source,console]
 ----
-$ bundle exec bin/w2a document.docx > document.adoc
+$ reverse_adoc -h
+Usage: reverse_adoc [options] <file>
+    -m, --mathml2asciimath           Convert MathML to AsciiMath
+    -o, --output=FILENAME            Output file to write to
+    -e, --external-images            Export images if data URI
+    -u [pass_through, drop, bypass, raise],
+        --unknown_tags               Unknown tag handling (default: pass_through)
+    -v, --version                    Version information
+    -h, --help                       Prints this help
 ----
 
-The script presumes that LibreOffice has already been installed: it uses LibreOffice's
+
+
+=== Microsoft Word to AsciiDoc: `w2a`
+
+Convert Word `.doc` or `.docx` files to AsciiDoc:
+
+[source,console]
+----
+$ w2a file.docx > file.adoc
+----
+
+[source,console]
+----
+$ w2a input.docx -o output.adoc
+----
+
+Help:
+
+[source,console]
+----
+$ w2a -h
+Usage: w2a [options] <file>
+    -a, --mathml2asciimath           Convert MathML to AsciiMath
+    -o, --output=FILENAME            Output file to write to
+    -e, --external-images            Export images if data URI
+    -v, --version                    Version information
+    -h, --help                       Prints this help
+----
+
+
+NOTE: `w2a` requires LibreOffice to be installed. It uses LibreOffice's
 export to XHTML. LibreOffice's export of XHTML is superior to the native Microsoft Word export
 to HTML: it exports lists (which Word keeps as paragraphs), and it exports OOMML into MathML.
 On the other hand, the LibreOffice export relies on default styling being used in the
 document, and it may not cope with ordered lists or headings with customised appearance.
 For best results, reset the styles in the document you're converting to those in
-the default Normal.dot template.
+the default `Normal.dot` template.
+
+NOTE: Some information in OOMML is not preserved in the export to MathML from LibreOffice;
+in particular, font shifts such as double-struck fonts.
+The LibreOffice exporter does seem to drop some text (possibly associated with
+MathML); use with caution.
+
+NOTE: Adapted from `w2m` of
+https://github.com/benbalter/word-to-markdown[Ben Balter's word-to-markdown]
+
+
+=== Common options
+
+
+==== MathML to AsciiMath conversion
 
 If you wish to convert the MathML in the document to AsciiMath, run the script with the
 `--mathml2asciimath` option:
 
 [source,console]
 ----
-$ bundle exec bin/w2a --mathml2asciimath document.docx > document.adoc
+$ w2a --mathml2asciimath document.docx > document.adoc
 ----
 
-Note that some information in OOMML is not preserved in the export to MathML from LibreOffice;
-in particular, font shifts such as double-struck fonts.
 
-Note that the LibreOffice exporter does seem to drop some text (possibly associated with
-MathML); use with caution.
+==== Extracting images
+
+Images referred by the HTML can be extracted into the destination output folder by using:
+
+[source,console]
+----
+$ reverse_adoc input.docx -o output/file.adoc -e
+$ reverse_adoc input.docx --output output/file.adoc --external-images
+----
+
+
+Word embedded images can be extracted into the destination output folder by using:
+
+[source,console]
+----
+$ w2a input.docx -o output/file.adoc -e
+$ w2a input.docx --output output/file.adoc --external-images
+----
+
+
+==== Handling unknown HTML tags
+
+The `--unknown_tags` option allows you to specify how to handle unknown tags
+(default `pass_through`).
+
+Valid options are:
+
+* `pass_through` - Include the unknown tag completely into the result
+* `drop` - Drop the unknown tag and its content
+* `bypass` - Ignore the unknown tag but try to convert its content
+* `raise` - Raise an error to let you know
+
+
+==== Tagging of borders
+
+Specify how to handle tag borders with the option `--tag_border` (default `' '`).
+
+Valid options are:
+
+* `' '` - Add whitespace if there is none at tag borders.
+* `''` - Do not not add whitespace.
+
 
 == Features
 
-As a port of reverse_markdown, reverse_asciidoctor shares its features:
+=== General
 
-* Module based - if you miss a tag, just add it
-* Can deal with nested lists 
+`reverse_adoc` shares features as a port of `reverse_markdown`:
+
+* Module based -- if you miss a tag, just add it
+* Can deal with nested lists
 * Inline and block code is supported
 * Supports blockquote
 
-It supports the following html tags supported by reverse_markdown:
+It supports the following HTML tags (these are supported by `reverse_markdown`):
 
 * `a`
 * `blockquote`
@@ -103,7 +178,7 @@ It supports the following html tags supported by reverse_markdown:
 * `div`, `article`
 * `em`, `i` (added: `cite`)
 * `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`
-* `img` 
+* `img`
 * `li`, `ol`, `ul` (added: `dir`)
 * `p`, `pre`
 * `strong`, `b`
@@ -111,7 +186,7 @@ It supports the following html tags supported by reverse_markdown:
 
 [NOTE]
 ====
-* reverse_asciidoctor does *not* support `del` or `strike`, because Asciidoctor out of the box does not
+* reverse_adoc does *not* support `del` or `strike`, because Asciidoctor does not out of the box.
 * As with reverse_markdown, `pre` is only treated as sourcecode if it is contained in a `div@class = highlight-` element, or has a `@brush` attribute naming the language (Confluence).
 * The gem does not support `p@align`, because Asciidoctor doesn't
 ====
@@ -120,7 +195,7 @@ In addition, it supports:
 
 * `aside`
 * `audio`, `video` (with `@src` attributes)
-* `figure`, `figcaption` 
+* `figure`, `figcaption`
 * `mark`
 * `q`
 * `sub`, `sup`
@@ -131,24 +206,7 @@ In addition, it supports:
 * `td/@colspan`, `td/@rowspan`, `td@/align`, `td@/valign`
 * `table/caption`, `table/@width`, `table/@frame` (partial), `table/@rules` (partial)
 * Lists and paragraphs within cells
-** Not tables within cells: Asciidoctor cannot deal with nested tabls
-
-It also supports MathML... sort of.
-
-* Asciidoctor supports AsciiMath and LaTeX for stem expressions. HTML uses MathML.
-The gem will recognise MathML expressions in HTML, and will wrap them in Asciidoctor
-`stem:[ ]` macros. The result of this gem is not actually legal Asciidoctor for stem:
-Asciidoctor will presumably
-think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
-AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
-on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
-uses the output) as such; so this is still much better than nothing for stem processing.
-** On the other hand, if you are using this gem in the context of https://www.metanorma.com[Metanorma],
-Metanorma Asciidoctor accepts MathML as a native mathematical format. So you do not need
-to convert the MathML to AsciiMath.
-** The gem will optionally invoke the https://github.com/metanorma/mathml2asciimath
-gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
-post-edited; but it's a lot better than nothing.
+** Not tables within cells: Asciidoctor cannot deal with nested tables
 
 The gem does not support:
 
@@ -165,22 +223,39 @@ The gem does not support:
 * `footer`, `header`, `main`, `nav`, `details`, `section`, `summary`, `template`
 
 
-== Configuration
+=== MathML support
 
-The following options are available:
+If you are using this gem in the context of https://www.metanorma.com[Metanorma],
+Metanorma Asciidoctor accepts MathML as a native mathematical format. So you do not need
+to convert the MathML to AsciiMath.
 
-* `unknown_tags` (default `pass_through`) - how to handle unknown tags. Valid options are:
-** `pass_through` - Include the unknown tag completely into the result
-** `drop` - Drop the unknown tag and its content
-** `bypass` - Ignore the unknown tag but try to convert its content
-** `raise` - Raise an error to let you know
-* `tag_border` (default `' '`) - how to handle tag borders. valid options are:
-** `' '` - Add whitespace if there is none at tag borders.
-** `''` - Do not not add whitespace.
-* `mathml2asciimath` - if `true`, will use the https://github.com/metanorma/mathml2asciimath gem
-to convert MathML to AsciiMath
+The gem will optionally invoke the https://github.com/metanorma/mathml2asciimath
+gem, to convert MathML to AsciiMath. The conversion is not perfect, and will need to be
+post-edited; but it's a lot better than nothing.
 
-=== As options
+NOTE: Asciidoctor does not support MathML input. HTML uses MathML.
+The gem will recognize MathML expressions in HTML, and will wrap them in Asciidoctor
+`stem:[ ]` macros. The result of this gem is not actually legal Asciidoctor for `stem`:
+Asciidoctor will presumably
+think this is AsciiMath in the `stem:[ ]` macro, try to pass it into MathJax as
+AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some postprocessing
+on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
+uses the output) as such; so this is still much better than nothing for stem processing.
+
+
+== Ruby library usage
+
+=== General
+
+Simple to use.
+
+[source,ruby]
+----
+result = ReverseAsciidoctor.convert input
+result.inspect # " *feelings* "
+----
+
+=== Configure with options
 
 Just pass your chosen configuration options in after the input. The given options will last for this operation only.
 
@@ -189,14 +264,15 @@ Just pass your chosen configuration options in after the input. The given option
 ReverseAsciidoctor.convert(input, unknown_tags: :raise, mathml2asciimath: true)
 ----
 
-=== Preconfigure
+
+=== Preconfigure using an initializer
 
 Or configure it block style on a initializer level. These configurations will last for all conversions until they are set to something different.
 
 [source,ruby]
 ----
 ReverseAsciidoctor.config do |config|
-  config.unknown_tags     = :bypass
+  config.unknown_tags      = :bypass
   config.mathml2asciimath  = true
   config.tag_border  = ''
 end

@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'word-to-markdown'
+require 'optparse'
 require 'reverse_asciidoctor'
 
 def scrub_whitespace(string)
@@ -19,22 +20,66 @@ def scrub_whitespace(string)
   string
 end
 
-if ARGV.size != 1 && ARGV[0] != "--mathml2asciimath" || ARGV[0] == '--help'
-  puts 'Usage: bundle exec w2m path/to/document.docx'
-  exit 1
+ARGV.push('-h') if ARGV.empty?
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: w2a [options] <file>"
+  opts.on('-m', '--mathml2asciimath', 'Convert MathML to AsciiMath') do |v|
+    ReverseAsciidoctor.config.mathml2asciimath = true
+  end
+
+  opts.on('-oFILENAME', '--output=FILENAME', 'Output file to write to') do |v|
+    ReverseAsciidoctor.config.destination = File.expand_path(v)
+    # puts "output goes to #{ReverseAsciidoctor.config.destination}"
+  end
+
+  opts.on('-e', '--external-images', 'Export images if data URI') do |v|
+    ReverseAsciidoctor.config.external_images = true
+  end
+
+  opts.on('-v', '--version', 'Version information') do |v|
+    puts "reverse_adoc: v#{ReverseAsciidoctor::VERSION}"
+    puts "[dependency] WordToMarkdown: v#{WordToMarkdown::VERSION}"
+    unless Gem.win_platform?
+      puts "[dependency] LibreOffice: v#{WordToMarkdown.soffice.version}"
+    else
+      puts "[dependency] LibreOffice: version not available on Windows"
+    end
+    exit
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+
+end.parse!
+
+filename = ARGV.pop
+raise "Please provide an input file to process. Exiting." unless filename
+
+if ReverseAsciidoctor.config.external_images && ReverseAsciidoctor.config.destination.nil?
+  raise "The -e | --external-images feature must be used with -o | --output. Exiting."
 end
 
-if ARGV[0] == "--mathml2asciimath" && ARGV[1]
-  ReverseAsciidoctor.config.mathml2asciimath = true
-  ARGV[0] = ARGV[1]
+ReverseAsciidoctor.config.sourcedir = Dir.mktmpdir
+# puts "ReverseAsciidoctor.config.sourcedir #{ReverseAsciidoctor.config.sourcedir}"
+
+doc = WordToMarkdown.new(filename, ReverseAsciidoctor.config.sourcedir)
+adoc_content = ReverseAsciidoctor.convert(
+  scrub_whitespace(doc.document.html),
+  WordToMarkdown::REVERSE_MARKDOWN_OPTIONS
+)
+# puts scrub_whitespace(doc.document.html)
+
+# Print to STDOUT
+unless ReverseAsciidoctor.config.destination
+  puts adoc_content
+  exit
 end
 
-if ARGV[0] == '--version'
-  puts "WordToMarkdown v#{WordToMarkdown::VERSION}"
-  puts "LibreOffice v#{WordToMarkdown.soffice.version}" unless Gem.win_platform?
-else
-  doc = WordToMarkdown.new ARGV[0]
-  # puts scrub_whitespace(doc.document.html)
-  puts ReverseAsciidoctor.convert(scrub_whitespace(doc.document.html), WordToMarkdown::REVERSE_MARKDOWN_OPTIONS)
+# Write output to ReverseAsciidoctor.config.destination
+FileUtils.mkdir_p(File.dirname(ReverseAsciidoctor.config.destination))
+File.open(ReverseAsciidoctor.config.destination, "w") do |file|
+  file.write(adoc_content)
 end
-
