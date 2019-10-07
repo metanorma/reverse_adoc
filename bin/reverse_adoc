@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+# Usage: reverse_asciidoctor [FILE]...
+# Usage: cat FILE | reverse_asciidoctor
+require 'reverse_asciidoctor'
+require 'optparse'
+require 'fileutils'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: reverse_adoc [options] <file>"
+  opts.on('-m', '--mathml2asciimath', 'Convert MathML to AsciiMath') do |v|
+    ReverseAsciidoctor.config.mathml2asciimath = true
+  end
+
+  opts.on('-oFILENAME', '--output=FILENAME', 'Output file to write to') do |v|
+    ReverseAsciidoctor.config.destination = File.expand_path(v)
+    # puts "output goes to #{ReverseAsciidoctor.config.destination}"
+  end
+
+  opts.on('-e', '--external-images', 'Export images if data URI') do |v|
+    ReverseAsciidoctor.config.external_images = true
+  end
+
+  opts.on('-u', '--unknown_tags [pass_through, drop, bypass, raise]', 'Unknown tag handling (default: pass_through)') do |v|
+    ReverseAsciidoctor.config.unknown_tags = v
+  end
+
+  opts.on('-v', '--version', 'Version information') do |v|
+    puts "reverse_adoc: v#{ReverseAsciidoctor::VERSION}"
+    exit
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+
+end.parse!
+
+if filename = ARGV.pop
+  input_content = IO.read(filename)
+  ReverseAsciidoctor.config.sourcedir = File.dirname(File.expand_path(filename))
+else
+  if ReverseAsciidoctor.config.external_images
+    raise "The -e | --external-images feature cannot be used with STDIN input. Exiting."
+  end
+
+  input_content = ARGF.read
+end
+
+if ReverseAsciidoctor.config.external_images && ReverseAsciidoctor.config.destination.nil?
+  raise "The -e | --external-images feature must be used with -o | --output. Exiting."
+end
+
+# Read from STDIN
+adoc_content = ReverseAsciidoctor.convert(input_content)
+
+# Print to STDOUT
+unless ReverseAsciidoctor.config.destination
+  puts adoc_content
+  exit
+end
+
+# Write output to ReverseAsciidoctor.config.destination
+FileUtils.mkdir_p(File.dirname(ReverseAsciidoctor.config.destination))
+File.open(ReverseAsciidoctor.config.destination, "w") do |file|
+  file.write(adoc_content)
+end
