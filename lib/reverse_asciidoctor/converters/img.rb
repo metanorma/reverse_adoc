@@ -1,4 +1,5 @@
-require 'fileutils'
+require "fileutils"
+require "pathname"
 
 module ReverseAsciidoctor
   module Converters
