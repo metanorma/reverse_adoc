@@ -7,12 +7,12 @@ require 'reverse_asciidoctor'
 
 def scrub_whitespace(string)
   string = string.dup
-  string.gsub!('&nbsp;', ' ')       # HTML encoded spaces
-  string.sub!(/\A[[:space:]]+/, '') # document leading whitespace
-  string.sub!(/[[:space:]]+\z/, '') # document trailing whitespace
-  string.gsub!(/([ ]+)$/, '')       # line trailing whitespace
+  string.gsub!(/&nbsp;|\&#xA0;|\u00a0/i, '&#xA0;')       # HTML encoded spaces
+  string.sub!(/^\A[[:space:]]+/m, '') # document leading whitespace
+  string.sub!(/[[:space:]]+\z$/m, '') # document trailing whitespace
+  string.gsub!(/([ ]+)$/, ' ')       # line trailing whitespace
   string.gsub!(/\n\n\n\n/, "\n\n")  # Quadruple line breaks
-  string.delete!(' ')               # Unicode non-breaking spaces, injected as tabs
+  #string.delete!(' ')               # Unicode non-breaking spaces, injected as tabs
   # following added by me
   string.gsub!(%r{<h[1-9][^>]*></h1>}, " ") # I don't know why Libre Office is inserting them, but they need to go
   string.gsub!(%r{<h1[^>]* style="vertical-align: super;[^>]*>([^<]+)</h1>},
