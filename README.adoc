@@ -92,6 +92,13 @@ document, and it may not cope with ordered lists or headings with customised app
 For best results, reset the styles in the document you're converting to those in
 the default `Normal.dot` template.
 
+NOTE: `w2a` requires the command-line version of LibreOffice, `soffice`. As it turns out,
+LibreOffice v6 appears to render formulae in HTML as images instead of MathML expressions;
+use LibreOffice v5. If you have both LibreOffice v5 and LibreOffice v6 installed, make sure
+that your OS path searches for the LibreOffice v5 version of `soffice` first; e.g. on Mac,
+include something like `/Applications/LibreOffice5.4.7.2.app/Contents/MacOS` in your PATH
+environment.
+
 NOTE: Some information in OOMML is not preserved in the export to MathML from LibreOffice;
 in particular, font shifts such as double-struck fonts.
 The LibreOffice exporter does seem to drop some text (possibly associated with
