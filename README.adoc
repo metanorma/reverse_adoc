@@ -1,9 +1,11 @@
 = AsciiDoc from HTML and Microsoft Word: reverse_adoc
 
-image:https://img.shields.io/gem/v/reverse_adoc.svg["Gem Version", link="https://rubygems.org/gems/reverse_adoc"]
-image:https://img.shields.io/travis/metanorma/reverse_adoc/master.svg["Build Status", link="https://travis-ci.org/metanorma/reverse_adoc"]
-image:https://codeclimate.com/github/metanorma/reverse_adoc/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/reverse_adoc"]
-image:https://ci.appveyor.com/api/projects/status/s4st0ft8moay90m6?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/reverse-asciidoctor"]
+image:https://img.shields.io/gem/v/reverse_asciidoctor.svg["Gem Version", link="https://rubygems.org/gems/reverse_asciidoctor"]
+image:https://travis-ci.com/metanorma/reverse_asciidoctor.svg["Build Status", link="https://travis-ci.com/metanorma/reverse_asciidoctor"]
+image:https://ci.appveyor.com/api/projects/status/9dui2fs4pc590f4k?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/metanorma/reverse-asciidoctor"]
+image:https://codeclimate.com/github/metanorma/reverse_asciidoctor/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/reverse_asciidoctor"]
+image:https://img.shields.io/github/issues-pr-raw/metanorma/reverse_asciidoctor.svg["Pull Requests", link="https://github.com/metanorma/reverse_asciidoctor/pulls"]
+image:https://img.shields.io/github/commits-since/metanorma/reverse_asciidoctor/latest.svg["Commits since latest",link="https://github.com/metanorma/reverse_asciidoctor/releases"]
 
 == Purpose
 
