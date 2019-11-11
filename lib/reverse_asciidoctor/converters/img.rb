@@ -26,11 +26,15 @@ module ReverseAsciidoctor
         ext = ""
 
         if imgdata
-          file = Tempfile.new(["radoc", ".jpg"]) do |f|
-            f.binmode
-            f.write(Base64.strict_decode64(imgdata))
-            f.rewind
-            ext = MimeMagic.by_magic(f)
+          file = Tempfile.open(["radoc", ".jpg"]) do |f|
+            begin
+              f.binmode
+              f.write(Base64.strict_decode64(imgdata))
+              f.rewind
+              ext = MimeMagic.by_magic(f)
+            ensure
+              f.close!
+            end
           end
 
           image_src_path = file.path
