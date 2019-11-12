@@ -251,6 +251,18 @@ AsciiMath, and fail. But of course, MathJax has no problem with MathML, and some
 on the Asciidoctor output can ensure that the MathML is treated by MathJax (or whatever else
 uses the output) as such; so this is still much better than nothing for stem processing.
 
+=== Word cleanup
+
+This gem is routinely used in the Metanorma project to export Word documents to Asciidoctor.
+The HTML export from Word that the gem uses, from LibreOffice, is much cleaner than the
+native HTML 4 export from Word; but it has some infelicities which this gem cleans up:
+
+* The HTML export has trouble with subscripts, and routinely exports them as headings; the `w2a`
+script tries to clean them up.
+* The `w2a` cleans up spaces, but it does not strip them.
+* Spaces are removed from anchors and cross-references.
+* Double underscores are removed from anchors and cross-references.
+
 
 == Ruby library usage
 
