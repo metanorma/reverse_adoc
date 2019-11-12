@@ -18,4 +18,7 @@ describe ReverseAsciidoctor do
   it { is_expected.to include ' link <<content2>>internal jumplinks without anchors ' }
   it { is_expected.to include ' treat [[content]] as bookmarks ' }
 
+  it { is_expected.to include "<<a_bspaced,Double \\_\\_ anchor with space>>" }
+  it { is_expected.to include "[[a_bspaced]]" }
+
 end

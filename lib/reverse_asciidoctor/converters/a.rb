@@ -9,10 +9,12 @@ module ReverseAsciidoctor
         title = extract_title(node)
         id = node['id'] || node['name']
 
+        id = id&.gsub(/\s/, "")&.gsub(/__+/, "_")
+
         if !id.nil? && !id.empty?
           "[[#{id}]]"
         elsif href.to_s.start_with?('#')
-            href = href.sub(/^#/, "")
+          href = href.sub(/^#/, "").gsub(/\s/, "").gsub(/__+/, "_")
           if name.empty?
             "<<#{href}>>"
           else
