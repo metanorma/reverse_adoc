@@ -262,7 +262,7 @@ script tries to clean them up.
 * The `w2a` cleans up spaces, but it does not strip them.
 * Spaces are removed from anchors and cross-references.
 * Double underscores are removed from anchors and cross-references.
-
+* Cross-references to `_GoBack` and to `_Toc` followed by numbers (used to construct tables of contents) are ignored.
 
 == Ruby library usage
 

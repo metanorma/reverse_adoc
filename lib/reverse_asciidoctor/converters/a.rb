@@ -11,7 +11,9 @@ module ReverseAsciidoctor
 
         id = id&.gsub(/\s/, "")&.gsub(/__+/, "_")
 
-        if !id.nil? && !id.empty?
+        if /^_Toc\d+$|^_GoBack$/.match id
+          ""
+        elsif !id.nil? && !id.empty?
           "[[#{id}]]"
         elsif href.to_s.start_with?('#')
           href = href.sub(/^#/, "").gsub(/\s/, "").gsub(/__+/, "_")
