@@ -51,7 +51,7 @@ ReverseAsciidoctor.config.sourcedir = Dir.mktmpdir
 # puts "ReverseAsciidoctor.config.sourcedir #{ReverseAsciidoctor.config.sourcedir}"
 
 doc = WordToMarkdown.new(filename, ReverseAsciidoctor.config.sourcedir)
-#File.open("test.html", "w:UTF-8") { |f| f.write doc.document.html }
+File.open("test.html", "w:UTF-8") { |f| f.write doc.document.html }
 adoc_content = ReverseAsciidoctor.convert(
   ReverseAsciidoctor.cleaner.preprocess_word_html(doc.document.html),
   WordToMarkdown::REVERSE_MARKDOWN_OPTIONS

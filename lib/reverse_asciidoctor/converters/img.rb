@@ -1,5 +1,8 @@
 require "fileutils"
 require "pathname"
+require "tempfile"
+require "base64"
+require "mimemagic"
 
 module ReverseAsciidoctor
   module Converters

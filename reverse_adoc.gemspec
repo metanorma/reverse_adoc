@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_dependency 'nokogiri', ">= 1.10.4"
   s.add_dependency 'mathml2asciimath'
+  s.add_dependency 'mimemagic'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'rake'
