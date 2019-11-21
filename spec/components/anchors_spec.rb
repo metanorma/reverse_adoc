@@ -20,6 +20,7 @@ describe ReverseAsciidoctor do
 
   it { is_expected.to include "<<a_bspaced,Double \\_\\_ anchor with space>>" }
   it { is_expected.to include "[[a_bspaced]]" }
+  it { is_expected.to include "[[a_Foreword]]\n== Text" }
   it { is_expected.not_to include "[[_Toc12345]]" }
 
 end

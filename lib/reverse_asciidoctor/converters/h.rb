@@ -3,9 +3,24 @@ module ReverseAsciidoctor
     class H < Base
       def convert(node, state = {})
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
+        anchor = id ? "[[#{id}]]" : ""
+        internal_anchor = treat_children_anchors(node, state) || ""
+        anchor.empty? and anchor = internal_anchor
+        anchor.empty? or anchor += "\n"
         prefix = '=' * (node.name[/\d/].to_i + 1)
-        ["\n", anchor, prefix, ' ', treat_children(node, state), "\n"].join
+        ["\n", anchor, prefix, ' ', treat_children_no_anchors(node, state), "\n"].join
+      end
+
+      def treat_children_no_anchors(node, state)
+        node.children.reject { |a| a.name == "a" }.inject('') do |memo, child|
+          memo << treat(child, state)
+        end
+      end
+
+      def treat_children_anchors(node, state)
+        node.children.select { |a| a.name == "a" }.inject('') do |memo, child|
+          memo << treat(child, state)
+        end
       end
     end
 
