@@ -3,6 +3,18 @@ require 'spec_helper'
 describe ReverseAsciidoctor::Cleaner do
   let(:cleaner) { ReverseAsciidoctor::Cleaner.new }
 
+  describe '#clean_headings' do
+    it "removes empty headings" do
+      result = cleaner.clean_headings("<h2></h2>")
+      expect(result).to eq " "
+    end
+
+    it "cleans superscripts rendered as headings" do
+      result = cleaner.clean_headings(%{<p class="Standard" style="font-size: 12pt; font-family: Calibri; writing-mode: lr-tb; margin: 0;" align="left ! important"><span class="T1" style="margin: 0;">H</span><h1 class="T2" style="vertical-align: super; font-size: 58%; margin: 0;">2</h1><span class="T1" style="margin: 0;">0</span></p>})
+      expect(result).to eq %{<p class="Standard" style="font-size: 12pt; font-family: Calibri; writing-mode: lr-tb; margin: 0;" align="left ! important"><span class="T1" style="margin: 0;">H</span><sup>2</sup><span class="T1" style="margin: 0;">0</span></p>}
+    end
+  end
+
   describe '#remove_newlines' do
     it 'removes more than 2 subsequent newlines' do
       result = cleaner.remove_newlines("foo\n\n\nbar")

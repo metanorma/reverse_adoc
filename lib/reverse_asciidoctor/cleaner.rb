@@ -64,6 +64,29 @@ module ReverseAsciidoctor
       string.gsub(/(\*\*|~~|__)\s([\.!\?'"])/, "\\1".strip + "\\2")
     end
 
+     # preprocesses HTML, rather than postprocessing it
+    def preprocess_word_html(string)
+      clean_headings(scrub_whitespace(string.dup))
+    end
+
+    def scrub_whitespace(string)
+      string.gsub!(/&nbsp;|\&#xA0;|\u00a0/i, '&#xA0;')       # HTML encoded spaces
+      string.sub!(/^\A[[:space:]]+/m, '') # document leading whitespace
+      string.sub!(/[[:space:]]+\z$/m, '') # document trailing whitespace
+      string.gsub!(/([ ]+)$/, ' ')       # line trailing whitespace
+      string.gsub!(/\n\n\n\n/, "\n\n")  # Quadruple line breaks
+      #string.delete!('?| ')               # Unicode non-breaking spaces, injected as tabs
+      string
+    end
+
+    # following added by me
+    def clean_headings(string)
+      string.gsub!(%r{<h([1-9])[^>]*></h\1>}, " ") # I don't know why Libre Office is inserting them, but they need to go
+      string.gsub!(%r{<h([1-9])[^>]* style="vertical-align: super;[^>]*>(.+?)</h\1>},
+                   "<sup>\\2</sup>")         # I absolutely don't know why Libre Office is rendering superscripts as h1
+      string
+    end
+
     private
 
     def preserve_border_whitespaces(string, options = {}, &block)

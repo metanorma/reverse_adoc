@@ -5,21 +5,6 @@ require 'word-to-markdown'
 require 'optparse'
 require 'reverse_asciidoctor'
 
-def scrub_whitespace(string)
-  string = string.dup
-  string.gsub!(/&nbsp;|\&#xA0;|\u00a0/i, '&#xA0;')       # HTML encoded spaces
-  string.sub!(/^\A[[:space:]]+/m, '') # document leading whitespace
-  string.sub!(/[[:space:]]+\z$/m, '') # document trailing whitespace
-  string.gsub!(/([ ]+)$/, ' ')       # line trailing whitespace
-  string.gsub!(/\n\n\n\n/, "\n\n")  # Quadruple line breaks
-  #string.delete!(' ')               # Unicode non-breaking spaces, injected as tabs
-  # following added by me
-  string.gsub!(%r{<h[1-9][^>]*></h1>}, " ") # I don't know why Libre Office is inserting them, but they need to go
-  string.gsub!(%r{<h1[^>]* style="vertical-align: super;[^>]*>([^<]+)</h1>},
-              "<sup>\\1</sup>")         # I absolutely don't know why Libre Office is rendering superscripts as h1
-  string
-end
-
 ARGV.push('-h') if ARGV.empty?
 
 OptionParser.new do |opts|
@@ -68,7 +53,7 @@ ReverseAsciidoctor.config.sourcedir = Dir.mktmpdir
 doc = WordToMarkdown.new(filename, ReverseAsciidoctor.config.sourcedir)
 #File.open("test.html", "w:UTF-8") { |f| f.write doc.document.html }
 adoc_content = ReverseAsciidoctor.convert(
-  scrub_whitespace(doc.document.html),
+  ReverseAsciidoctor.cleaner.preprocess_word_html(doc.document.html),
   WordToMarkdown::REVERSE_MARKDOWN_OPTIONS
 )
 # puts scrub_whitespace(doc.document.html)
