@@ -3,6 +3,18 @@ require 'spec_helper'
 describe ReverseAsciidoctor::Cleaner do
   let(:cleaner) { ReverseAsciidoctor::Cleaner.new }
 
+  describe '#scrub_whitespace' do
+    it "makes consistent nonbreaking spaces" do
+      result = cleaner.scrub_whitespace("&nbsp; &#xA0;  ")
+      expect(result).to eq "&#xA0; &#xA0; &#xA0;"
+    end
+
+    it "makes four linebreaks into two" do
+      result = cleaner.scrub_whitespace("A\n\n\n\nB")
+      expect(result).to eq "A\n\nB"
+    end
+  end
+
   describe '#clean_headings' do
     it "removes empty headings" do
       result = cleaner.clean_headings("<h2></h2>")
