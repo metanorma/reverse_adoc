@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 # Usage: reverse_asciidoctor [FILE]...
 # Usage: cat FILE | reverse_asciidoctor
+require 'rubygems'
+require 'bundler/setup'
+
 require 'reverse_asciidoctor'
 require 'optparse'
 require 'fileutils'

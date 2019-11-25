@@ -26,29 +26,7 @@ module ReverseAsciidoctor
         images_dir = dest_dir + 'images'
         FileUtils.mkdir_p(images_dir)
 
-        ext = ""
-
-        if imgdata
-          file = Tempfile.open(["radoc", ".jpg"]) do |f|
-            begin
-              f.binmode
-              f.write(Base64.strict_decode64(imgdata))
-              f.rewind
-              ext = MimeMagic.by_magic(f)
-            ensure
-              f.close!
-            end
-          end
-
-          image_src_path = file.path
-          # puts "tempfile: #{file}"
-
-        else
-          ext = File.extname(src).strip.downcase[1..-1]
-          image_src_path = Pathname.new(ReverseAsciidoctor.config.sourcedir) + src
-
-        end
-
+        ext, image_src_path = determine_image_src_path(imgdata)
         image_dest_path = images_dir + "#{image_number}.#{ext}"
 
         # puts "image_dest_path: #{image_dest_path.to_s}"
@@ -58,6 +36,23 @@ module ReverseAsciidoctor
         image_number_increment
 
         image_dest_path.relative_path_from(dest_dir)
+      end
+
+      def determine_image_src_path(imgdata)
+        return copy_temp_file(imgdata) if imgdata
+
+        ext = File.extname(src).strip.downcase[1..-1]
+        [ext, Pathname.new(ReverseAsciidoctor.config.sourcedir) + src]
+      end
+
+      def copy_temp_file(imgdata)
+        Tempfile.open(['radoc', '.jpg']) do |f|
+          f.binmode
+          f.write(Base64.strict_decode64(imgdata))
+          f.rewind
+          ext = MimeMagic.by_magic(f).subtype
+          [ext, f.path]
+        end
       end
 
       def convert(node, state = {})
