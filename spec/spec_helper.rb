@@ -9,6 +9,7 @@ end
 SimpleCov.start 'gem'
 
 require 'reverse_asciidoctor'
+require 'word-to-markdown'
 
 RSpec.configure do |config|
   config.after(:each) do

@@ -18,6 +18,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
+      - name: install dependcnies
+        run: brew cask install libreoffice
       - name: Update gems
         run: |
           sudo gem install bundler -v "~> 2" --force

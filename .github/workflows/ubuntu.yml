@@ -18,6 +18,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
+      - name: install dependcnies
+        run: sudo apt-get -y --no-install-recommends install libreoffice
       - name: Update gems
         run: |
           gem install bundler -v "~> 2"

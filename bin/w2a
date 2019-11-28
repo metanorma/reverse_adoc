@@ -50,9 +50,11 @@ if ReverseAsciidoctor.config.external_images && ReverseAsciidoctor.config.destin
 end
 
 ReverseAsciidoctor.config.sourcedir = Dir.mktmpdir
+# TODO: Check if needed
 # puts "ReverseAsciidoctor.config.sourcedir #{ReverseAsciidoctor.config.sourcedir}"
 
 doc = WordToMarkdown.new(filename, ReverseAsciidoctor.config.sourcedir)
+# TODO: Check if needed
 File.open("test.html", "w:UTF-8") { |f| f.write doc.document.html }
 adoc_content = ReverseAsciidoctor.convert(
   ReverseAsciidoctor.cleaner.preprocess_word_html(doc.document.html),
