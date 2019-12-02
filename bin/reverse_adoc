@@ -4,7 +4,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'reverse_asciidoctor'
+require 'reverse_adoc'
 require 'optparse'
 require 'fileutils'
 
