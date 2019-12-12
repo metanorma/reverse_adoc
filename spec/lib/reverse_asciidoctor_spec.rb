@@ -53,8 +53,8 @@ describe ReverseAsciidoctor do
     end
 
     it 'Creates local files from external URI' do
-      expect { convert }.
-        to(change do
+      expect { convert }
+        .to(change do
           Dir["#{images_folder}/*gif"]
             .map { |entry| File.basename(entry) }
             .sort
