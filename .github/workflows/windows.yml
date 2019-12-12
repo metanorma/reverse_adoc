@@ -27,8 +27,10 @@ jobs:
           bundle config --local path vendor/bundle
           bundle update
           bundle install --jobs 4 --retry 3
+      - name: try to set path var
+        run: echo "::add-path::C:\Program Files\LibreOffice\program"
+      - name: echo path
+        run: echo $PATH
       - name: Run specs
-        env:
-          PATH: '%PATH%;C:\Program Files\LibreOffice\program'
         run: |
           bundle exec rake

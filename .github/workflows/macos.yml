@@ -20,6 +20,8 @@ jobs:
           architecture: 'x64'
       - name: install dependcnies
         run: brew cask install libreoffice
+      - name: test libreoffice install
+        run: /Applications/LibreOffice.app/Contents/MacOS/soffice --help
       - name: Update gems
         run: |
           sudo gem install bundler -v "~> 2" --force
