@@ -21,7 +21,8 @@ jobs:
       - name: install dependcnies
         run: brew cask install libreoffice
       - name: test libreoffice install
-        run: /Applications/LibreOffice.app/Contents/MacOS/soffice --headless --help
+        # https://stackoverflow.com/questions/30349542/command-libreoffice-headless-convert-to-pdf-test-docx-outdir-pdf-is-not/30465397
+        run: /Applications/LibreOffice.app/Contents/MacOS/soffice --headless "-env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}" --help
       - name: Update gems
         run: |
           sudo gem install bundler -v "~> 2" --force
