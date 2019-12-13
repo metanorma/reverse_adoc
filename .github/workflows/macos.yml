@@ -19,10 +19,9 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
       - name: install dependcnies
-        run: brew cask install libreoffice
+        run: brew install homebrew/cask-versions/libreoffice-still
       - name: test libreoffice install
-        # https://stackoverflow.com/questions/30349542/command-libreoffice-headless-convert-to-pdf-test-docx-outdir-pdf-is-not/30465397
-        run: /usr/local/bin/soffice --headless "-env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}" --help
+        run: /usr/local/bin/soffice --headless --help
       - name: Update gems
         run: |
           sudo gem install bundler -v "~> 2" --force
