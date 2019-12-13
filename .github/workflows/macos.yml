@@ -18,10 +18,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
-      - name: install dependcnies
-        run: brew install homebrew/cask-versions/libreoffice-still
-      - name: test libreoffice install
-        run: /usr/local/bin/soffice --headless --help
       - name: Update gems
         run: |
           sudo gem install bundler -v "~> 2" --force
