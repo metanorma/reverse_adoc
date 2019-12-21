@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'open3'
 
 module ShellUtils
@@ -6,7 +7,8 @@ module ShellUtils
 
   def execute!(cmd)
     stdout, stderr, status = Open3.capture3(cmd)
-    raise ShellExcutionError.new(stderr) unless status.success?
+    raise(ShellExcutionError, stderr) unless status.success?
+
     stdout
   end
 end
