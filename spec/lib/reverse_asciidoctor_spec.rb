@@ -74,7 +74,7 @@ describe ReverseAsciidoctor do
       end
       let(:input) do
         WordToMarkdown.new('spec/assets/external_images.docx',
-          ReverseAsciidoctor.config.sourcedir)
+                           ReverseAsciidoctor.config.sourcedir)
       end
       it_behaves_like 'converting source with external images included',
                       ['001.gif', '002.gif']
