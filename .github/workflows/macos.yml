@@ -25,7 +25,3 @@ jobs:
       - name: Run specs
         run: |
           bundle exec rake
-      - name: Test reverse_adoc binary
-        run: ./bin/reverse_adoc -e -o test1 spec/assets/external_images.html
-      - name: Assert image extraction - reverse_adoc
-        run: rm images/001.gif

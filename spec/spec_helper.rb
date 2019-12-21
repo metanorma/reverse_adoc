@@ -11,6 +11,8 @@ SimpleCov.start 'gem'
 require 'reverse_asciidoctor'
 require 'word-to-markdown'
 
+Dir[File.join('spec', 'support', '**', '*.rb')].each { |f| require File.join('.', f) }
+
 RSpec.configure do |config|
   config.after(:each) do
     ReverseAsciidoctor.instance_variable_set(:@config, nil)
