@@ -19,6 +19,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
+      - name: install dependcnies
+        run: choco install libreoffice-still
       - name: Update gems
         shell: pwsh
         run: |
@@ -26,6 +28,10 @@ jobs:
           bundle config --local path vendor/bundle
           bundle update
           bundle install --jobs 4 --retry 3
+      - name: try to set path var
+        run: echo "::add-path::C:\Program Files\LibreOffice\program"
+      - name: echo path
+        run: echo $PATH
       - name: Run specs
         run: |
           bundle exec rake
