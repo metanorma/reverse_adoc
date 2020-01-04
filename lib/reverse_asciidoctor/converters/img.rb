@@ -26,7 +26,7 @@ module ReverseAsciidoctor
         images_dir = dest_dir + 'images'
         FileUtils.mkdir_p(images_dir)
 
-        ext, image_src_path = determine_image_src_path(imgdata, src)
+        ext, image_src_path = determine_image_src_path(src, imgdata)
         image_dest_path = images_dir + "#{image_number}.#{ext}"
 
         # puts "image_dest_path: #{image_dest_path.to_s}"
@@ -38,7 +38,7 @@ module ReverseAsciidoctor
         image_dest_path.relative_path_from(dest_dir)
       end
 
-      def determine_image_src_path(imgdata, src)
+      def determine_image_src_path(src, imgdata)
         return copy_temp_file(imgdata) if imgdata
 
         ext = File.extname(src).strip.downcase[1..-1]
