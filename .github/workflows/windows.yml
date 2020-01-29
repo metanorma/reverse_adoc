@@ -23,10 +23,14 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
+      - name: Install LibreOffice
+        run: |
+          choco install libreoffice-still
+          echo "::add-path::C:\Program Files\LibreOffice\program"
       - name: Update gems
         shell: pwsh
         run: |
-          gem install bundler 
+          gem install bundler
           bundle config --local path vendor/bundle
           bundle update
           bundle install --jobs 4 --retry 3
