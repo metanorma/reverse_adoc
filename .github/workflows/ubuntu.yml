@@ -23,9 +23,11 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
+      - name: Install LibreOffice
+        run: sudo apt-get -y --no-install-recommends install libreoffice
       - name: Update gems
         run: |
-          gem install bundler 
+          gem install bundler
           bundle install --jobs 4 --retry 3
       - name: Run specs
         run: |
