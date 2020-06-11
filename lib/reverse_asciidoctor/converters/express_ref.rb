@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReverseAsciidoctor
   module Converters
     class ExpressRef < Base
