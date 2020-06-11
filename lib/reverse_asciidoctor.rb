@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 require 'nokogiri'
 require 'reverse_asciidoctor/version'
@@ -16,6 +18,7 @@ require 'reverse_asciidoctor/converters/code'
 require 'reverse_asciidoctor/converters/div'
 require 'reverse_asciidoctor/converters/drop'
 require 'reverse_asciidoctor/converters/em'
+require 'reverse_asciidoctor/converters/example'
 require 'reverse_asciidoctor/converters/ext_descriptions'
 require 'reverse_asciidoctor/converters/ext_description'
 require 'reverse_asciidoctor/converters/express_ref'
@@ -26,6 +29,7 @@ require 'reverse_asciidoctor/converters/hr'
 require 'reverse_asciidoctor/converters/ignore'
 require 'reverse_asciidoctor/converters/img'
 require 'reverse_asciidoctor/converters/mark'
+require 'reverse_asciidoctor/converters/note'
 require 'reverse_asciidoctor/converters/li'
 require 'reverse_asciidoctor/converters/ol'
 require 'reverse_asciidoctor/converters/p'
@@ -44,15 +48,18 @@ require 'reverse_asciidoctor/converters/video'
 require 'reverse_asciidoctor/converters/math'
 
 module ReverseAsciidoctor
-
   def self.convert(input, options = {})
-    root = case input
-      when String                  then Nokogiri::HTML(input).root
-      when Nokogiri::XML::Document then input.root
-      when Nokogiri::XML::Node     then input
-    end
+    root = if input.is_a?(String) && config.input_format == 'smrl_description'
+            then Nokogiri::XML(input).root
+           elsif input.is_a?(String)
+            then Nokogiri::HTML(input).root
+           elsif input.is_a?(Nokogiri::XML::Document)
+            then input.root
+           elsif input.is_a?(Nokogiri::XML::Node)
+            then input
+           end
 
-    root or return ''
+    root || (return '')
 
     config.with(options) do
       result = ReverseAsciidoctor::Converters.lookup(root.name).convert(root)
@@ -69,5 +76,4 @@ module ReverseAsciidoctor
   def self.cleaner
     @cleaner ||= Cleaner.new
   end
-
 end
