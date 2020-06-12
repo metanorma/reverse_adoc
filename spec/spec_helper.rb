@@ -9,6 +9,7 @@ end
 SimpleCov.start 'gem'
 
 require 'reverse_asciidoctor'
+require 'reverse_asciidoctor/html_converter'
 require 'word-to-markdown'
 
 Dir[File.join('spec', 'support', '**', '*.rb')]

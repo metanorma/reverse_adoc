@@ -58,8 +58,13 @@ if ReverseAsciidoctor.config.external_images && ReverseAsciidoctor.config.destin
   raise "The -e | --external-images feature must be used with -o | --output. Exiting."
 end
 
-# Read from STDIN
-adoc_content = ReverseAsciidoctor.convert(input_content)
+adoc_content = if ReverseAsciidoctor.config.input_format == 'smrl_description'
+                 require 'reverse_asciidoctor/express_converter'
+                 ReverseAsciidoctor::ExpressConverter.convert(input_content)
+               else
+                 require 'reverse_asciidoctor/html_converter'
+                 ReverseAsciidoctor::HtmlConverter.convert(input_content)
+               end
 
 # Print to STDOUT
 unless ReverseAsciidoctor.config.destination
