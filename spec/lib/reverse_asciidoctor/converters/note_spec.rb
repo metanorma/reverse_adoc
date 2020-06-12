@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'reverse_asciidoctor/converters/note'
 
 describe ReverseAsciidoctor::Converters::Note do
   let(:converter) { described_class.new }

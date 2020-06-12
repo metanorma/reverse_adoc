@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'reverse_asciidoctor/converters/ext_description'
 
 describe ReverseAsciidoctor::Converters::ExtDescription do
   let(:converter) { described_class.new }
