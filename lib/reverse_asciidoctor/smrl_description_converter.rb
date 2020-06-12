@@ -24,7 +24,7 @@ require 'reverse_asciidoctor/converters/sub'
 require 'reverse_asciidoctor/converters/text'
 
 module ReverseAsciidoctor
-  class ExpressConverter
+  class SmrlDescriptionConverter
     def self.convert(input, options = {})
       root = if input.is_a?(String)
                 then Nokogiri::XML(input).root

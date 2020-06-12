@@ -11,9 +11,11 @@ require 'reverse_asciidoctor/converters/base'
 
 module ReverseAsciidoctor
   def self.convert(input, options = {})
-    require 'reverse_asciidoctor/html_converter'
-
-    ReverseAsciidoctor::HtmlConverter.convert(input, options = {})
+    type = config.input_format
+    name = "#{type}_converter"
+    require "reverse_asciidoctor/#{type}_converter"
+    constant = name.split('_').map(&:capitalize).join.to_s
+    ReverseAsciidoctor.const_get(constant).convert(input, options)
   end
 
   def self.config
