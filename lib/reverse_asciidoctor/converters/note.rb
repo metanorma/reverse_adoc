@@ -5,6 +5,7 @@ module ReverseAsciidoctor
     class Note < Base
       def convert(node, state = {})
         <<~TEMPLATE
+          \n
           [NOTE]
           --
           #{treat_children(node, state)}
