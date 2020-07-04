@@ -6,22 +6,29 @@ on:
   push:
     branches: [ master ]
   pull_request:
+    paths-ignore:
+      - .github/workflows/macos.yml
+      - .github/workflows/windows.yml
 
 jobs:
   test-linux:
     name: Test on Ruby ${{ matrix.ruby }} Ubuntu
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         ruby: [ '2.6', '2.5', '2.4' ]
+        experimental: [false]
+        include:
+          - ruby: '2.7'
+            experimental: true
     steps:
       - uses: actions/checkout@master
       - name: Use Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          architecture: 'x64'
       - name: Install LibreOffice
         run: sudo apt-get -y --no-install-recommends install libreoffice
       - name: Update gems
