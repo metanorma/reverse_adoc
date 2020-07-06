@@ -33,6 +33,9 @@ jobs:
         run: |
           sudo gem install bundler --force
           bundle install --jobs 4 --retry 3
+      - name: Install LibreOffice
+        run: |
+          brew cask install libreoffice
       - name: Run specs
         run: |
           bundle exec rake
