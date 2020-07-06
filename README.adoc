@@ -247,7 +247,7 @@ The gem does not support:
 === MathML support
 
 If you are using this gem in the context of https://www.metanorma.com[Metanorma],
-Metanorma Asciidoctor accepts MathML as a native mathematical format. So you do not need
+Metanorma AsciiDoc accepts MathML as a native mathematical format. So you do not need
 to convert the MathML to AsciiMath.
 
 The gem will optionally invoke the https://github.com/metanorma/mathml2asciimath
@@ -265,7 +265,7 @@ uses the output) as such; so this is still much better than nothing for stem pro
 
 === Word cleanup
 
-This gem is routinely used in the Metanorma project to export Word documents to Asciidoctor.
+This gem is routinely used in the Metanorma project to export Word documents to AsciiDoc.
 The HTML export from Word that the gem uses, from LibreOffice, is much cleaner than the
 native HTML 4 export from Word; but it has some infelicities which this gem cleans up:
 
@@ -284,7 +284,7 @@ Simple to use.
 
 [source,ruby]
 ----
-result = ReverseAsciidoctor.convert input
+result = ReverseAdoc.convert input
 result.inspect # " *feelings* "
 ----
 
@@ -294,7 +294,7 @@ Just pass your chosen configuration options in after the input. The given option
 
 [source,ruby]
 ----
-ReverseAsciidoctor.convert(input, unknown_tags: :raise, mathml2asciimath: true)
+ReverseAdoc.convert(input, unknown_tags: :raise, mathml2asciimath: true)
 ----
 
 
@@ -304,7 +304,7 @@ Or configure it block style on a initializer level. These configurations will la
 
 [source,ruby]
 ----
-ReverseAsciidoctor.config do |config|
+ReverseAdoc.config do |config|
   config.unknown_tags      = :bypass
   config.mathml2asciimath  = true
   config.tag_border  = ''

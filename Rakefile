@@ -10,5 +10,5 @@ task :default => :spec
 
 desc 'Open an irb session preloaded with this library'
 task :console do
-  sh 'irb -rubygems -I lib -r reverse_asciidoctor.rb'
+  sh 'irb -rubygems -I lib -r reverse_adoc.rb'
 end

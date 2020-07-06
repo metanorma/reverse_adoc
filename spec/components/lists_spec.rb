@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ReverseAsciidoctor do
+describe ReverseAdoc do
 
   let(:input)    { File.read('spec/assets/lists.html') }
   let(:document) { Nokogiri::HTML(input) }
-  subject { ReverseAsciidoctor.convert(input) }
+  subject { ReverseAdoc.convert(input) }
 
   it { is_expected.to match /\n\* unordered list entry\n/ }
   it { is_expected.to match /\n\* unordered list entry 2\n/ }

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ReverseAsciidoctor do
+describe ReverseAdoc do
 
   let(:input)    { File.read('spec/assets/from_the_wild.html') }
   let(:document) { Nokogiri::HTML(input) }
-  subject { ReverseAsciidoctor.convert(input) }
+  subject { ReverseAdoc.convert(input) }
 
   it "should make sense of strong-crazy markup (as seen in the wild)" do
     expect(subject).to include "*. +\n \\*\\*\\* intentcast* : logo design *+*\n"

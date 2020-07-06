@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ReverseAsciidoctor do
+describe ReverseAdoc do
 
   let(:input)    { File.read('spec/assets/paragraphs.html') }
   let(:document) { Nokogiri::HTML(input) }
-  subject { ReverseAsciidoctor.convert(input) }
+  subject { ReverseAdoc.convert(input) }
 
   it { is_expected.not_to start_with "\n\n" }
   it { is_expected.to start_with "First content\n\nSecond content\n\n" }

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ReverseAsciidoctor do
+describe ReverseAdoc do
 
   let(:input)    { File.read('spec/assets/tables.html') }
   let(:document) { Nokogiri::HTML(input) }
-  subject { ReverseAsciidoctor.convert(input) }
+  subject { ReverseAdoc.convert(input) }
 
   it { is_expected.to match /\[\[A\]\]\n\|===\n\| \[\[C\]\]header 1 \| header 2 \| header 3\n\n/ }
   it { is_expected.to match /\nh\| \[\[D\]\]data 1-1 \| data 2-1 \| data 3-1\n/ }

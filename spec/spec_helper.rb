@@ -8,8 +8,8 @@ SimpleCov.profiles.define 'gem' do
 end
 SimpleCov.start 'gem'
 
-require 'reverse_asciidoctor'
-require 'reverse_asciidoctor/html_converter'
+require 'reverse_adoc'
+require 'reverse_adoc/html_converter'
 require 'word-to-markdown'
 
 Dir[File.join('spec', 'support', '**', '*.rb')]
@@ -17,7 +17,7 @@ Dir[File.join('spec', 'support', '**', '*.rb')]
 
 RSpec.configure do |config|
   config.after(:each) do
-    ReverseAsciidoctor.instance_variable_set(:@config, nil)
+    ReverseAdoc.instance_variable_set(:@config, nil)
   end
 end
 

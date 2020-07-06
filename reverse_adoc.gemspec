@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "reverse_asciidoctor/version"
+require "reverse_adoc/version"
 
 Gem::Specification.new do |s|
   s.name        = "reverse_adoc"
-  s.version     = ReverseAsciidoctor::VERSION
+  s.version     = ReverseAdoc::VERSION
   s.authors       = ["Ribose Inc."]
   s.email         = ["open.source@ribose.com"]
 
