@@ -23,10 +23,6 @@ OptionParser.new do |opts|
     ReverseAdoc.config.external_images = true
   end
 
-  opts.on('-f', '--input_format [html, smrl_description]', 'Unknown input format (default: html)') do |v|
-    ReverseAdoc.config.input_format = v
-  end
-
   opts.on('-u', '--unknown_tags [pass_through, drop, bypass, raise]', 'Unknown tag handling (default: pass_through)') do |v|
     ReverseAdoc.config.unknown_tags = v
   end
