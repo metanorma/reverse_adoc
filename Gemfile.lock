@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    reverse_adoc (0.2.8)
+    reverse_adoc (0.2.9)
       mathml2asciimath
       mimemagic
       nokogiri (>= 1.10.4)
@@ -28,15 +28,15 @@ GEM
       nokogiri (>= 1.10.4)
     mimemagic (0.3.5)
     mini_portile2 (2.4.0)
-    nokogiri (1.10.9)
+    nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     nokogiri-styles (0.1.2)
       nokogiri
-    premailer (1.11.1)
+    premailer (1.13.1)
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
-    public_suffix (4.0.5)
+    public_suffix (4.0.6)
     rake (13.0.1)
     redcarpet (3.5.0)
     reverse_markdown (1.4.0)
@@ -58,7 +58,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.1)
-    sys-proctable (1.2.5)
+    sys-proctable (1.2.6)
       ffi
     word-to-markdown (1.1.8)
       cliver (~> 0.3)

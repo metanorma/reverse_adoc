@@ -44,31 +44,6 @@ $ reverse_adoc file.html > file.adoc
 $ cat file.html | reverse_adoc > file.adoc
 ----
 
-=== XML smrl description to AsciiDoc: `reverse_adoc`
-
-Convert XML smrl description files to AsciiDoc:
-
-[source,console]
-----
-$ reverse_adoc -f smrl_description descriptions.xml > file.adoc
-$ cat descriptions.xml | reverse_adoc -f smrl_description > file.adoc
-----
-
-[source,console]
-----
-$ reverse_adoc -h
-Usage: reverse_adoc [options] <file>
-    -f, --input_format               Supply input format to choose converter(html or smrl_description)
-    -m, --mathml2asciimath           Convert MathML to AsciiMath
-    -o, --output=FILENAME            Output file to write to
-    -e, --external-images            Export images if data URI
-    -u [pass_through, drop, bypass, raise],
-        --unknown_tags               Unknown tag handling (default: pass_through)
-    -v, --version                    Version information
-    -h, --help                       Prints this help
-----
-
-
 
 === Microsoft Word to AsciiDoc: `w2a`
 
