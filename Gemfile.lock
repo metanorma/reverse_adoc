@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    reverse_adoc (0.2.9)
+    reverse_adoc (0.2.10)
       mathml2asciimath
       mimemagic
       nokogiri (>= 1.10.4)
