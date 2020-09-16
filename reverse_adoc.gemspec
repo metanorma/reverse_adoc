@@ -33,4 +33,5 @@ Gem::Specification.new do |s|
 
   # All the following are for bin/w2m
   s.add_dependency 'word-to-markdown'
+  s.add_dependency 'premailer', '~> 1.11.0'
 end

@@ -5,6 +5,7 @@ PATH
       mathml2asciimath
       mimemagic
       nokogiri (>= 1.10.4)
+      premailer (~> 1.11.0)
       word-to-markdown
 
 GEM
@@ -32,7 +33,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogiri-styles (0.1.2)
       nokogiri
-    premailer (1.13.1)
+    premailer (1.11.1)
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
