@@ -2,7 +2,7 @@ require "fileutils"
 require "pathname"
 require "tempfile"
 require "base64"
-require "mimemagic"
+require "marcel"
 
 module ReverseAdoc
   module Converters
@@ -50,7 +50,7 @@ module ReverseAdoc
           f.binmode
           f.write(Base64.strict_decode64(imgdata))
           f.rewind
-          ext = MimeMagic.by_magic(f).subtype
+          ext = Marcel::MimeType.for(f).sub(%r{^[^/]+/}, "")
           [ext, f.path]
         end
       end

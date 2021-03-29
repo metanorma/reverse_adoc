@@ -22,13 +22,13 @@ describe 'bin/w2a' do
         expect { convert }.to_not raise_error
       end
 
-      it 'exatracts images from source html' do
+      it 'extracts images from source html' do
         expect { convert }
           .to(change do
             Dir["#{images_folder}/*gif"]
               .map { |entry| File.basename(entry) }
               .sort
-          end.from([]).to(['001.gif', '002.gif']))
+          end.from([]).to(['001.gif']))
       end
     end
   end
