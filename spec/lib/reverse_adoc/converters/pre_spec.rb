@@ -42,4 +42,3 @@ describe ReverseAdoc::Converters::Pre do
     end
   end
 end
-

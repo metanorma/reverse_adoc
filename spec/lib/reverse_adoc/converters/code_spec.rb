@@ -15,4 +15,3 @@ describe ReverseAdoc::Converters::Code do
   end
 
 end
-

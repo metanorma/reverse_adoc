@@ -9,4 +9,3 @@ describe ReverseAdoc::Converters::P do
     expect(converter.convert(node)).to include "\n[[A]]\nputs foo"
   end
 end
-

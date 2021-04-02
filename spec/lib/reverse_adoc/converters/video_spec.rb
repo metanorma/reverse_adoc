@@ -15,4 +15,3 @@ describe ReverseAdoc::Converters::Video do
   end
 
 end
-
