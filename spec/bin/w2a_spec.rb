@@ -2,9 +2,9 @@
 
 require 'spec_helper'
 
-describe 'bin/w2a' do
+describe 'exe/w2a' do
   subject(:convert) do
-    ShellUtils.execute!("./bin/w2a -e -o test1 #{input_file_path}")
+    ShellUtils.execute!("./exe/w2a -e -o test1 #{input_file_path}")
   end
   # TODO: fix github actions integration with libreoffice, currently it hangs
   # when trying to use soffice binary

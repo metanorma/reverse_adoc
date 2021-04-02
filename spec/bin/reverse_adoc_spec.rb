@@ -2,9 +2,9 @@
 
 require 'spec_helper'
 
-describe 'bin/revrse_adoc' do
+describe 'exe/revrse_adoc' do
   subject(:convert) do
-    ShellUtils.execute!("./bin/reverse_adoc -e -o test1 #{input_file_path}")
+    ShellUtils.execute!("./exe/reverse_adoc -e -o test1 #{input_file_path}")
   end
   unless Gem.win_platform?
     context 'when external images present' do
