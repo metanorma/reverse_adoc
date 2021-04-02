@@ -25,10 +25,10 @@ describe 'bin/w2a' do
       it 'extracts images from source html' do
         expect { convert }
           .to(change do
-            Dir["#{images_folder}/*gif"]
-              .map { |entry| File.basename(entry) }
-              .sort
-          end.from([]).to(['001.gif']))
+          Dir["#{images_folder}/*gif"]
+            .map { |entry| File.basename(entry) }
+            .size > 0
+        end.from(false).to(true))
       end
     end
   end
