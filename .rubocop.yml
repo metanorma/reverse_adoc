@@ -8,3 +8,7 @@ AllCops:
   TargetRubyVersion: 2.4
 Rails:
   Enabled: false
+
+# Dependencies are ordered for purpose.
+Gemspec/OrderedDependencies:
+  Enabled: false
