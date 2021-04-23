@@ -12,7 +12,7 @@ module ReverseAdoc
       end
 
       def escape_keychars(string)
-        string.gsub(/(?<!\\)[*_]/, '*' => '\*', '_' => '\_')
+        string #.gsub(/(?<!\\)[*_]/, '*' => '\*', '_' => '\_')
       end
 
       def extract_title(node)
