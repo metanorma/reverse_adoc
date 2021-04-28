@@ -26,7 +26,7 @@ module ReverseAdoc
 
       # Precedes square brackets with a +\+.
       def escape_square_brackets(str)
-        str.gsub(/\[/, "\\[").gsub(/\]/, "\\]") unless str.nil?
+        str&.gsub(/\[/, "\\[")&.gsub(/\]/, "\\]")
       end
 
       # Removes reundant round brackets like in +((...))+.
@@ -34,7 +34,7 @@ module ReverseAdoc
       # For some short discussion, see:
       # https://github.com/metanorma/reverse_adoc/issues/67
       def remove_redundant_round_brackets(str)
-        str.gsub(/\(\(([^\)]+)\)\)/, "(\\1)") unless str.nil?
+        str&.gsub(/\(\(([^\)]+)\)\)/, "(\\1)")
       end
     end
 
