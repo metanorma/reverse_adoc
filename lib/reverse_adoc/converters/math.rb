@@ -11,7 +11,7 @@ module ReverseAdoc
         stem = node.to_s.gsub(/\n/, " ")
         stem = MathML2AsciiMath.m2a(stem) if ReverseAdoc.config.mathml2asciimath
         stem = stem.gsub(/\[/, "\\[").gsub(/\]/, "\\]").gsub(/\(\(([^\)]+)\)\)/, "(\\1)") unless stem.nil?
-        " stem:[" << stem << "] "
+        " stem:[#{stem}] "
       end
     end
 
