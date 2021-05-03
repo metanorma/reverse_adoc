@@ -25,4 +25,3 @@ describe ReverseAdoc do
   end
 
 end
-

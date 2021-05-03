@@ -36,4 +36,3 @@ describe ReverseAdoc do
     it { expect { result }.to raise_error(ReverseAdoc::InvalidConfigurationError) }
   end
 end
-

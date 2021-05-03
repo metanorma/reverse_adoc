@@ -10,4 +10,3 @@ describe ReverseAdoc::Converters::Figure do
 
   end
 end
-

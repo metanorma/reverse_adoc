@@ -15,4 +15,3 @@ describe ReverseAdoc::Converters::Audio do
   end
 
 end
-

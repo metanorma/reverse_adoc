@@ -25,4 +25,3 @@ describe ReverseAdoc::Converters::Img do
   end
 
 end
-

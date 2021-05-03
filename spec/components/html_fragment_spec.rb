@@ -8,4 +8,3 @@ describe ReverseAdoc do
 
   it { is_expected.to eq("naked text 1\n\nparagraph text\n\nnaked text 2") }
 end
-
