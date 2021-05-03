@@ -8,7 +8,7 @@ describe ReverseAdoc do
 
   it { is_expected.to match /plain text ?\n/ }
   it { is_expected.to match /\n== h1\n/ }
-  it { is_expected.to match /\n\[\[A]\]\n== h1 with anchor\n/ }
+  it { is_expected.to match /\n\[\[A\]\]\n== h1 with anchor\n/ }
   it { is_expected.to match /\n=== h2\n/ }
   it { is_expected.to match /\n==== h3\n/ }
   it { is_expected.to match /\n===== h4\n/ }
