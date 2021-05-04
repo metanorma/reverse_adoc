@@ -12,9 +12,9 @@ module ReverseAdoc
       end
 
       def escape_keychars(string)
+        subs = { '*' => '\*', '_' => '\_' }
         string
-          .gsub(/(?<!\\)_+\b|\b(?<!\\)_+/) { |n| n.chars.map {|_| '\_'}.join }
-          .gsub(/(?<!\\)\*/, '\*')
+          .gsub(/((?<=\s)[\*_]+)|[\*_]+(?=\s)/) { |n| n.chars.map { |char| subs[char] }.join }
       end
 
       def extract_title(node)

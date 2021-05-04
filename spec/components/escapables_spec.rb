@@ -9,6 +9,9 @@ describe ReverseAdoc do
   context "multiple asterisks" do
     it { is_expected.to include ' \*\*two asterisks\*\* ' }
     it { is_expected.to include ' \*\*\*three asterisks\*\*\* ' }
+    it { is_expected.to include ' \*and*the\* ' }
+    it { is_expected.to include ' asterisc*word ' }
+    it { is_expected.to include ' asterisc**multword asterisks\*\*\* ' }
   end
 
   context "multiple underscores" do
