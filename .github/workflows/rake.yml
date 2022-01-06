@@ -10,23 +10,6 @@ on:
 
 jobs:
   rake:
-    name: Test on Ruby ${{ matrix.ruby }} ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby: [ '3.0', '2.7', '2.6', '2.5' ]
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
-        experimental: [ false ]
-    steps:
-      - uses: actions/checkout@master
-
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
-
-      - uses: metanorma/metanorma-build-scripts/libreoffice-setup-action@master
-
-      - run: bundle exec rake
+    uses: metanorma/metanorma-build-scripts/.github/workflows/libreoffice-rake.yml@main
+    secrets:
+      pat_token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
