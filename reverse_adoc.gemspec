@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_dependency "marcel", "~> 1.0.0"
   s.add_dependency "mathml2asciimath"
-  s.add_dependency "nokogiri", "~> 1.12"
+  s.add_dependency "nokogiri", "~> 1.13"
   s.add_development_dependency "codeclimate-test-reporter"
   s.add_development_dependency "rake"
   s.add_development_dependency "redcarpet"
