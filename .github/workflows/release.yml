@@ -15,31 +15,10 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+    uses: metanorma/ci/.github/workflows/rubygems-release.yml@main
+    with:
+      next_version: ${{ github.event.inputs.next_version }}
+    secrets:
+      rubygems-api-key: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
+      pat_token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
-          bundler-cache: true
-
-      - run: gem install gem-release
-
-      - if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ github.event.inputs.next_version != 'skip' }}
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          gem bump --version ${{ github.event.inputs.next_version }} --tag --push
-
-      - name: publish to rubygems.org
-        env:
-          RUBYGEMS_API_KEY: ${{secrets.METANORMA_CI_RUBYGEMS_API_KEY}}
-        run: |
-          gem install gem-release
-          envsubst << 'EOF' > ~/.gem/credentials
-          ---
-          :rubygems_api_key: ${RUBYGEMS_API_KEY}
-          EOF
-          chmod 0600 ~/.gem/credentials
-          gem release
