@@ -25,7 +25,7 @@ describe ReverseAdoc do
   end
 
   context "underscores within words in code blocks" do
-    it { is_expected.to include "....\n<code>var theoretical_max_infin = 1.0;</code>\n....\n" }
+    it { is_expected.to include "....\nvar theoretical_max_infin = 1.0;\n....\n" }
   end
 
 end

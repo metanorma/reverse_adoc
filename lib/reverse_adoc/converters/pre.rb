@@ -16,7 +16,11 @@ module ReverseAdoc
       private
 
       def treat(node, state)
-        node.to_s
+        return "\n" if node.name == "br"
+
+        prefix = postfix = "\n\n" if node.name == "p"
+
+        "#{prefix}#{node.text}#{postfix}"
       end
 
       def language(node)
