@@ -7,13 +7,13 @@ describe ReverseAdoc do
   subject { ReverseAdoc.convert(input) }
 
   it { is_expected.to match /inline `code` block/ }
-  it { is_expected.to match /\nvar this\;\nthis\.is/ }
+  it { is_expected.to match /\nvar this;\nthis\.is/ }
   it { is_expected.to match /block"\)\nconsole/ }
 
   context "with github style code blocks" do
     subject { ReverseAdoc.convert(input) }
     it { is_expected.to match /inline `code` block/ }
-    it { is_expected.to match /\n\.\.\.\.\nvar this\;\nthis/ }
+    it { is_expected.to match /\n\.\.\.\.\nvar this;\nthis/ }
     it { is_expected.to match /it is"\) ?\n	\n\.\.\.\./ }
   end
 
