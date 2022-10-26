@@ -21,7 +21,7 @@ describe ReverseAdoc::Converters::Pre do
 
   it 'preserves xml' do
     node = node_for("<pre><code>x</code><br/><p>hello</p></pre>")
-    expect(converter.convert(node)).to include "....\n<code>x</code><br><p>hello</p>\n....\n"
+    expect(converter.convert(node)).to include "....\nx\n\n\nhello\n\n\n....\n"
   end
 
   context 'syntax highlighting' do
