@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- exe/*`.split("\n").map { |f| File.basename(f) }
   s.bindir        = "exe"
   s.require_paths = ["lib"]
-  s.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
+  s.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
   # specify any dependencies here; for example:
   s.add_dependency "marcel", "~> 1.0.0"
