@@ -32,9 +32,7 @@ module ReverseAdoc
         text = escape_keychars(text)
 
         text = preserve_keychars_within_backticks(text)
-        text = escape_links(text)
-
-        text
+        escape_links(text)
       end
 
       def preserve_nbsp(text)
