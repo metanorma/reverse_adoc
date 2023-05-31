@@ -28,10 +28,16 @@ describe ReverseAdoc::Converters::Text do
     expect(result).to eq "foo&nbsp;bar &nbsp;"
   end
 
-  it 'keeps escaped HTML-ish characters' do
+  it 'keeps HTML characters' do
     input = node_for("<p>&lt;foo&gt;</p>")
     result = converter.convert(input)
-    expect(result).to eq '\<foo\>'
+    expect(result).to eq '<foo>'
+  end
+
+  it 'escapes Link like characters in text' do
+    input = node_for("<p>&lt;&lt;foo&gt;&gt;</p>")
+    result = converter.convert(input)
+    expect(result).to eq '\<<foo>>'
   end
 
   context 'within backticks' do
