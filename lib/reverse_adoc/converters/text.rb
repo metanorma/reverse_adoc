@@ -32,7 +32,7 @@ module ReverseAdoc
         text = escape_keychars(text)
 
         text = preserve_keychars_within_backticks(text)
-        text = preserve_tags(text)
+        text = escape_links(text)
 
         text
       end
@@ -41,8 +41,8 @@ module ReverseAdoc
         text.gsub(/\u00A0/, "&nbsp;")
       end
 
-      def preserve_tags(text)
-        text.gsub(/[<>]/, '>' => '\>', '<' => '\<')
+      def escape_links(text)
+        text.gsub(/<<([^>]*)>>/, "\\<<\\1>>")
       end
 
       def remove_border_newlines(text)
