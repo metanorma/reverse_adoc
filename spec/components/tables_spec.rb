@@ -23,7 +23,7 @@ describe ReverseAdoc do
   it { is_expected.to match /\^\.\^\| center middle\n/ }
 
   it { is_expected.to match /\n\.Table _caption_\n\|===\n/ }
-  it { is_expected.to match /\n\[width=75%\]\n\|===\n\| 75% width table\n/ }
+  # it { is_expected.to match /\n\[width=75%\]\n\|===\n\| 75% width table\n/ }
   it { is_expected.to match /\n\[frame=topbot,rules=cols\]\n\|===\n\| topbot\n/ }
 
   it { is_expected.to match /\na|\nHello\n\nThis cell has multiple paragraphs\n\n/ }

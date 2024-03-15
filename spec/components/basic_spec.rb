@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ReverseAdoc do
 
   let(:input)    { File.read('spec/assets/basic.html') }
-  let(:document) { Nokogiri::HTML(input) }
+  # let(:document) { Nokogiri::HTML(input) }
   subject { ReverseAdoc.convert(input) }
 
   it { is_expected.to match /plain text ?\n/ }
