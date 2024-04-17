@@ -1,12 +1,15 @@
 module ReverseAdoc
   module Converters
     class Text < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         if node.text.strip.empty?
           treat_empty(node, state)
         else
-          treat_text(node)
+          Coradoc::Document::TextElement.new(treat_text(node))
         end
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       private

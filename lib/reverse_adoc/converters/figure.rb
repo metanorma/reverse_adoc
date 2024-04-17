@@ -1,12 +1,14 @@
 module ReverseAdoc
   module Converters
     class Figure < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
         title = extract_title(node)
-        title = ".#{title}\n" unless title.empty?
-        "\n\n#{anchor}#{title}====\n" << treat_children(node, state).strip << "\n====\n\n"
+        content = treat_children(node, state).strip
+        Coradoc::Document::Block.new(title, lines: content.lines, type: :example, id: id)
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       def extract_title(node)

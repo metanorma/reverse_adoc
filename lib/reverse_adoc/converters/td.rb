@@ -1,9 +1,9 @@
 module ReverseAdoc
   module Converters
     class Td < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
+        # convert(node, state)
         id = node['id']
-        anchor = id ? "[[#{id}]]" : ""
         colrowattr = colrow(node['colspan'], node['rowspan'])
         alignattr = alignstyle(node)
         style = cellstyle(node)
@@ -13,8 +13,18 @@ module ReverseAdoc
           node.at(".//p") && !singlepara
         style = "a" if adoccell
         delim = adoccell ? "\n" : " "
-        content = treat_children(node, state)
-        "#{colrowattr}#{alignattr}#{style}| #{anchor}#{content}#{delim}"
+        content = treat_children_coradoc(node, state)
+        options = {}
+        options[:id] = id
+        options[:colrowattr] = colrowattr
+        options[:alignattr] = alignattr
+        options[:style] = style
+        options[:content] = content
+        options[:delim] = delim
+        Coradoc::Document::Table::Cell.new(options)
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc( to_coradoc(node, state))
       end
 
       def cellstyle(node)

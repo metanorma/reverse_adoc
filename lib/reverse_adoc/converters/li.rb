@@ -1,12 +1,18 @@
 module ReverseAdoc
   module Converters
     class Li < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
+        # convert(node, state)
         id = node['id']
         anchor = id ? "[[#{id}]]" : ""
-        content     = treat_children(node, state)
+        content     = treat_children_coradoc(node, state)
         prefix      = prefix_for(node, state)
-        "#{prefix} #{anchor}#{content.chomp}\n"
+        # "#{prefix} #{anchor}#{content.chomp}\n"
+        Coradoc::Document::List::Item.new(content, anchor: anchor)
+      end
+      
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       def prefix_for(node, state)

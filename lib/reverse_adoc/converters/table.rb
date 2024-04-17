@@ -1,13 +1,18 @@
 module ReverseAdoc
   module Converters
     class Table < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {}) #FIXIT
+        # convert(node,state) #PLACEHOLDER
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
         title = extract_title(node)
         title = ".#{title}\n" unless title.empty?
         attrs = style(node)
-        "\n\n#{anchor}#{attrs}#{title}|===\n" << treat_children(node, state) << "\n|===\n"
+        content = treat_children_coradoc(node, state)
+        Coradoc::Document::Table.new(title, content, {id: id, attrs: attrs})
+        # "\n\n#{anchor}#{attrs}#{title}|===\n" << treat_children(node, state) << "\n|===\n"
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc( to_coradoc(node, state) )
       end
 
       def extract_title(node)

@@ -55,13 +55,13 @@ module ReverseAdoc
         end
       end
 
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         alt   = node['alt']
         src   = node['src']
         id = node['id']
         width = node['width']
         height = node['height']
-        anchor = id ? "[[#{id}]]\n" : ""
+        
         title = extract_title(node)
 
         if ReverseAdoc.config.external_images
@@ -69,12 +69,11 @@ module ReverseAdoc
           src = datauri2file(src)
         end
 
-        title = ".#{title}\n" unless title.empty?
-        attrs = alt
-        attrs = "\"\"" if (width || height) && alt.nil?
-        attrs += ",#{width}" if width
-        attrs += ",#{height}" if width && height
-        [anchor, title, "image::", src, "[", attrs, "]"].join("")
+        Coradoc::Document::Inline::Image.new(id: id,
+          title: title, src: src, alt: alt, width: width, height: height)
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
     end
 

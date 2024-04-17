@@ -1,6 +1,9 @@
 module ReverseAdoc
   module Converters
     class Drop < Base
+      def to_coradoc(node, state = {})
+        convert(node, state)
+      end
       def convert(node, state = {})
         ''
       end

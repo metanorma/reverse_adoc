@@ -1,13 +1,16 @@
 module ReverseAdoc
   module Converters
     class Strong < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         content = treat_children(node, state.merge(already_strong: true))
         if content.strip.empty? || state[:already_strong]
           content
         else
-          "#{content[/^\s*/]}*#{content.strip}*#{content[/\s*$/]}"
+          Coradoc::Document::Inline::Bold.new(content)
         end
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node,state))
       end
     end
 

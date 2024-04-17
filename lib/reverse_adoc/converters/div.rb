@@ -1,10 +1,13 @@
 module ReverseAdoc
   module Converters
     class Div < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
-        "\n#{anchor}" << treat_children(node, state) << "\n"
+        contents = treat_children_coradoc(node, state)
+        Coradoc::Document::Section.new(nil, id: id, contents: contents)
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
     end
 

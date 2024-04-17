@@ -11,6 +11,16 @@ module ReverseAdoc
         ReverseAdoc::Converters.lookup(node.name).convert(node, state)
       end
 
+      def treat_children_coradoc(node, state)
+        node.children.inject([]) do |memo, child|
+          memo << treat_coradoc(child, state)
+        end
+      end
+
+      def treat_coradoc(node, state)
+        ReverseAdoc::Converters.lookup(node.name).to_coradoc(node, state)
+      end
+
       def escape_keychars(string)
         subs = { '*' => '\*', '_' => '\_' }
         string

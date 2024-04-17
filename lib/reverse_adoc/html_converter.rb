@@ -36,7 +36,7 @@ require "reverse_adoc/converters/math"
 
 module ReverseAdoc
   class HtmlConverter
-    def self.convert(input, options = {})
+    def self.to_coradoc(input, options = {})
       root = if input.is_a?(String)
               then Nokogiri::HTML(input).root
              elsif input.is_a?(Nokogiri::XML::Document)
@@ -46,11 +46,13 @@ module ReverseAdoc
              end
 
       root || (return "")
-
       ReverseAdoc.config.with(options) do
-        result = ReverseAdoc::Converters.lookup(root.name).convert(root)
-        ReverseAdoc.cleaner.tidy(result)
+        result = ReverseAdoc::Converters.lookup(root.name).to_coradoc(root)
       end
+    end
+    def self.convert(input, options = {})
+      result = Coradoc::Generator.gen_adoc(to_coradoc(input, options))
+      ReverseAdoc.cleaner.tidy(result)
     end
   end
 end

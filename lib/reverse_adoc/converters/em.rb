@@ -1,13 +1,16 @@
 module ReverseAdoc
   module Converters
     class Em < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         content = treat_children(node, state.merge(already_italic: true))
         if content.strip.empty? || state[:already_italic]
           content
         else
-          "#{content[/^\s*/]}_#{content.strip}_#{content[/\s*$/]}"
+          Coradoc::Document::Inline::Italic.new(Coradoc::Document::TextElement.new(content))
         end
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node,state))
       end
     end
 
