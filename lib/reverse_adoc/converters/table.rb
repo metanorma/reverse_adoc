@@ -1,16 +1,14 @@
 module ReverseAdoc
   module Converters
     class Table < Base
-      def to_coradoc(node, state = {}) #FIXIT
-        # convert(node,state) #PLACEHOLDER
+      def to_coradoc(node, state = {})
         id = node['id']
         title = extract_title(node)
-        title = ".#{title}\n" unless title.empty?
         attrs = style(node)
         content = treat_children_coradoc(node, state)
         Coradoc::Document::Table.new(title, content, {id: id, attrs: attrs})
-        # "\n\n#{anchor}#{attrs}#{title}|===\n" << treat_children(node, state) << "\n|===\n"
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc( to_coradoc(node, state) )
       end
@@ -24,13 +22,13 @@ module ReverseAdoc
       def frame(node)
         case node["frame"]
         when "void"
-          "frame=none"
+          "none"
         when "hsides"
-          "frame=topbot"
+          "topbot"
         when "vsides"
-          "frame=sides"
+          "sides"
         when "box", "border"
-          "frame=all"
+          "all"
         else
           nil
         end
@@ -39,28 +37,27 @@ module ReverseAdoc
       def rules(node)
         case node["rules"]
         when "all"
-          "rules=all"
+          "all"
         when "rows"
-          "rules=rows"
+          "rows"
         when "cols"
-          "rules=cols"
+          "cols"
         when "none"
-          "rules=none"
+          "none"
         else
           nil
         end
       end
 
       def style(node)
-        width = "width=#{node['width']}" if node['width']
-        attrs = []
+        attrs = Coradoc::Document::AttributeList.new
+        attrs.add_named("width", node["width"]) if node["width"]
         frame_attr = frame(node)
+        attrs.add_named("frame", frame_attr) if frame_attr
         rules_attr = rules(node)
-        attrs << width if width
-        attrs << frame_attr if frame_attr
-        attrs << rules_attr if rules_attr
+        attrs.add_named("rules", rules_attr) if rules_attr
         return "" if attrs.empty?
-        "[#{attrs.join(',')}]\n"
+        attrs
       end
     end
 

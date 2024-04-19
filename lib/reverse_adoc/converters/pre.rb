@@ -6,9 +6,9 @@ module ReverseAdoc
         lang = language(node)
         content = treat_children(node, state)
         if lang
-          Coradoc::Document::Block.new(nil, lines: content.lines, delimiter: '----', lang: lang, id: id)
+          Coradoc::Document::Block::SourceCode.new(nil, lines: content, lang: lang, id: id)
         else
-          Coradoc::Document::Block.new(nil, lines: content.lines, delimiter: '....', id: id)
+          Coradoc::Document::Block::Literal.new(nil, lines: content, id: id)
         end
       end
       def convert(node, state = {})

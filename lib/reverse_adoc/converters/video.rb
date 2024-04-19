@@ -1,7 +1,7 @@
 module ReverseAdoc
   module Converters
     class Video < Base
-      def to_coradoc(node, state = {})
+      def to_coradoc(node, _state = {})
         src   = node['src']
         id = node['id']
         title = extract_title(node)

@@ -14,7 +14,7 @@ module ReverseAdoc
       def treat_children_coradoc(node, state)
         node.children.inject([]) do |memo, child|
           memo << treat_coradoc(child, state)
-        end
+        end.flatten.reject{|x| x=="" || x.nil?}
       end
 
       def treat_coradoc(node, state)

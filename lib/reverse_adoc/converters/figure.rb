@@ -4,8 +4,8 @@ module ReverseAdoc
       def to_coradoc(node, state = {})
         id = node['id']
         title = extract_title(node)
-        content = treat_children(node, state).strip
-        Coradoc::Document::Block.new(title, lines: content.lines, type: :example, id: id)
+        content = treat_children_coradoc(node, state)
+        Coradoc::Document::Block::Example.new(title, lines: content, id: id)
       end
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))

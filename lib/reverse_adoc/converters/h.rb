@@ -3,13 +3,13 @@ module ReverseAdoc
     class H < Base
       def to_coradoc(node, state = {})
         id = node['id']
-        anchor = id ? "[[#{id}]]" : ""
-        internal_anchor = treat_children_anchors(node, state) || ""
-        anchor.empty? and anchor = internal_anchor
-        anchor.empty? or anchor += "\n"
-        level_str = '=' * (node.name[/\d/].to_i + 1)
+        internal_anchor = treat_children_anchors(node, state)
+        if id.to_s.empty? && internal_anchor.size > 0
+          id = internal_anchor.first.id
+        end
+        level = (node.name[/\d/].to_i)
         content = treat_children_no_anchors(node, state)
-        Coradoc::Document::Title.new(content, level_str, anchor: anchor, id: id)
+        Coradoc::Document::Title.new(content, level, id: id)
       end
 
       def convert(node, state = {})
@@ -23,8 +23,8 @@ module ReverseAdoc
       end
 
       def treat_children_anchors(node, state)
-        node.children.select { |a| a.name == "a" }.inject('') do |memo, child|
-          memo << treat(child, state)
+        node.children.select { |a| a.name == "a" }.inject([]) do |memo, child|
+          memo << treat_coradoc(child, state)
         end
       end
     end

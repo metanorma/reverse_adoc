@@ -4,29 +4,27 @@ module ReverseAdoc
       def to_coradoc(node, state = {}) #FIXIT
         # convert(node, state)
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
         ol_count = state.fetch(:ol_count, 0) + 1
         attrs = ol_attrs(node)
         items = treat_children_coradoc(node, state.merge(ol_count: ol_count))
         options = {}
         options[:id] = id
-        options[:anchor] = anchor
         options[:ol_count] = ol_count
         options[:attrs] = attrs
         list_type = get_list_type(node, state)
         if list_type == :ordered
-          Coradoc::Document::List.new(items, options)
+          Coradoc::Document::List::Ordered.new(items, options)
         else
           Coradoc::Document::List::Unordered.new(items, options)
         end
       end
+
       def convert(node, state = {})
-        Coradoc::Generator.gen_adoc(to_coradoc(node,state))
-        # "\n#{anchor}#{attrs}" << treat_children(node, state.merge(ol_count: ol_count))
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
-      def get_list_type(node, state)
-        if node.name == 'ol'
+      def get_list_type(node, _state)
+        if node.name == "ol"
           :ordered
         else
           :unordered
@@ -46,20 +44,13 @@ module ReverseAdoc
       end
 
       def ol_attrs(node)
+        attrs = Coradoc::Document::AttributeList.new
         style = number_style(node)
-        reversed = "%reversed" if node["reversed"]
-        start = "start=#{node['start']}" if node["start"]
-        type = "type=#{node['type']}" if node["type"]
-        attrs = []
-        attrs << style if style
-        attrs << reversed if reversed
-        attrs << start if start
-        attrs << type if type
-        if attrs.empty?
-          ""
-        else
-          "[#{attrs.join(',')}]\n"
-        end
+        attrs.add_positional(style) if style
+        attrs.add_positional("%reversed") if node["reversed"]
+        attrs.add_named("start", node["start"]) if node["start"]
+        attrs.add_named("type", node["type"]) if node["type"]
+        attrs
       end
     end
 

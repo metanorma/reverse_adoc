@@ -5,6 +5,7 @@ module ReverseAdoc
         content = treat_children(node, state)
         Coradoc::Document::Inline::Quotation.new(content)
       end
+      
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end

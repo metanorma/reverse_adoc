@@ -9,6 +9,7 @@ module ReverseAdoc
         options[:tdsinglepara] = true if state[:tdsinglepara]
         Coradoc::Document::Paragraph.new(content, options)
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end

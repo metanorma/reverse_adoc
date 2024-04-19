@@ -50,6 +50,7 @@ module ReverseAdoc
         result = ReverseAdoc::Converters.lookup(root.name).to_coradoc(root)
       end
     end
+    
     def self.convert(input, options = {})
       result = Coradoc::Generator.gen_adoc(to_coradoc(input, options))
       ReverseAdoc.cleaner.tidy(result)

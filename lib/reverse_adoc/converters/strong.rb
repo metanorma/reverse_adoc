@@ -10,7 +10,7 @@ module ReverseAdoc
         end
       end
       def convert(node, state = {})
-        Coradoc::Generator.gen_adoc(to_coradoc(node,state))
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
     end
 
