@@ -56,12 +56,12 @@ module ReverseAdoc
       end
 
       def to_coradoc(node, state = {})
+        id = node['id']
         alt   = node['alt']
         src   = node['src']
-        id = node['id']
         width = node['width']
         height = node['height']
-        
+
         title = extract_title(node)
 
         if ReverseAdoc.config.external_images
@@ -69,8 +69,18 @@ module ReverseAdoc
           src = datauri2file(src)
         end
 
-        Coradoc::Document::Inline::Image.new(id: id,
-          title: title, src: src, alt: alt, width: width, height: height)
+        attributes = Coradoc::Document::AttributeList.new
+        # attributes.add_named("id", id) if id
+        if alt# && !alt.to_s.empty?
+          attributes.add_positional(alt) 
+        elsif width || height
+          attributes.add_positional("\"\"")
+        end
+        # attributes.add_named("title", title) if title
+        attributes.add_positional(width) if width
+        attributes.add_positional(height) if height
+
+        Coradoc::Document::Image::BlockImage.new(title, id, src, attributes: attributes)
       end
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))

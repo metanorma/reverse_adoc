@@ -19,11 +19,7 @@ module ReverseAdoc
           Coradoc::Document::Inline::Anchor.new(id)
         elsif href.to_s.start_with?('#')
           href = href.sub(/^#/, "").gsub(/\s/, "").gsub(/__+/, "_")
-          if name.to_s.empty?
-            Coradoc::Document::Inline::CrossReference.new(href)
-          else
-            Coradoc::Document::Inline::CrossReference.new(href, name)
-          end
+          Coradoc::Document::Inline::CrossReference.new(href, name)
         elsif href.to_s.empty?
           name
         else

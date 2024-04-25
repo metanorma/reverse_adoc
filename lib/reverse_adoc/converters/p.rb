@@ -3,7 +3,7 @@ module ReverseAdoc
     class P < Base
       def to_coradoc(node, state = {})
         id = node['id']
-        content = treat_children(node, state).strip
+        content = treat_children_coradoc(node, state)
         options = {}
         options[:id] = id if id
         options[:tdsinglepara] = true if state[:tdsinglepara]

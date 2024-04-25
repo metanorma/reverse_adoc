@@ -32,11 +32,15 @@ describe ReverseAdoc do
   it { is_expected.to match /a \*strong with leading and trailing\* whitespace/ }
   it { is_expected.to match /a \*strong with extra leading and trailing\* whitespace/ }
 
-  it { is_expected.to match /H~2~O/ }
-  it { is_expected.to match /A\^2\^B/ }
+
+  it { is_expected.to match /constrai\*\*ned\*\* strong/ }
+  it { is_expected.to match /constrai__ned__ italic/ }
 
   it { is_expected.to match /_i tag content_/ }
   it { is_expected.to match /\*b tag content\*/ }
+
+  it { is_expected.to match /H~2~O/ }
+  it { is_expected.to match /A\^2\^B/ }
 
   it { is_expected.to match /br tags become double space followed by newline \+\n/ }
   #it { should match /br tags XXX  \n/ }

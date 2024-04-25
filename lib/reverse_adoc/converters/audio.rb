@@ -5,7 +5,10 @@ module ReverseAdoc
         src   = node['src']
         id = node['id']
         title = extract_title(node)
-        Coradoc::Document::Audio.new(title, id: id, src: src, options: options(node))
+        attributes = Coradoc::Document::AttributeList.new
+        options = options(node)
+        attributes.add_named("options", options) if options.any?
+        Coradoc::Document::Audio.new(title, id: id, src: src, attributes: attributes)
       end
 
       def convert(node, state = {})

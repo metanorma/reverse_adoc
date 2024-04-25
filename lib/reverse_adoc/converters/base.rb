@@ -31,6 +31,65 @@ module ReverseAdoc
         title = escape_keychars(node['title'].to_s)
         title.empty? ? '' : %[ #{title}]
       end
+
+      def node_has_ancestor?(node, name)
+        if name.is_a?(String)
+          node.ancestors.map(&:name).include?(name)
+        elsif name.is_a?(Array)
+          (node.ancestors.map(&:name) & name).any?
+        end
+      end
+
+      def textnode_before_end_with?(node, str)
+        return nil if (!str.is_a?(String) || !(str.size>=1))
+        node2 = node.at_xpath("preceding-sibling::node()[1]")
+        node2.respond_to?(:text) && node2.text.end_with?(str)
+      end
+
+      def unconstrained_before?(node)
+        before = node.at_xpath("preceding::node()[1]")
+        if before && !before.text.strip.empty?
+          before = (before.text[-1] =~ (/\w/)) ? true : false
+        else
+          before = false
+        end
+      end        
+
+      def unconstrained_after?(node)
+        after = node.at_xpath("following::node()[1]")
+        if after && !after.text.strip.empty?
+          after = (after.text[0] =~ (/\w|,|;|\"|\.\?\!/)) ? true : false
+        else
+          after = false
+        end
+      end
+
+      #def trailing_whitespace?(node)
+
+      def constrained?(node)
+        before = node.at_xpath("preceding::node()[1]").to_s[-1]
+        if before
+          before = (before =~ (/\s/)) ? true : false
+        else
+          before = true
+        end
+        if !before
+          before = true if node.to_s[0] =~ /\s/
+        end
+        
+        after = node.at_xpath("following::node()[1]").to_s[0]
+        if after
+          after = (after =~ (/\s|,|;|\"|\.\?\!/)) ? true : false
+        else
+          after = true
+        end
+        if !after
+          after = true if node.to_s[-1] =~ /\s/
+        end
+        
+        before && after
+      end
+
     end
   end
 end

@@ -14,7 +14,7 @@ module ReverseAdoc
       def extract_title(node)
         title = node.at("./figcaption")
         return "" if title.nil?
-        treat_children(title, {})
+        treat_children_coradoc(title, {})
       end
     end
 

@@ -17,8 +17,8 @@ module ReverseAdoc
       end
 
       def treat_children_no_anchors(node, state)
-        node.children.reject { |a| a.name == "a" }.inject('') do |memo, child|
-          memo << treat(child, state)
+        node.children.reject { |a| a.name == "a" }.inject([]) do |memo, child|
+          memo << treat_coradoc(child, state)
         end
       end
 

@@ -6,7 +6,8 @@ module ReverseAdoc
         if content.strip.empty? || state[:already_strong]
           content
         else
-          Coradoc::Document::Inline::Highlight.new(content)
+          c = constrained?(node)
+          Coradoc::Document::Inline::Highlight.new(content, c)
         end
       end
       def convert(node, state = {})
