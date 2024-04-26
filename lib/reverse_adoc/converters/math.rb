@@ -7,6 +7,9 @@ require "mathml2asciimath"
 module ReverseAdoc
   module Converters
     class Math < Base
+      def to_coradoc(node, state = {}) #FIXIT
+        convert(node, state)
+      end
       def convert(node, state = {})
         stem = node.to_s.gsub(/\n/, " ")
         stem = MathML2AsciiMath.m2a(stem) if ReverseAdoc.config.mathml2asciimath

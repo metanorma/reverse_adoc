@@ -1,10 +1,12 @@
+require "coradoc"
 require "uri"
 
 module ReverseAdoc
   module Converters
     class A < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state ={})
         name  = treat_children(node, state)
+
         href  = node['href']
         title = extract_title(node)
         id = node['id'] || node['name']
@@ -14,23 +16,18 @@ module ReverseAdoc
         if /^_Toc\d+$|^_GoBack$/.match id
           ""
         elsif !id.nil? && !id.empty?
-          "[[#{id}]]"
+          Coradoc::Document::Inline::Anchor.new(id)
         elsif href.to_s.start_with?('#')
           href = href.sub(/^#/, "").gsub(/\s/, "").gsub(/__+/, "_")
-          if name.empty?
-            "<<#{href}>>"
-          else
-            "<<#{href},#{name}>>"
-          end
+          Coradoc::Document::Inline::CrossReference.new(href, name)
         elsif href.to_s.empty?
           name
         else
-          name = title if name.empty?
-          href = "link:#{href}" unless href.to_s =~ URI::DEFAULT_PARSER.make_regexp
-          link = "#{href}[#{name}]"
-          link.prepend(' ')
-          link
+          Coradoc::Document::Inline::Link.new(path: href, name: name, title: title)
         end
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       private

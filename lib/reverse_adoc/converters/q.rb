@@ -1,9 +1,13 @@
 module ReverseAdoc
   module Converters
     class Q < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         content = treat_children(node, state)
-        "#{content[/^\s*/]}\"#{content.strip}\"#{content[/\s*$/]}"
+        Coradoc::Document::Inline::Quotation.new(content)
+      end
+      
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
     end
 
