@@ -2,14 +2,17 @@ module ReverseAdoc
   module Converters
     class H < Base
       def to_coradoc(node, state = {})
-        id = node['id']
+        id = node["id"]
         internal_anchor = treat_children_anchors(node, state)
-        if id.to_s.empty? && internal_anchor.size > 0
+
+        if id.to_s.empty? && internal_anchor.size.positive?
           id = internal_anchor.first.id
         end
-        level = (node.name[/\d/].to_i)
+
+        level = node.name[/\d/].to_i
         content = treat_children_no_anchors(node, state)
-        Coradoc::Document::Title.new(content, level, id: id)
+
+        Coradoc::Element::Title.new(content, level, id: id)
       end
 
       def convert(node, state = {})

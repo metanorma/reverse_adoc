@@ -2,12 +2,11 @@ module ReverseAdoc
   module Converters
     class Text < Base
       def to_coradoc(node, state = {})
-        if node.text.strip.empty?
-          treat_empty(node, state)
-        else
-          Coradoc::Document::TextElement.new(treat_text(node))
-        end
+        return treat_empty(node, state) if node.text.strip.empty?
+
+        Coradoc::Element::TextElement.new(treat_text(node))
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
@@ -16,14 +15,14 @@ module ReverseAdoc
 
       def treat_empty(node, state)
         parent = node.parent.name.to_sym
-        if [:ol, :ul].include?(parent)  # Otherwise the identation is broken
-          ''
+        if %i[ol ul].include?(parent) # Otherwise the identation is broken
+          ""
         elsif state[:tdsinglepara]
-          ''
-        elsif node.text == ' '          # Regular whitespace text node
-          ' '
+          ""
+        elsif node.text == " " # Regular whitespace text node
+          " "
         else
-          ''
+          ""
         end
       end
 
@@ -47,16 +46,16 @@ module ReverseAdoc
       end
 
       def remove_border_newlines(text)
-        text.gsub(/\A\n+/, '').gsub(/\n+\z/, '')
+        text.gsub(/\A\n+/, "").gsub(/\n+\z/, "")
       end
 
       def remove_inner_newlines(text)
-        text.tr("\n\t", ' ').squeeze(' ')
+        text.tr("\n\t", " ").squeeze(" ")
       end
 
       def preserve_keychars_within_backticks(text)
         text.gsub(/`.*?`/) do |match|
-          match.gsub('\_', '_').gsub('\*', '*')
+          match.gsub('\_', "_").gsub('\*', "*")
         end
       end
     end

@@ -1,8 +1,8 @@
 module ReverseAdoc
   module Converters
     class Br < Base
-      def to_coradoc(node, state = {})
-        Coradoc::Document::Inline::HardLineBreak.new
+      def to_coradoc(_node, _state = {})
+        Coradoc::Element::Inline::HardLineBreak.new
       end
 
       def convert(node, state = {})

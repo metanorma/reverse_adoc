@@ -2,12 +2,10 @@ module ReverseAdoc
   module Converters
     class Th < Td
       def cellstyle(node)
-        if node.parent.previous_element.nil?
-          # this is the header row
-          ""
-        else
-          "h"
-        end
+        # this is the header row
+        return "" if node.parent.previous_element.nil?
+
+        "h"
       end
     end
 

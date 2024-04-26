@@ -7,11 +7,10 @@ require "marcel"
 module ReverseAdoc
   module Converters
     class Img < Base
-
       def image_number
         sprintf(
           ReverseAdoc.config.image_counter_pattern,
-          ReverseAdoc.config.image_counter
+          ReverseAdoc.config.image_counter,
         )
       end
 
@@ -20,10 +19,10 @@ module ReverseAdoc
       end
 
       def datauri2file(src)
-        %r{^data:image/(?<imgtype>[^;]+);base64,(?<imgdata>.+)$} =~ src
+        %r{^data:image/(?:[^;]+);base64,(?<imgdata>.+)$} =~ src
 
         dest_dir = Pathname.new(ReverseAdoc.config.destination).dirname
-        images_dir = dest_dir + 'images'
+        images_dir = dest_dir.join("images")
         FileUtils.mkdir_p(images_dir)
 
         ext, image_src_path = determine_image_src_path(src, imgdata)
@@ -42,11 +41,11 @@ module ReverseAdoc
         return copy_temp_file(imgdata) if imgdata
 
         ext = File.extname(src).strip.downcase[1..-1]
-        [ext, Pathname.new(ReverseAdoc.config.sourcedir) + src]
+        [ext, Pathname.new(ReverseAdoc.config.sourcedir).join(src)]
       end
 
       def copy_temp_file(imgdata)
-        Tempfile.open(['radoc', '.jpg']) do |f|
+        Tempfile.open(["radoc", ".jpg"]) do |f|
           f.binmode
           f.write(Base64.strict_decode64(imgdata))
           f.rewind
@@ -55,12 +54,12 @@ module ReverseAdoc
         end
       end
 
-      def to_coradoc(node, state = {})
-        id = node['id']
-        alt   = node['alt']
-        src   = node['src']
-        width = node['width']
-        height = node['height']
+      def to_coradoc(node, _state = {})
+        id = node["id"]
+        alt   = node["alt"]
+        src   = node["src"]
+        width = node["width"]
+        height = node["height"]
 
         title = extract_title(node)
 
@@ -69,10 +68,10 @@ module ReverseAdoc
           src = datauri2file(src)
         end
 
-        attributes = Coradoc::Document::AttributeList.new
+        attributes = Coradoc::Element::AttributeList.new
         # attributes.add_named("id", id) if id
-        if alt# && !alt.to_s.empty?
-          attributes.add_positional(alt) 
+        if alt # && !alt.to_s.empty?
+          attributes.add_positional(alt)
         elsif width || height
           attributes.add_positional("\"\"")
         end
@@ -80,8 +79,10 @@ module ReverseAdoc
         attributes.add_positional(width) if width
         attributes.add_positional(height) if height
 
-        Coradoc::Document::Image::BlockImage.new(title, id, src, attributes: attributes)
+        Coradoc::Element::Image::BlockImage.new(title, id, src,
+                                                attributes: attributes)
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end

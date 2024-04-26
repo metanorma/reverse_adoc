@@ -3,8 +3,9 @@ module ReverseAdoc
     class Sub < Base
       def to_coradoc(node, state = {})
         content = treat_children_coradoc(node, state)
-        Coradoc::Document::Inline::Subscript.new(content)
+        Coradoc::Element::Inline::Subscript.new(content)
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end

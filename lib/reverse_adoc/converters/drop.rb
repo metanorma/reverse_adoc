@@ -5,8 +5,8 @@ module ReverseAdoc
         convert(node, state)
       end
 
-      def convert(node, state = {})
-        ''
+      def convert(_node, _state = {})
+        ""
       end
     end
 

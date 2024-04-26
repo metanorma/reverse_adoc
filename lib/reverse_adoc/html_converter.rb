@@ -1,56 +1,58 @@
 # frozen_string_literal: true
 
-require "reverse_adoc/converters/a"
-require "reverse_adoc/converters/aside"
-require "reverse_adoc/converters/audio"
-require "reverse_adoc/converters/blockquote"
-require "reverse_adoc/converters/br"
-require "reverse_adoc/converters/bypass"
-require "reverse_adoc/converters/code"
-require "reverse_adoc/converters/div"
-require "reverse_adoc/converters/drop"
-require "reverse_adoc/converters/em"
-require "reverse_adoc/converters/figure"
-require "reverse_adoc/converters/h"
-require "reverse_adoc/converters/head"
-require "reverse_adoc/converters/hr"
-require "reverse_adoc/converters/ignore"
-require "reverse_adoc/converters/img"
-require "reverse_adoc/converters/mark"
-require "reverse_adoc/converters/li"
-require "reverse_adoc/converters/ol"
-require "reverse_adoc/converters/p"
-require "reverse_adoc/converters/pass_through"
-require "reverse_adoc/converters/pre"
-require "reverse_adoc/converters/q"
-require "reverse_adoc/converters/strong"
-require "reverse_adoc/converters/sup"
-require "reverse_adoc/converters/sub"
-require "reverse_adoc/converters/table"
-require "reverse_adoc/converters/td"
-require "reverse_adoc/converters/th"
-require "reverse_adoc/converters/text"
-require "reverse_adoc/converters/tr"
-require "reverse_adoc/converters/video"
-require "reverse_adoc/converters/math"
+require_relative "converters/a"
+require_relative "converters/aside"
+require_relative "converters/audio"
+require_relative "converters/blockquote"
+require_relative "converters/br"
+require_relative "converters/bypass"
+require_relative "converters/code"
+require_relative "converters/div"
+require_relative "converters/drop"
+require_relative "converters/em"
+require_relative "converters/figure"
+require_relative "converters/h"
+require_relative "converters/head"
+require_relative "converters/hr"
+require_relative "converters/ignore"
+require_relative "converters/img"
+require_relative "converters/mark"
+require_relative "converters/li"
+require_relative "converters/ol"
+require_relative "converters/p"
+require_relative "converters/pass_through"
+require_relative "converters/pre"
+require_relative "converters/q"
+require_relative "converters/strong"
+require_relative "converters/sup"
+require_relative "converters/sub"
+require_relative "converters/table"
+require_relative "converters/td"
+require_relative "converters/th"
+require_relative "converters/text"
+require_relative "converters/tr"
+require_relative "converters/video"
+require_relative "converters/math"
 
 module ReverseAdoc
   class HtmlConverter
     def self.to_coradoc(input, options = {})
-      root = if input.is_a?(String)
-              then Nokogiri::HTML(input).root
-             elsif input.is_a?(Nokogiri::XML::Document)
-              then input.root
-             elsif input.is_a?(Nokogiri::XML::Node)
-              then input
+      root = case input
+             when String
+               Nokogiri::HTML(input).root
+             when Nokogiri::XML::Document
+               input.root
+             when Nokogiri::XML::Node
+               input
              end
 
-      root || (return "")
+      return "" unless root
+
       ReverseAdoc.config.with(options) do
-        result = ReverseAdoc::Converters.lookup(root.name).to_coradoc(root)
+        ReverseAdoc::Converters.lookup(root.name).to_coradoc(root)
       end
     end
-    
+
     def self.convert(input, options = {})
       result = Coradoc::Generator.gen_adoc(to_coradoc(input, options))
       ReverseAdoc.cleaner.tidy(result)
