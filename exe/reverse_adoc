@@ -1,33 +1,34 @@
 #!/usr/bin/env ruby
 # Usage: reverse_adoc [FILE]...
 # Usage: cat FILE | reverse_adoc
-require 'rubygems'
-require 'bundler/setup'
+require "rubygems"
+require "bundler/setup"
 
-require 'reverse_adoc'
-require 'optparse'
-require 'fileutils'
+require "reverse_adoc"
+require "optparse"
+require "fileutils"
 
 OptionParser.new do |opts|
   opts.banner = "Usage: reverse_adoc [options] <file>"
-  opts.on('-m', '--mathml2asciimath', 'Convert MathML to AsciiMath') do |v|
+  opts.on("-m", "--mathml2asciimath", "Convert MathML to AsciiMath") do |_v|
     ReverseAdoc.config.mathml2asciimath = true
   end
 
-  opts.on('-oFILENAME', '--output=FILENAME', 'Output file to write to') do |v|
+  opts.on("-oFILENAME", "--output=FILENAME", "Output file to write to") do |v|
     ReverseAdoc.config.destination = File.expand_path(v)
     # puts "output goes to #{ReverseAdoc.config.destination}"
   end
 
-  opts.on('-e', '--external-images', 'Export images if data URI') do |v|
+  opts.on("-e", "--external-images", "Export images if data URI") do |_v|
     ReverseAdoc.config.external_images = true
   end
 
-  opts.on('-u', '--unknown_tags [pass_through, drop, bypass, raise]', 'Unknown tag handling (default: pass_through)') do |v|
+  opts.on("-u", "--unknown_tags [pass_through, drop, bypass, raise]",
+          "Unknown tag handling (default: pass_through)") do |v|
     ReverseAdoc.config.unknown_tags = v
   end
 
-  opts.on('-v', '--version', 'Version information') do |v|
+  opts.on("-v", "--version", "Version information") do |_v|
     puts "reverse_adoc: v#{ReverseAdoc::VERSION}"
     exit
   end
@@ -36,7 +37,6 @@ OptionParser.new do |opts|
     puts opts
     exit
   end
-
 end.parse!
 
 if filename = ARGV.pop

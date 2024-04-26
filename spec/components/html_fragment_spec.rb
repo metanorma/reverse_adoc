@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ReverseAdoc do
-
-  let(:input)    { File.read('spec/assets/html_fragment.html') }
+  let(:input)    { File.read("spec/assets/html_fragment.html") }
   let(:document) { Nokogiri::HTML(input) }
   subject { ReverseAdoc.convert(input) }
 

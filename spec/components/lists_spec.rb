@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ReverseAdoc do
-
-  let(:input)    { File.read('spec/assets/lists.html') }
+  let(:input)    { File.read("spec/assets/lists.html") }
   let(:document) { Nokogiri::HTML(input) }
   subject { ReverseAdoc.convert(input) }
 
@@ -30,7 +29,9 @@ describe ReverseAdoc do
 
   context "list start, reversed" do
     it { is_expected.to match /\n\[start=3\]\n\. another ordered list entry\n/ }
-    it { is_expected.to match /\n\[%reversed\]\n\. a reversed ordered list entry\n/ }
+    it {
+      is_expected.to match /\n\[%reversed\]\n\. a reversed ordered list entry\n/
+    }
   end
 
   context "nested list with no whitespace" do
@@ -49,8 +50,12 @@ describe ReverseAdoc do
 
   context "lists containing links" do
     it { is_expected.to match /\n\* link:Basic_concepts\[1 Basic concepts\]\n/ }
-    it { is_expected.to match /\n\* link:History_of_the_idea\[2 History of the idea\]\n/ }
-    it { is_expected.to match /\n\* link:Intelligence_explosion\[3 Intelligence explosion\]\n/ }
+    it {
+      is_expected.to match /\n\* link:History_of_the_idea\[2 History of the idea\]\n/
+    }
+    it {
+      is_expected.to match /\n\* link:Intelligence_explosion\[3 Intelligence explosion\]\n/
+    }
   end
 
   context "lists containing embedded <p> tags" do
@@ -61,7 +66,7 @@ describe ReverseAdoc do
     xit { is_expected.to match /\n\* li 1, p 1\n\n\* li 1, p 2\n/ }
   end
 
-  context 'it produces correct numbering' do
+  context "it produces correct numbering" do
     it { is_expected.to include "\. one" }
     it { is_expected.to include "\.\. one one" }
     it { is_expected.to include "\.\. one two" }
@@ -82,5 +87,4 @@ describe ReverseAdoc do
     it { is_expected.to match /\n\* charlie\n/ }
     it { is_expected.to match /\n\* delta\n/ }
   end
-
 end

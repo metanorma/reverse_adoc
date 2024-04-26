@@ -13,8 +13,6 @@ module ReverseAdoc
       @@converters[tag_name.to_sym] or default_converter(tag_name)
     end
 
-    private
-
     def self.default_converter(tag_name)
       case ReverseAdoc.config.unknown_tags.to_sym
       when :pass_through
@@ -26,7 +24,8 @@ module ReverseAdoc
       when :raise
         raise UnknownTagError, "unknown tag: #{tag_name}"
       else
-        raise InvalidConfigurationError, "unknown value #{ReverseAdoc.config.unknown_tags.inspect} for ReverseAdoc.config.unknown_tags"
+        raise InvalidConfigurationError,
+              "unknown value #{ReverseAdoc.config.unknown_tags.inspect} for ReverseAdoc.config.unknown_tags"
       end
     end
   end

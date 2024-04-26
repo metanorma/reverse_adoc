@@ -35,9 +35,9 @@ module ReverseAdoc
     # Same for underscores and brackets.
     def clean_tag_borders(string)
       # result = string.gsub(/\s?\*{2,}.*?\*{2,}\s?/) do |match|
-        # preserve_border_whitespaces(match, default_border: ReverseAdoc.config.tag_border) do
-        #   match.strip.sub("** ", "**").sub(" **", "**")
-        # end
+      # preserve_border_whitespaces(match, default_border: ReverseAdoc.config.tag_border) do
+      #   match.strip.sub("** ", "**").sub(" **", "**")
+      # end
       # end
 
       # result = string.gsub(/\s?_{2,}.*?_{2,}\s?/) do |match|
@@ -47,7 +47,8 @@ module ReverseAdoc
       # end
 
       result = string.gsub(/\s?~{2,}.*?~{2,}\s?/) do |match|
-        preserve_border_whitespaces(match, default_border: ReverseAdoc.config.tag_border) do
+        preserve_border_whitespaces(match,
+                                    default_border: ReverseAdoc.config.tag_border) do
           match.strip.sub("~~ ", "~~").sub(" ~~", "~~")
         end
       end
@@ -60,7 +61,7 @@ module ReverseAdoc
     end
 
     def clean_punctuation_characters(string)
-      string.gsub(/(\*\*|~~|__)\s([.!?'"])/, "\\1".strip + "\\2")
+      string.gsub(/(\*\*|~~|__)\s([.!?'"])/, "#{'\\1'.strip}\\2")
     end
 
     # preprocesses HTML, rather than postprocessing it
