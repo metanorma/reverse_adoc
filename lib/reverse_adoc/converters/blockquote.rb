@@ -2,12 +2,19 @@ module ReverseAdoc
   module Converters
     class Blockquote < Base
       def to_coradoc(node, state = {})
-        id = node['id']
-        cite = node['cite']
-        attributes = cite.nil? ? nil :  Coradoc::Document::AttributeList.new("quote", cite)
+        node["id"]
+        cite = node["cite"]
+        attributes = if cite.nil?
+                       nil
+                     else
+                       Coradoc::Element::AttributeList.new(
+                         "quote", cite
+                       )
+                     end
         content = treat_children(node, state).strip
         content = ReverseAdoc.cleaner.remove_newlines(content)
-        Coradoc::Document::Block::Quote.new(nil, lines: content, attributes: attributes)
+        Coradoc::Element::Block::Quote.new(nil, lines: content,
+                                                attributes: attributes)
       end
 
       def convert(node, state = {})

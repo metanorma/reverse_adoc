@@ -2,22 +2,33 @@ module ReverseAdoc
   module Converters
     class Pre < Base
       def to_coradoc(node, state = {})
-        id = node['id']
+        id = node["id"]
         lang = language(node)
         content = treat_children(node, state)
-        if lang
-          Coradoc::Document::Block::SourceCode.new(nil, lines: content, lang: lang, id: id)
-        else
-          Coradoc::Document::Block::Literal.new(nil, lines: content, id: id)
+
+        unless lang
+          return Coradoc::Element::Block::Literal.new(
+            nil,
+            lines: content,
+            id: id,
+          )
         end
+
+        Coradoc::Element::Block::SourceCode.new(
+          nil,
+          lines: content,
+          lang: lang,
+          id: id,
+        )
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       private
 
-      def treat(node, state)
+      def treat(node, _state)
         return "\n" if node.name == "br"
 
         prefix = postfix = "\n\n" if node.name == "p"
@@ -31,11 +42,11 @@ module ReverseAdoc
       end
 
       def language_from_highlight_class(node)
-        node.parent['class'].to_s[/highlight-([a-zA-Z0-9]+)/, 1]
+        node.parent["class"].to_s[/highlight-([a-zA-Z0-9]+)/, 1]
       end
 
       def language_from_confluence_class(node)
-        node['class'].to_s[/brush:\s?(:?.*);/, 1]
+        node["class"].to_s[/brush:\s?(:?.*);/, 1]
       end
     end
 

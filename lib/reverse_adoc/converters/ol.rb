@@ -1,21 +1,25 @@
 module ReverseAdoc
   module Converters
     class Ol < Base
-      def to_coradoc(node, state = {}) #FIXIT
+      # FIXIT
+      def to_coradoc(node, state = {})
         # convert(node, state)
-        id = node['id']
+        id = node["id"]
         ol_count = state.fetch(:ol_count, 0) + 1
         attrs = ol_attrs(node)
         items = treat_children_coradoc(node, state.merge(ol_count: ol_count))
-        options = {}
-        options[:id] = id
-        options[:ol_count] = ol_count
-        options[:attrs] = attrs
-        list_type = get_list_type(node, state)
-        if list_type == :ordered
-          Coradoc::Document::List::Ordered.new(items, options)
-        else
-          Coradoc::Document::List::Unordered.new(items, options)
+
+        options = {}.tap do |hash|
+          hash[:id] = id
+          hash[:ol_count] = ol_count
+          hash[:attrs] = attrs
+        end
+
+        case get_list_type(node, state)
+        when :ordered
+          Coradoc::Element::List::Ordered.new(items, options)
+        when :unordered
+          Coradoc::Element::List::Unordered.new(items, options)
         end
       end
 
@@ -24,27 +28,26 @@ module ReverseAdoc
       end
 
       def get_list_type(node, _state)
-        if node.name == "ol"
+        case node.name
+        when "ol"
           :ordered
-        else
+        when "ul"
           :unordered
         end
       end
 
       def number_style(node)
-        style = case node["style"]
-                when "1" then "arabic"
-                when "A" then "upperalpha"
-                when "a" then "loweralpha"
-                when "I" then "upperroman"
-                when "i" then "lowerroman"
-                else
-                  nil
-                end
+        case node["style"]
+        when "1" then "arabic"
+        when "A" then "upperalpha"
+        when "a" then "loweralpha"
+        when "I" then "upperroman"
+        when "i" then "lowerroman"
+        end
       end
 
       def ol_attrs(node)
-        attrs = Coradoc::Document::AttributeList.new
+        attrs = Coradoc::Element::AttributeList.new
         style = number_style(node)
         attrs.add_positional(style) if style
         attrs.add_positional("%reversed") if node["reversed"]

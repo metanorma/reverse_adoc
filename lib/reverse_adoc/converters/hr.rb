@@ -1,9 +1,10 @@
 module ReverseAdoc
   module Converters
     class Hr < Base
-      def to_coradoc(node, state = {})
-        Coradoc::Document::Break::ThematicBreak.new
+      def to_coradoc(_node, _state = {})
+        Coradoc::Element::Break::ThematicBreak.new
       end
+
       def convert(node, state = {})
         Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end

@@ -3,15 +3,16 @@ module ReverseAdoc
     class Mark < Base
       def to_coradoc(node, state = {})
         content = treat_children(node, state.merge(already_strong: true))
+
         if content.strip.empty? || state[:already_strong]
-          content
-        else
-          c = constrained?(node)
-          Coradoc::Document::Inline::Highlight.new(content, c)
+          return content
         end
+
+        Coradoc::Element::Inline::Highlight.new(content, constrained?(node))
       end
+
       def convert(node, state = {})
-        Coradoc::Generator.gen_adoc(to_coradoc(node,state))
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
     end
 

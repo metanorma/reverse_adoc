@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'digest'
-require 'nokogiri'
-require 'reverse_adoc/version'
-require 'reverse_adoc/errors'
-require 'reverse_adoc/cleaner'
-require 'reverse_adoc/config'
-require 'reverse_adoc/converters'
-require 'reverse_adoc/converters/base'
-require "reverse_adoc/html_converter"
+require "digest"
+require "nokogiri"
+require_relative "reverse_adoc/version"
+require_relative "reverse_adoc/errors"
+require_relative "reverse_adoc/cleaner"
+require_relative "reverse_adoc/config"
+require_relative "reverse_adoc/converters"
+require_relative "reverse_adoc/converters/base"
+require_relative "reverse_adoc/html_converter"
 
 module ReverseAdoc
   def self.convert(input, options = {})

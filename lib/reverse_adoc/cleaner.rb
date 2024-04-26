@@ -104,11 +104,9 @@ module ReverseAdoc
     end
 
     def present_or_default(string, default)
-      if string.nil? || string.empty?
-        default
-      else
-        string
-      end
+      return default if string.nil? || string.empty?
+
+      string
     end
   end
 end

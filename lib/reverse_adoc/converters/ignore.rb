@@ -2,10 +2,11 @@ module ReverseAdoc
   module Converters
     class Ignore < Base
       def to_coradoc(node, state = {})
-        convert(node,state)
+        convert(node, state)
       end
-      def convert(node, state = {})
-        '' # noop
+
+      def convert(_node, _state = {})
+        "" # noop
       end
     end
 

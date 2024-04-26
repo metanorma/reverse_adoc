@@ -1,7 +1,7 @@
 module ReverseAdoc
   module Converters
     class PassThrough < Base
-      def to_coradoc(node, state = {})
+      def to_coradoc(node, _state = {})
         node.to_s
       end
 

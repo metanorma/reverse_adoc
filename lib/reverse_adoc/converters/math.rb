@@ -7,13 +7,21 @@ require "mathml2asciimath"
 module ReverseAdoc
   module Converters
     class Math < Base
-      def to_coradoc(node, state = {}) #FIXIT
+      # FIXIT
+      def to_coradoc(node, state = {})
         convert(node, state)
       end
-      def convert(node, state = {})
+
+      def convert(node, _state = {})
         stem = node.to_s.gsub(/\n/, " ")
         stem = MathML2AsciiMath.m2a(stem) if ReverseAdoc.config.mathml2asciimath
-        stem = stem.gsub(/\[/, "\\[").gsub(/\]/, "\\]").gsub(/\(\(([^\)]+)\)\)/, "(\\1)") unless stem.nil?
+        unless stem.nil?
+          stem = stem.gsub(/\[/, "\\[").gsub(/\]/, "\\]").gsub(
+            /\(\(([^\)]+)\)\)/, "(\\1)"
+          )
+        end
+
+        # TODO: This is to be done in Coradoc
         " stem:[" << stem << "] "
       end
     end
