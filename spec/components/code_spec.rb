@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ReverseAdoc do
-
-  let(:input)    { File.read('spec/assets/code.html') }
+  let(:input)    { File.read("spec/assets/code.html") }
   let(:document) { Nokogiri::HTML(input) }
   subject { ReverseAdoc.convert(input) }
 
@@ -23,5 +22,4 @@ describe ReverseAdoc do
     it { is_expected.to match(/^    beep\n/) }
     it { is_expected.to match(/^end tell\n/) }
   end
-
 end

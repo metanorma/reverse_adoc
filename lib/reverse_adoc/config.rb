@@ -1,9 +1,9 @@
-require 'tmpdir'
+require "tmpdir"
 
 module ReverseAdoc
   class Config
     attr_accessor :unknown_tags, :tag_border, :mathml2asciimath, :external_images,
-      :destination, :sourcedir, :image_counter, :image_counter_pattern, :input_format
+                  :destination, :sourcedir, :image_counter, :image_counter_pattern, :input_format
 
     def initialize
       @unknown_tags     = :pass_through
@@ -18,14 +18,14 @@ module ReverseAdoc
       # @sourcedir        = nil
 
       # Image counter, assuming there are max 999 images
-      @image_counter    = 1
+      @image_counter = 1
       # pad with 0s
-      @image_counter_pattern = '%03d'
+      @image_counter_pattern = "%03d"
 
-      @em_delimiter     = '_'.freeze
-      @strong_delimiter = '*'.freeze
+      @em_delimiter     = "_".freeze
+      @strong_delimiter = "*".freeze
       @inline_options   = {}
-      @tag_border       = ' '.freeze
+      @tag_border       = " ".freeze
     end
 
     def with(options = {})

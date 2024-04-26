@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ReverseAdoc do
-
-  let(:input)    { File.read('spec/assets/basic.html') }
+  let(:input) { File.read("spec/assets/basic.html") }
   # let(:document) { Nokogiri::HTML(input) }
   subject { ReverseAdoc.convert(input) }
 
@@ -21,17 +20,26 @@ describe ReverseAdoc do
   it { is_expected.to match /_double em tags_/ }
   it { is_expected.to match /_double em tags in p tag_/ }
   it { is_expected.to match /a _em with leading and trailing_ whitespace/ }
-  it { is_expected.to match /a _em with extra leading and trailing_ whitespace/ }
+  it {
+    is_expected.to match /a _em with extra leading and trailing_ whitespace/
+  }
 
   it { is_expected.to match /\*strong tag content\*/ }
   it { is_expected.to match /before and after empty strong tags/ }
-  it { is_expected.to match /before and after strong tags containing whitespace/ }
+  it {
+    is_expected.to match /before and after strong tags containing whitespace/
+  }
   it { is_expected.to match /\*double strong tags\*/ }
   it { is_expected.to match /\*double strong tags in p tag\*/ }
-  it { is_expected.to match /before \*double strong tags containing whitespace\* after/ }
-  it { is_expected.to match /a \*strong with leading and trailing\* whitespace/ }
-  it { is_expected.to match /a \*strong with extra leading and trailing\* whitespace/ }
-
+  it {
+    is_expected.to match /before \*double strong tags containing whitespace\* after/
+  }
+  it {
+    is_expected.to match /a \*strong with leading and trailing\* whitespace/
+  }
+  it {
+    is_expected.to match /a \*strong with extra leading and trailing\* whitespace/
+  }
 
   it { is_expected.to match /constrai\*\*ned\*\* strong/ }
   it { is_expected.to match /constrai__ned__ italic/ }
@@ -42,8 +50,10 @@ describe ReverseAdoc do
   it { is_expected.to match /H~2~O/ }
   it { is_expected.to match /A\^2\^B/ }
 
-  it { is_expected.to match /br tags become double space followed by newline \+\n/ }
-  #it { should match /br tags XXX  \n/ }
+  it {
+    is_expected.to match /br tags become double space followed by newline \+\n/
+  }
+  # it { should match /br tags XXX  \n/ }
 
   it { is_expected.to match /before hr \n\* \* \*\n after hr/ }
 

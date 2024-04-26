@@ -1,37 +1,37 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'rubygems'
-require 'bundler/setup'
+require "rubygems"
+require "bundler/setup"
 
-require 'word-to-markdown'
-require 'optparse'
-require 'reverse_adoc'
+require "word-to-markdown"
+require "optparse"
+require "reverse_adoc"
 
-ARGV.push('-h') if ARGV.empty?
+ARGV.push("-h") if ARGV.empty?
 
 OptionParser.new do |opts|
   opts.banner = "Usage: w2a [options] <file>"
-  opts.on('-m', '--mathml2asciimath', 'Convert MathML to AsciiMath') do |v|
+  opts.on("-m", "--mathml2asciimath", "Convert MathML to AsciiMath") do |_v|
     ReverseAdoc.config.mathml2asciimath = true
   end
 
-  opts.on('-oFILENAME', '--output=FILENAME', 'Output file to write to') do |v|
+  opts.on("-oFILENAME", "--output=FILENAME", "Output file to write to") do |v|
     ReverseAdoc.config.destination = File.expand_path(v)
     # puts "output goes to #{ReverseAdoc.config.destination}"
   end
 
-  opts.on('-e', '--external-images', 'Export images if data URI') do |v|
+  opts.on("-e", "--external-images", "Export images if data URI") do |_v|
     ReverseAdoc.config.external_images = true
   end
 
-  opts.on('-v', '--version', 'Version information') do |v|
+  opts.on("-v", "--version", "Version information") do |_v|
     puts "reverse_adoc: v#{ReverseAdoc::VERSION}"
     puts "[dependency] WordToMarkdown: v#{WordToMarkdown::VERSION}"
-    unless Gem.win_platform?
-      puts "[dependency] LibreOffice: v#{WordToMarkdown.soffice.version}"
-    else
+    if Gem.win_platform?
       puts "[dependency] LibreOffice: version not available on Windows"
+    else
+      puts "[dependency] LibreOffice: v#{WordToMarkdown.soffice.version}"
     end
     exit
   end
@@ -40,7 +40,6 @@ OptionParser.new do |opts|
     puts opts
     exit
   end
-
 end.parse!
 
 filename = ARGV.pop
@@ -53,10 +52,10 @@ end
 ReverseAdoc.config.sourcedir = Dir.mktmpdir
 
 doc = WordToMarkdown.new(filename, ReverseAdoc.config.sourcedir)
-#File.open("test.html", "w:UTF-8") { |f| f.write doc.document.html }
+# File.open("test.html", "w:UTF-8") { |f| f.write doc.document.html }
 adoc_content = ReverseAdoc.convert(
   ReverseAdoc.cleaner.preprocess_word_html(doc.document.html),
-  WordToMarkdown::REVERSE_MARKDOWN_OPTIONS
+  WordToMarkdown::REVERSE_MARKDOWN_OPTIONS,
 )
 # puts scrub_whitespace(doc.document.html)
 
