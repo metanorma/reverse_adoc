@@ -1,31 +1,25 @@
 module ReverseAdoc
   module Converters
     class Audio < Base
-      def convert(node, state = {})
-        autoplay   = node['autoplay']
-        loop_attr   = node['loop']
-        controls   = node['controls']
+      def to_coradoc(node, state = {})
         src   = node['src']
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
         title = extract_title(node)
-        title = ".#{title}\n" unless title.empty?
-        [anchor, title, "audio::", src, "[", options(node), "]"].join("")
+        attributes = Coradoc::Document::AttributeList.new
+        options = options(node)
+        attributes.add_named("options", options) if options.any?
+        Coradoc::Document::Audio.new(title, id: id, src: src, attributes: attributes)
+      end
+
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       def options(node)
         autoplay   = node['autoplay']
         loop_attr   = node['loop']
         controls   = node['controls']
-        ret = ""
-        if autoplay || loop_attr || controls
-          out = []
-          out << "autoplay" if autoplay
-          out << "loop" if loop_attr
-          out << "controls" if controls
-          ret = %{options="#{out.join(',')}"}
-        end
-        ret
+        [autoplay, loop_attr, controls].compact
       end
     end
 

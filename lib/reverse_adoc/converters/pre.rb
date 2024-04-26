@@ -1,16 +1,18 @@
 module ReverseAdoc
   module Converters
     class Pre < Base
-      def convert(node, state = {})
+      def to_coradoc(node, state = {})
         id = node['id']
-        anchor = id ? "[[#{id}]]\n" : ""
         lang = language(node)
         content = treat_children(node, state)
         if lang
-          "\n\n#{anchor}[source,#{lang}]\n----\n" << content.lines.to_a.join("") << "\n----\n\n"
+          Coradoc::Document::Block::SourceCode.new(nil, lines: content, lang: lang, id: id)
         else
-          "\n\n#{anchor}....\n" << content.lines.to_a.join("") << "\n....\n\n"
+          Coradoc::Document::Block::Literal.new(nil, lines: content, id: id)
         end
+      end
+      def convert(node, state = {})
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       private

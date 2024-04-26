@@ -19,6 +19,6 @@ describe ReverseAdoc::Converters::Blockquote do
   it 'can deal with cite attribute' do
     input = node_for("<blockquote cite='http://www.example.com'><p>Some text.</p><p>Some more text.</p></blockquote>")
     result = converter.convert(input)
-    expect(result).to eq "\n\n[quote, http://www.example.com]\n____\nSome text.\n\nSome more text.\n____\n\n"
+    expect(result).to eq "\n\n[quote,http://www.example.com]\n____\nSome text.\n\nSome more text.\n____\n\n"
   end
 end

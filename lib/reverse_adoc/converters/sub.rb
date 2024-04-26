@@ -1,9 +1,12 @@
 module ReverseAdoc
   module Converters
     class Sub < Base
+      def to_coradoc(node, state = {})
+        content = treat_children_coradoc(node, state)
+        Coradoc::Document::Inline::Subscript.new(content)
+      end
       def convert(node, state = {})
-        content = treat_children(node, state)
-        "#{content[/^\s*/]}~#{content.strip}~#{content[/\s*$/]}"
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
     end
 

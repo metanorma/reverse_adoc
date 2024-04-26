@@ -1,10 +1,13 @@
 module ReverseAdoc
   module Converters
     class Tr < Base
+      def to_coradoc(node, state = {})
+        content = treat_children_coradoc(node, state)
+        header = table_header_row?(node)
+        Coradoc::Document::Table::Row.new(content, header)
+      end
       def convert(node, state = {})
-        content = treat_children(node, state).rstrip
-        result  = "#{content}\n"
-        table_header_row?(node) ? result + underline_for(node) : result
+        Coradoc::Generator.gen_adoc(to_coradoc(node, state))
       end
 
       def table_header_row?(node)
@@ -12,9 +15,6 @@ module ReverseAdoc
         node.previous_element.nil?
       end
 
-      def underline_for(node)
-        "\n"
-      end
     end
 
     register :tr, Tr.new

@@ -1,8 +1,11 @@
 module ReverseAdoc
   module Converters
     class Bypass < Base
+      def to_coradoc(node, state = {})
+        treat_children_coradoc(node, state)
+      end
       def convert(node, state = {})
-        treat_children(node, state)
+        Coradoc::Generator.gen_adoc(to_coradoc(node,state))
       end
     end
 
