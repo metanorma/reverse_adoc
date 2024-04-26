@@ -33,11 +33,11 @@ module ReverseAdoc
       end
 
       def colrow(colspan, rowspan)
-        if colspan && rowspan
+        if colspan && rowspan && colspan != "1" && rowspan != "1"
           "#{colspan}.#{rowspan}+"
-        elsif colspan
+        elsif colspan && colspan != "1"
           "#{colspan}+"
-        elsif rowspan
+        elsif rowspan && rowspan != "1"
           ".#{rowspan}+"
         else
           ""

@@ -51,7 +51,8 @@ module ReverseAdoc
 
       def style(node)
         attrs = Coradoc::Document::AttributeList.new
-        attrs.add_named("width", node["width"]) if node["width"]
+        # Width is disabled on tables for now.
+        # attrs.add_named("width", node["width"]) if node["width"]
         frame_attr = frame(node)
         attrs.add_named("frame", frame_attr) if frame_attr
         rules_attr = rules(node)
