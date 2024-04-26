@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
   # specify any dependencies here; for example:
-  s.add_dependency "coradoc"
+  s.add_dependency "coradoc", "~> 0.2"
   s.add_dependency "marcel", "~> 1.0.0"
   s.add_dependency "mathml2asciimath"
   s.add_dependency "nokogiri", "~> 1.13"
