@@ -1,7 +1,7 @@
 module ReverseAdoc
   class Cleaner
     def tidy(string)
-      result = remove_inner_whitespaces(string)
+      result = remove_inner_whitespaces(String.new(string))
       result = remove_newlines(result)
       result = remove_leading_newlines(result)
       result = clean_tag_borders(result)
