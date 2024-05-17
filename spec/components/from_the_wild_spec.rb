@@ -6,7 +6,7 @@ describe ReverseAdoc do
   subject { ReverseAdoc.convert(input) }
 
   it "should make sense of strong-crazy markup (as seen in the wild)" do
-    expect(subject).to include "*. +\n \\*\\*\\* intentcast* : logo design *+*\n"
+    expect(subject).to include "*. +\n \\*\\*\\* intentcast* : logo design * +\n* *.*"
   end
 
   it "should not over escape * or _" do

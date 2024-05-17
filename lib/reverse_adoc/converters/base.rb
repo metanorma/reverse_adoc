@@ -52,6 +52,25 @@ module ReverseAdoc
         node2.respond_to?(:text) && node2.text.end_with?(str)
       end
 
+      def extract_leading_trailing_whitespace(node)
+        node.text =~ /^(\s+)/
+        leading_whitespace = $1
+        if !leading_whitespace.nil?
+          first_text = node.at_xpath("./text()[1]")
+          first_text.replace(first_text.text.lstrip)
+          leading_whitespace = " "
+        end
+        node.text =~ /(\s+)$/
+        trailing_whitespace = $1
+        if !trailing_whitespace.nil?
+          last_text = node.at_xpath("./text()[last()]")
+          last_text.replace(last_text.text.rstrip)
+          trailing_whitespace = " "
+        end
+        [leading_whitespace, trailing_whitespace]
+      end
+
+
       def unconstrained_before?(node)
         before = node.at_xpath("preceding::node()[1]")
 

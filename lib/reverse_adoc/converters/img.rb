@@ -58,8 +58,8 @@ module ReverseAdoc
         id = node["id"]
         alt   = node["alt"]
         src   = node["src"]
-        width = node["width"]
-        height = node["height"]
+        width = node["width"]&.to_i
+        height = node["height"]&.to_i
 
         title = extract_title(node)
 
@@ -73,7 +73,7 @@ module ReverseAdoc
         if alt # && !alt.to_s.empty?
           attributes.add_positional(alt)
         elsif width || height
-          attributes.add_positional("\"\"")
+          attributes.add_positional("")
         end
         # attributes.add_named("title", title) if title
         attributes.add_positional(width) if width

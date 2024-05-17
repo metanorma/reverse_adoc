@@ -87,4 +87,12 @@ describe ReverseAdoc do
     it { is_expected.to match /\n\* charlie\n/ }
     it { is_expected.to match /\n\* delta\n/ }
   end
+
+  context "definition list simple" do
+    it { is_expected.to include "Coffee:: Black hot drink\nMilk:: White cold drink" }
+  end
+
+  context "definition list multiple terms" do
+    it { is_expected.to include "Coffee::\nKaffee::\nBlack hot drink\nMilk::\nMilch::\nWhite cold drink" }
+  end
 end
