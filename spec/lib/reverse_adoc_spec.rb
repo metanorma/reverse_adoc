@@ -55,7 +55,7 @@ describe ReverseAdoc do
     it "Creates local files from external URI" do
       expect { convert }
         .to(change do
-          Dir["#{images_folder}/*gif"]
+          Dir["#{images_folder}/*"]
             .map { |entry| File.basename(entry) }
             .sort
         end.from([]).to(result))
@@ -86,5 +86,12 @@ describe ReverseAdoc do
     let(:input) { File.read("spec/assets/external_images.html") }
     it_behaves_like "converting source with external images included",
                     ["001.gif"]
+  end
+
+  context "when html file input with internal images" do
+    subject(:convert) { ReverseAdoc.convert(input) }
+    let(:input) { File.read("spec/assets/internal_images.html") }
+    it_behaves_like "converting source with external images included",
+                    ["001.png", "002.jpeg", "003.webp", "004.avif", "005.gif"]
   end
 end
