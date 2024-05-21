@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-$:.push File.expand_path("lib", __dir__)
-require "reverse_adoc/version"
-
 Gem::Specification.new do |s|
   s.name        = "reverse_adoc"
   s.version     = "2.0.0"
