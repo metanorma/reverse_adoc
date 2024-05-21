@@ -5,7 +5,7 @@ require "reverse_adoc/version"
 
 Gem::Specification.new do |s|
   s.name        = "reverse_adoc"
-  s.version     = ReverseAdoc::VERSION
+  s.version     = "2.0.0"
   s.authors       = ["Ribose Inc."]
   s.email         = ["open.source@ribose.com"]
 
@@ -23,20 +23,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
-  # specify any dependencies here; for example:
-  s.add_dependency "coradoc", "~> 0.2"
-  s.add_dependency "marcel", "~> 1.0.0"
-  s.add_dependency "mathml2asciimath"
-  s.add_dependency "nokogiri", "~> 1.13"
-  s.add_development_dependency "codeclimate-test-reporter"
-  s.add_development_dependency "rake"
-  s.add_development_dependency "redcarpet"
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "simplecov"
-
-  # spec.add_runtime_dependency "thor"
-
-  # All the following are for bin/w2m
-  s.add_dependency "premailer", "~> 1.11.0"
-  s.add_dependency "word-to-markdown"
+  s.add_dependency "coradoc", ">= 0.3"
 end
