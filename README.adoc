@@ -1,6 +1,32 @@
-# AsciiDoc from HTML and Microsoft Word: reverse_adoc
+= AsciiDoc from HTML and Microsoft Word: reverse_adoc
 
 This repository has been merged into Coradoc. See:
 
 * https://github.com/metanorma/coradoc/
 * https://github.com/metanorma/coradoc/tree/main/lib/coradoc/reverse_adoc
+
+== Migration to Coradoc
+
+To migrate to Coradoc, replace:
+
+[source,ruby]
+----
+require 'reverse_adoc'
+
+ReverseAdoc.convert("<b>hello</b>")
+----
+
+With:
+
+[source,ruby]
+----
+require 'coradoc'
+require 'coradoc/reverse_adoc'
+
+Coradoc::ReverseAdoc.convert("<b>hello</b>")
+----
+
+== License
+
+Copyright Ribose.
+
