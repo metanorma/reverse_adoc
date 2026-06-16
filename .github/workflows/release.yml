@@ -14,12 +14,16 @@ on:
   repository_dispatch:
     types: [ do-release ]
 
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
 jobs:
   release:
-    uses: metanorma/ci/.github/workflows/rubygems-release.yml@main
+    uses: metanorma/support/.github/workflows/release.yml@main
     with:
       next_version: ${{ github.event.inputs.next_version }}
     secrets:
       rubygems-api-key: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
-      pat_token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
 
