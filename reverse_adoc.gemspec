@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   end
   s.bindir        = "exe"
   s.require_paths = ["lib"]
-  s.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
+  s.required_ruby_version = Gem::Requirement.new(">= 3.3.0")
 
   s.add_dependency "coradoc", ">= 0.3"
 end
