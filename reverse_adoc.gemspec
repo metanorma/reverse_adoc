@@ -20,5 +20,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
-  s.add_dependency "coradoc", ">= 0.3"
+  # reverse_adoc is a codeless facade: the HTML/Word-to-AsciiDoc engine
+  # lives in the ceradoc monorepo (renamed coradoc → coridoc → ceradoc,
+  # 2026-11-25); the ceradoc hub carries the CoreModel and the
+  # html→asciidoc pipeline.
+  s.add_dependency "ceradoc", "~> 3.0"
 end
