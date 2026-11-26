@@ -1,4 +1,10 @@
-= AsciiDoc from HTML: reverse_adoc
+= AsciiDoc from HTML: reverse_adoc (DEPRECATED)
+
+[DEPRECATED]
+====
+reverse_adoc is retired. Depend on the `ceradoc` gem and call
+`Ceradoc.convert(input, from: :html, to: :asciidoc)` directly.
+====
 
 reverse_adoc is a compatibility facade over the ceradoc monorepo (the gem
 formerly known as coradoc, renamed coradoc → coridoc → ceradoc in
