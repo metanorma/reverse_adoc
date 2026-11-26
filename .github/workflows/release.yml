@@ -13,6 +13,21 @@ on:
         default: 'skip'
   repository_dispatch:
     types: [ do-release ]
+  # The publish leg: when the release PR (head branch `release/v*`) merges,
+  # the reusable tags the merge commit and publishes (ci#515). Ordinary PR
+  # closes are skipped inside the reusable — no noise on regular merges.
+  pull_request:
+    types:
+      - closed
+
+# Least-privilege ceiling for the called rubygems-release.yml: its release job
+# needs contents:write (git tag push), id-token:write (OIDC Trusted Publishing),
+# and pull-requests:write (the release-PR leg opens and auto-merges the release
+# PR — ci#515; reusable workflows are capped by the caller's permissions).
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: write
 
 jobs:
   release:
@@ -20,6 +35,8 @@ jobs:
     with:
       next_version: ${{ github.event.inputs.next_version }}
     secrets:
-      rubygems-api-key: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
+      # Trusted Publishing (OIDC) is the only publish path: the org
+      # METANORMA_CI_RUBYGEMS_API_KEY secret was deleted (metanorma/ci#373),
+      # and rubygems-release.yml falls through to the OIDC/TP flow when the
+      # rubygems-api-key secret is absent (metanorma/ci#416).
       pat_token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
-
