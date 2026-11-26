@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.homepage    = "http://github.com/metanorma/reverse_adoc"
   s.summary     = "Compatibility facade for ceradoc: generate AsciiDoc from HTML."
-  s.description = "Compatibility facade for ceradoc: generate AsciiDoc from HTML. " \
+  s.description = "DEPRECATED and retired compatibility shim: the engine lives in the ceradoc gem (Ceradoc.convert). " \
                   "The former reverse_adoc converter lives in the ceradoc monorepo."
   s.license       = "BSD-2-Clause"
 
