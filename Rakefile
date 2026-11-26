@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require "bundler/gem_tasks"
+require "rspec/core/rake_task"
 
-# No-op default until the ceradoc migration lands the shim specs; `bundle
-# exec rake` (generic-rake) needs a default task to stay green.
-task default: []
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :spec
