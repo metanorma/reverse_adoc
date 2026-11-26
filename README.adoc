@@ -1,13 +1,14 @@
-= AsciiDoc from HTML and Microsoft Word: reverse_adoc
+= AsciiDoc from HTML: reverse_adoc
 
-This repository has been merged into Coradoc. See:
+reverse_adoc is a compatibility facade over the ceradoc monorepo (the gem
+formerly known as coradoc, renamed coradoc → coridoc → ceradoc in
+November 2026): since 2.0.0 it ships no converter code of its own. The
+HTML-to-AsciiDoc engine lives in https://github.com/ceradoc/ceradoc as
+`ceradoc-html`, driven by the unified https://rubygems.org/gems/ceradoc[`ceradoc`]
+API.
 
-* https://github.com/metanorma/coradoc/
-* https://github.com/metanorma/coradoc/tree/main/lib/coradoc/reverse_adoc
-
-== Migration to Coradoc
-
-To migrate to Coradoc, replace:
+`require "reverse_adoc"` loads that engine, and `ReverseAdoc.convert`
+delegates to it, so existing callers keep working:
 
 [source,ruby]
 ----
@@ -16,17 +17,21 @@ require 'reverse_adoc'
 ReverseAdoc.convert("<b>hello</b>")
 ----
 
-With:
+New code should call ceradoc directly:
 
 [source,ruby]
 ----
-require 'coradoc'
-require 'coradoc/reverse_adoc'
+require 'ceradoc'
+require 'ceradoc/html'
+require 'ceradoc/asciidoc'
 
-Coradoc::ReverseAdoc.convert("<b>hello</b>")
+Ceradoc.convert("<b>hello</b>", from: :html, to: :asciidoc)
 ----
+
+The legacy `ReverseAdoc.convert(input, options)` options hash is accepted
+for arity compatibility and ignored; the conversion tuning moved into the
+ceradoc pipeline.
 
 == License
 
 Copyright Ribose.
-
